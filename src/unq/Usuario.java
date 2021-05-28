@@ -39,7 +39,10 @@ public abstract class Usuario {
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
-	//Metodos 
+	
+	
+//Metodos 	
+	
 	public void registrarse(SitioWeb sitioWeb) {
 		this.setSitioWeb(sitioWeb);
 	}

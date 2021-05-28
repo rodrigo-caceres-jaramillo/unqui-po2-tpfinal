@@ -1,9 +1,10 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.*;
-import org.mockito.Mock;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.*;
+
+
+
 import unq.Administrador;
 import unq.Inquilino;
 import unq.Propietario;
@@ -17,10 +18,10 @@ class SitioWebTestCase {
 	
 	@BeforeEach
 	public void setUp() throws Exception {
-		sitio = new SitioWeb();
+		sitio    = new SitioWeb();
 		usuario1 = mock(Inquilino.class);
 		usuario2 = mock(Propietario.class);
-		admin = mock(Administrador.class);
+		admin    = mock(Administrador.class);
 	}
 	
 	@Test
