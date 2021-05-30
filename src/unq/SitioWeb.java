@@ -9,7 +9,7 @@ public class SitioWeb {
 	private ArrayList<CategoriaDeRankeo> categoriasDeRankeo;
 	private ArrayList<TipoDeInmueble> tiposDeInmuebles;
 	private ArrayList<TipoDeServcio> tiposDeServicios;
-	
+	private ArrayList<Publicacion> publicaciones;
 	//Constructor
 	public SitioWeb() {
 		this.setAdministrador(null);
@@ -17,6 +17,7 @@ public class SitioWeb {
 		this.setCategoriasDeRankeo(new ArrayList<CategoriaDeRankeo>());
 		this.setTiposDeInmuebles(new ArrayList<TipoDeInmueble>());
 		this.setTiposDeServicios(new ArrayList<TipoDeServcio>());
+		this.setPublicaciones(new ArrayList<Publicacion>());
 	}
 	//Gets y sets
 	public Administrador getAdministrador() {
@@ -49,6 +50,13 @@ public class SitioWeb {
 	public void setTiposDeServicios(ArrayList<TipoDeServcio> tiposDeServicios) {
 		this.tiposDeServicios = tiposDeServicios;
 	}
+	
+	public ArrayList<Publicacion> getPublicaciones() {
+		return publicaciones;
+	}
+	public void setPublicaciones(ArrayList<Publicacion> publicaciones) {
+		this.publicaciones = publicaciones;
+	}
 	//Metodos 
 	public void registrarUsuario(Usuario usuario) {
 		usuario.registrarse(this);
@@ -69,6 +77,10 @@ public class SitioWeb {
 	}
 	public void agregarTipoDeServicio(TipoDeServcio servicio) {
 		this.tiposDeServicios.add(servicio);
+	}
+	public void registrarInmueble(Propietario propietario, Inmueble inmueble) {
+		Publicacion nuevaPublicacion = new Publicacion(propietario, inmueble);
+		this.publicaciones.add(nuevaPublicacion);
 	}
 	
 }
