@@ -24,7 +24,7 @@ public class Administrador {
 	public void agregarTipoDeInmmueble(TipoDeInmueble tipo ) {
 		this.sitioAcargo.agregarTipoDeInmueble(tipo);
 	}
-	public void agregarTipoDeServicio(TipoDeServcio servicio) {
+	public void agregarTipoDeServicio(TipoDeServicio servicio) {
 		this.sitioAcargo.agregarTipoDeServicio(servicio);	
 	}
 }
