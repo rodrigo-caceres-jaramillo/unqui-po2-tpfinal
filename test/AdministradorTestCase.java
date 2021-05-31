@@ -5,23 +5,18 @@ import org.junit.jupiter.api.Test;
 //import static org.mockito.Mockito.*;
 
 import unq.Administrador;
-import unq.CategoriaDeRankeo;
-import unq.CategoriaDeRankeoDeInmueble;
-import unq.CategoriaDeRankeoDeInquilino;
 import unq.CategoriaDeRankeoDePropietario;
 import unq.SitioWeb;
 import unq.TipoDeInmueble;
-import unq.TipoDeServcio;
+import unq.TipoDeServicio;
 
 
 class AdministradorTestCase {
 	private Administrador admin;
 	private SitioWeb sitio;
 	private CategoriaDeRankeoDePropietario rank1;
-	private CategoriaDeRankeoDeInquilino rank2;
-	private CategoriaDeRankeoDeInmueble rank3;
 	private TipoDeInmueble tipo;
-	private TipoDeServcio servicio;
+	private TipoDeServicio servicio;
 	
 	@BeforeEach
 	public void setUp() throws Exception {

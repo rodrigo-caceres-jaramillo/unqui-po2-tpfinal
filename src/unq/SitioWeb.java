@@ -8,7 +8,7 @@ public class SitioWeb {
 	private ArrayList<Usuario> usuarios;
 	private ArrayList<CategoriaDeRankeo> categoriasDeRankeo;
 	private ArrayList<TipoDeInmueble> tiposDeInmuebles;
-	private ArrayList<TipoDeServcio> tiposDeServicios;
+	private ArrayList<TipoDeServicio> tiposDeServicios;
 	
 	//Constructor
 	public SitioWeb() {
@@ -16,7 +16,7 @@ public class SitioWeb {
 		this.setUsuarios(new ArrayList<Usuario>());
 		this.setCategoriasDeRankeo(new ArrayList<CategoriaDeRankeo>());
 		this.setTiposDeInmuebles(new ArrayList<TipoDeInmueble>());
-		this.setTiposDeServicios(new ArrayList<TipoDeServcio>());
+		this.setTiposDeServicios(new ArrayList<TipoDeServicio>());
 	}
 	//Gets y sets
 	public Administrador getAdministrador() {
@@ -43,10 +43,10 @@ public class SitioWeb {
 	public void setTiposDeInmuebles(ArrayList<TipoDeInmueble> tiposDeInmuebles) {
 		this.tiposDeInmuebles = tiposDeInmuebles;
 	}
-	public ArrayList<TipoDeServcio> getTiposDeServicios() {
+	public ArrayList<TipoDeServicio> getTiposDeServicios() {
 		return tiposDeServicios;
 	}
-	public void setTiposDeServicios(ArrayList<TipoDeServcio> tiposDeServicios) {
+	public void setTiposDeServicios(ArrayList<TipoDeServicio> tiposDeServicios) {
 		this.tiposDeServicios = tiposDeServicios;
 	}
 	//Metodos 
@@ -67,7 +67,7 @@ public class SitioWeb {
 		this.tiposDeInmuebles.add(tipo);
 		
 	}
-	public void agregarTipoDeServicio(TipoDeServcio servicio) {
+	public void agregarTipoDeServicio(TipoDeServicio servicio) {
 		this.tiposDeServicios.add(servicio);
 	}
 	
