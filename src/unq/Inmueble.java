@@ -13,15 +13,17 @@ public class Inmueble {
 	private int capacidad;
 	private ArrayList<Puntaje> puntajesDeRankeo;
 
-	
-	
-	
-	
-	
+	// Constructores
 	public Inmueble() {
 		super();
-	this.servicios = new ArrayList<TipoDeServicio>();
-	this.puntajesDeRankeo = new ArrayList<Puntaje>();
+		this.servicios = new ArrayList<TipoDeServicio>();
+		this.puntajesDeRankeo = new ArrayList<Puntaje>();
+	}
+
+	// Getters and Setters
+	public Inmueble(String ciudad) {
+		super();
+		this.ciudad = ciudad;
 	}
 
 	public void setTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {
@@ -33,18 +35,19 @@ public class Inmueble {
 	}
 
 	public void setSuperficie(int superficie) {
-			this.superficie= superficie;
+		this.superficie = superficie;
 	}
 
 	public int getSuperficie() {
-		
+
 		return (this.superficie);
 	}
 
 	public void setPais(String pais) {
 		this.pais = pais;
-		
+
 	}
+
 	public String getPais() {
 
 		return (this.pais);
@@ -58,7 +61,7 @@ public class Inmueble {
 		return (this.ciudad);
 	}
 
-	public void setDireccion(String  direccion) {
+	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
@@ -68,10 +71,6 @@ public class Inmueble {
 
 	public ArrayList<TipoDeServicio> getServicios() {
 		return (this.servicios);
-	}
-
-	public void addNuevoServicio(TipoDeServicio servicioDeInmueble) {
-		this.getServicios().add(servicioDeInmueble);
 	}
 
 	public void setCapacidad(int capacidad) {
@@ -86,21 +85,24 @@ public class Inmueble {
 		return (this.puntajesDeRankeo);
 	}
 
-	public void addPuntaje(Puntaje puntajeParainmueble) {
-			this.getPuntajesDeRankeo().add(puntajeParainmueble);
-	}
-
+	// Métodos
 	public double getPromPuntajeDeRankeos() {
 		double promedio = 0;
-		 int cantPuntajes = this.getPuntajesDeRankeo().size();
-			for (int i = 0; i < cantPuntajes ; i++) {
-				
-				 Puntaje puntaje = this.getPuntajesDeRankeo().get(i);
-				 promedio =+ puntaje.getValor();
-			}
+		int cantPuntajes = this.getPuntajesDeRankeo().size();
+		for (int i = 0; i < cantPuntajes; i++) {
+
+			Puntaje puntaje = this.getPuntajesDeRankeo().get(i);
+			promedio = +puntaje.getValor();
+		}
 		return (promedio / 5);
 	}
 
-	
+	public void addNuevoServicio(TipoDeServicio servicioDeInmueble) {
+		this.getServicios().add(servicioDeInmueble);
+	}
+
+	public void addPuntaje(Puntaje puntajeParainmueble) {
+		this.getPuntajesDeRankeo().add(puntajeParainmueble);
+	}
 
 }
