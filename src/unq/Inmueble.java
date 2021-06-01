@@ -1,16 +1,10 @@
-<<<<<<< HEAD
 package unq;
 
-public class Inmueble {
-
-}
-=======
-package unq;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Inmueble {
-
+	// Atributos
 	private TipoDeInmueble tipoDeInmueble;
 	private int superficie;
 	private String pais;
@@ -18,13 +12,17 @@ public class Inmueble {
 	private String direccion;
 	private ArrayList<TipoDeServicio> servicios;
 	private int capacidad;
-	private ArrayList<Puntaje> puntajesDeRankeo;
-
+	//private ??? foto;
+	private LocalDate checkIn;
+	private LocalDate checkOut;
+	private ArrayList<String> formasDePagoAceptadas;
+	private Double precio;
+	private ArrayList<Puntacion> puntaciones;
 	// Constructores
 	public Inmueble() {
 		super();
 		this.servicios = new ArrayList<TipoDeServicio>();
-		this.puntajesDeRankeo = new ArrayList<Puntaje>();
+		this.puntaciones = new ArrayList<Puntacion>();
 	}
 
 	// Getters and Setters
@@ -88,17 +86,16 @@ public class Inmueble {
 		return (this.capacidad);
 	}
 
-	public ArrayList<Puntaje> getPuntajesDeRankeo() {
-		return (this.puntajesDeRankeo);
+	public ArrayList<Puntacion> getPuntajesDeRankeo() {
+		return (this.puntaciones);
 	}
 
-	// Métodos
+	//Metodos
 	public double getPromPuntajeDeRankeos() {
 		double promedio = 0;
 		int cantPuntajes = this.getPuntajesDeRankeo().size();
 		for (int i = 0; i < cantPuntajes; i++) {
-
-			Puntaje puntaje = this.getPuntajesDeRankeo().get(i);
+			Puntacion puntaje = this.getPuntajesDeRankeo().get(i);
 			promedio = +puntaje.getValor();
 		}
 		return (promedio / 5);
@@ -108,9 +105,9 @@ public class Inmueble {
 		this.getServicios().add(servicioDeInmueble);
 	}
 
-	public void addPuntaje(Puntaje puntajeParainmueble) {
+	public void addPuntaje(Puntacion puntajeParainmueble) {
 		this.getPuntajesDeRankeo().add(puntajeParainmueble);
 	}
 
 }
->>>>>>> branch 'main' of https://github.com/rodrigo-caceres-jaramillo/unqui-po2-tpfinal.git
+

@@ -9,29 +9,26 @@ import static org.mockito.Mockito.when;
 import unq.CategoriaDePuntaje;
 import unq.Inmueble;
 import unq.Inquilino;
-import unq.Puntaje;
 import unq.TipoDeInmueble;
 import unq.TipoDeServicio;
 
 class InmuebleTestCase {
-
 		private Inmueble inmueble;
 		private TipoDeInmueble tipoDeInmuebleHogar;
-		private TipoDeServicio servicioDeInmuebleLuz;  private TipoDeServicio servicioDeInmuebleAgua;
-		private Puntaje puntaje4Parainmueble; 		   private Puntaje puntaje3Parainmueble;
+		private TipoDeServicio servicioDeInmuebleLuz;  
+		private TipoDeServicio servicioDeInmuebleAgua;
+		private Puntacion puntaje4Parainmueble; 		  
+		private Puntacion puntaje3Parainmueble;
 
 	@BeforeEach
 	void setUp() throws Exception {
-	
 		inmueble = new Inmueble(); //SUT
 		tipoDeInmuebleHogar= mock(TipoDeInmueble.class); //DOT
 		servicioDeInmuebleAgua = mock(TipoDeServicio.class);
 		servicioDeInmuebleLuz  = mock(TipoDeServicio.class); //DOT
-		puntaje4Parainmueble = mock(Puntaje.class);//DOT
-		puntaje3Parainmueble = mock(Puntaje.class); //DOT
-
+		puntaje4Parainmueble = mock(Puntacion.class);//DOT
+		puntaje3Parainmueble = mock(Puntacion.class); //DOT
 	}
-	
 
 	@Test
 	void testUnInmuebleTieneUnTipoDeInmueblefinido() {
@@ -47,7 +44,6 @@ class InmuebleTestCase {
 	@Test 
 	void testUnInmuebleTieneUnaSuperficie() {
 		inmueble.setSuperficie(2);
-		
 		assertEquals(inmueble.getSuperficie(), 2); 
 
 	}
@@ -91,18 +87,15 @@ class InmuebleTestCase {
 	void testUnInmuebleTieneUnaCapacidadDeInquilinos() {
 		inmueble.setCapacidad(5);
 		assertEquals(inmueble.getCapacidad(), 5); 
-
 	}
 	
 	@Test
 	void testUnInmuebleNoRegistraUnNuevoPuntaje() {
 		assertTrue( inmueble.getPuntajesDeRankeo().isEmpty() );
-		
 	}
 	
 	@Test
 	void testUnInmuebleRegistraUnNuevoPuntaje() {
-
 		inmueble.addPuntaje(puntaje4Parainmueble);
 		assertTrue( inmueble.getPuntajesDeRankeo().contains(puntaje4Parainmueble) );
 		
@@ -110,12 +103,11 @@ class InmuebleTestCase {
 	
 	@Test
 	void testUnInmuebleConocePromedioDePuntajeDeRankeos() {
-		
 		inmueble.addPuntaje(puntaje4Parainmueble);
 		inmueble.addPuntaje(puntaje3Parainmueble);
 
-			when(puntaje4Parainmueble.getValor()).thenReturn(4);
-			when(puntaje3Parainmueble.getValor()).thenReturn(3);
+		when(puntaje4Parainmueble.getValor()).thenReturn(4);
+		when(puntaje3Parainmueble.getValor()).thenReturn(3);
 			
 		assertEquals(inmueble.getPromPuntajeDeRankeos(), 4,6 );
 	}

@@ -51,17 +51,8 @@ public abstract class Usuario {
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
-
 	//Metodos 	
-
 	public void registrarse(SitioWeb sitioWeb) {
 		this.setSitioWeb(sitioWeb);
-	}
-
-	public ArrayList<Inmueble> buscarInmuebles(String ciudad, LocalDate fechaDeEntrada, LocalDate fechaDeSalida) {
-		ArrayList<Inmueble> inmuebles = this.sitioWeb.filtrarInmueblesConEspecificaciones(ciudad, fechaDeEntrada,
-				fechaDeSalida);
-
-		return inmuebles;
 	}
 }
