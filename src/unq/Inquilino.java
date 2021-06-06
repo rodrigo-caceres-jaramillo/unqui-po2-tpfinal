@@ -8,7 +8,7 @@ public class Inquilino extends Usuario{
 		super(nombre, mail, telefono);
 	}
 
-	public ArrayList<Publicacion> buscarInmuebles(String ciudad, LocalDate fechaDeEntrada, LocalDate fechaDeSalida, int cantidadDeHuspedes, double precioMinimo, double precioMaximo) {
+	public ArrayList<Publicacion> buscarInmuebles(String ciudad, LocalDate fechaDeEntrada, LocalDate fechaDeSalida, Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
 		ArrayList<Publicacion> inmueblesPublicados = this.getSitioWeb().getInmueblesPublicadosConEspecificaciones(ciudad, 
 				fechaDeEntrada,
 				fechaDeSalida,

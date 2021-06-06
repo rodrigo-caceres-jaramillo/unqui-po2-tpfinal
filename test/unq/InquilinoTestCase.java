@@ -21,7 +21,7 @@ class InquilinoTestCase {
 	void setUp() throws Exception {
 		sitioWeb = new SitioWeb();
 		inquilino = new Inquilino("Sergio", "sergio.99@gmail.com", 22759863);
-		propietario = mock(Propietario.class);
+		propietario = new Propietario("Pepe", "example@example.com", 12531521);
 		inmueble1 = new Inmueble();
 		inmueble2 = new Inmueble();
 		sitioWeb.registrarUsuario(propietario);
@@ -35,7 +35,7 @@ class InquilinoTestCase {
 		LocalDate fechaDeEntrada = LocalDate.of(2021, 8, 22);
 		LocalDate fechaDeSalida = LocalDate.of(2021, 8, 23);
 
-		ArrayList<Publicacion> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", fechaDeEntrada, fechaDeSalida, null, null, null, null);
+		ArrayList<Publicacion> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", fechaDeEntrada, fechaDeSalida, null, null, null);
 		Boolean elInquilinoEncuentraInmueblesEnElSitio = !resultadoDeLaBusqueda.isEmpty();
 
 		assertTrue(elInquilinoEncuentraInmueblesEnElSitio);
@@ -46,7 +46,7 @@ class InquilinoTestCase {
 		LocalDate fechaDeEntrada = LocalDate.of(2021, 8, 22);
 		LocalDate fechaDeSalida = LocalDate.of(2021, 8, 23);
 
-		ArrayList<Inmueble> inmuebles = inquilino.buscarInmuebles("Villa Elisa", fechaDeEntrada, fechaDeSalida);
+		ArrayList<Publicacion> inmuebles = inquilino.buscarInmuebles("Villa Elisa", fechaDeEntrada, fechaDeSalida, 2, null, null);
 		Boolean elInquilinoEncuentraInmueblesEnElSitio = !inmuebles.isEmpty();
 
 		assertFalse(elInquilinoEncuentraInmueblesEnElSitio);

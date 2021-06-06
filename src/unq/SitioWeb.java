@@ -80,7 +80,7 @@ public class SitioWeb {
 		this.publicaciones.add(nuevaPublicacion);
 	}
 	
-	public ArrayList<Publicacion> getInmueblesPublicadosConEspecificaciones(String ciudad, LocalDate fechaDeEntrada,LocalDate fechaDeSalida, int cantidadDeHuspedes, double precioMinimo, double precioMaximo) {
+	public ArrayList<Publicacion> getInmueblesPublicadosConEspecificaciones(String ciudad, LocalDate fechaDeEntrada,LocalDate fechaDeSalida, Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
 		ArrayList<Publicacion> inmueblesFiltrados = new ArrayList<Publicacion>();
 		ArrayList<Publicacion> todosLosInmueblesPublicados = getPublicaciones();
 

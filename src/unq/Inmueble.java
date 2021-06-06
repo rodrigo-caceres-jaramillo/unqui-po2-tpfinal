@@ -12,6 +12,7 @@ public class Inmueble {
 	private String direccion;
 	private ArrayList<TipoDeServicio> servicios;
 	private int capacidad;
+	private Float metrosCuadrados;
 	//private ??? foto;
 	private LocalDate checkIn;
 	private LocalDate checkOut;
@@ -29,6 +30,12 @@ public class Inmueble {
 	public Inmueble(String ciudad) {
 		super();
 		this.ciudad = ciudad;
+	}
+
+	public Inmueble(String tipoInmueble, Float metrosCuadrados) {
+		setTipoDeInmueble(tipoDeInmueble);
+		setMetrosCuadrados(metrosCuadrados);
+		
 	}
 
 	public void setTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {
@@ -107,6 +114,14 @@ public class Inmueble {
 
 	public void addPuntaje(Puntacion puntajeParainmueble) {
 		this.getPuntajesDeRankeo().add(puntajeParainmueble);
+	}
+
+	public Float getMetrosCuadrados() {
+		return metrosCuadrados;
+	}
+
+	public void setMetrosCuadrados(Float metrosCuadrados) {
+		this.metrosCuadrados = metrosCuadrados;
 	}
 
 }
