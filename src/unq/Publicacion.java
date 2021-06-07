@@ -4,110 +4,106 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Publicacion {
-	// Atributos
-	private Usuario propietario;
-	private Inmueble inmueble;
-	private ArrayList<Comentario> comentarios;
-	private Double precio;
-	private Integer cantidadDeHuespedes;
-	private LocalDate fechaDeEntrada;
-	private LocalDate fechaDeSalida;
 
-	// Constructor
-	public Publicacion(Usuario propietario, Inmueble inmueble) {
+	private Usuario usuario;
+	private Inmueble inmueble;
+	private LocalDate checkIn;
+	private LocalDate checkOut;
+	private ArrayList<String> formasDePago;
+	private Double precio;
+	private ArrayList<Comentario> comentarios;
+
+	public void setUsuario(Usuario propietario) {
+		this.usuario = propietario;
+	}
+	
+	public Publicacion(Usuario usuario, Inmueble inmueble, LocalDate checkIn, LocalDate checkOut, Double precio) {
 		super();
-		this.propietario = propietario;
+		
+		this.usuario = usuario;
 		this.inmueble = inmueble;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.precio = precio;
+
+		
+		this.formasDePago = new ArrayList<String>();
 		this.comentarios = new ArrayList<Comentario>();
 	}
 
-	// Gets y sets
-	public Usuario getPropietario() {
-		return propietario;
+	public Publicacion() {
+		super();
+		this.formasDePago = new ArrayList<String>();
+		this.comentarios = new ArrayList<Comentario>();
 	}
 
-	public void setPropietario(Usuario propietario) {
-		this.propietario = propietario;
+	public Usuario getUsuario() {
+
+		return (this.usuario);
+	}
+
+	public void setInmuebleAPublicar(Inmueble inmuebleDePublicacion) {
+		this.inmueble = inmuebleDePublicacion;
 	}
 
 	public Inmueble getInmueble() {
-		return inmueble;
+		return (this.inmueble);
 	}
 
-	public void setInmueble(Inmueble inmueble) {
-		this.inmueble = inmueble;
+	public void setCheckIn(LocalDate checkIn) {
+		this.checkIn = checkIn;
+
 	}
 
-	public ArrayList<Comentario> getComentarios() {
-		return comentarios;
+	public LocalDate getCheckIn() {
+		return (this.checkIn);
 	}
 
-	public void setComentarios(ArrayList<Comentario> comentarios) {
-		this.comentarios = comentarios;
+	public void setCheckOut(LocalDate checkOut) {
+		this.checkOut = checkOut;
+	}
+
+	public LocalDate getCheckOut() {
+
+		return (this.checkOut);
+	}
+
+	public void agregarFormasDePago(ArrayList<String> formasDePago) {
+		this.formasDePago = formasDePago;
+	}
+
+	public ArrayList<String> getFormasDePago() {
+		return (this.formasDePago);
+	}
+
+	public boolean aceptaFormaDePago(String formaDePago) {
+
+		return (getFormasDePago().contains(formaDePago));
+	}
+
+	public void setPrecio(Double precioDePublicacion) {
+		this.precio = precioDePublicacion;
 	}
 
 	public Double getPrecio() {
-		return precio;
+		return (this.precio);
 	}
 
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+	public ArrayList<Comentario> getComentarios() {
+		return (this.comentarios);
 	}
 
-	public Integer getCantidadDeHuespedes() {
-		return cantidadDeHuespedes;
+	public boolean tieneComentarios() {
+		return ( !getComentarios().isEmpty()) ;
 	}
 
-	public void setCantidadDeHuespedes(Integer cantidadDeHuespedes) {
-		this.cantidadDeHuespedes = cantidadDeHuespedes;
+	public void addComentario(Comentario comentarioDePublicacion) {
+		this.getComentarios().add(comentarioDePublicacion);
 	}
 
-	public boolean cumpleConEspecificaciones(String ciudad, LocalDate fechaDeEntrada, LocalDate fechaDeSalida,
-			Integer cantidadHuespedes, Double precioMinimo, Double precioMaximo) {
-		String ciudadDelInmueble = getInmueble().getCiudad();
-		
-		Boolean cumpleConEspecificacionesObligatorias = ciudadDelInmueble.equals(ciudad)
-				&& getFechaDeEntrada().equals(fechaDeEntrada) && getFechaDeSalida().equals(fechaDeSalida);
-		
-		Boolean cumpleConEspecificacionesOpcionales = rangoDePreciosIngresadosNoEsNulo(precioMinimo, precioMaximo)
-				|| cantidadHuespedesIngresadosNoEsNulo(cantidadHuespedes);
-		
-		return cumpleConEspecificacionesObligatorias || cumpleConEspecificacionesOpcionales;
-	}
+	public String informacionDeUsuario() {
 
-	private boolean cantidadHuespedesIngresadosNoEsNulo(Integer cantidadHuespedes) {
-		if(!cantidadHuespedes.equals(null)) {
-			return getCantidadDeHuespedes() == cantidadHuespedes;
-		} else {
-			return false;
-		}
-		
+		return (getUsuario().getNombre() + " "+  getUsuario().getMail() + " "+ getUsuario().getTelefono()   );
 	}
-
-	private boolean rangoDePreciosIngresadosNoEsNulo(Double precioMinimo, Double precioMaximo) {
-		if (!precioMinimo.equals(null) && !precioMaximo.equals(null)) {
-			return getPrecio() <= precioMaximo || getPrecio() >= precioMinimo;
-		} else {
-			return false;
-		}
-		
-	}
-
-	public LocalDate getFechaDeSalida() {
-		return fechaDeSalida;
-	}
-
-	public void setFechaDeSalida(LocalDate fechaDeSalida) {
-		this.fechaDeSalida = fechaDeSalida;
-	}
-
-	public LocalDate getFechaDeEntrada() {
-		return fechaDeEntrada;
-	}
-
-	public void setFechaDeEntrada(LocalDate fechaDeEntrada) {
-		this.fechaDeEntrada = fechaDeEntrada;
-	}
-	
 
 }

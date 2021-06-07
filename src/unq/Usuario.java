@@ -1,8 +1,5 @@
 package unq;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public abstract class Usuario {
 	// Atributos
 	private SitioWeb sitioWeb;

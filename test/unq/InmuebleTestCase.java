@@ -6,12 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import unq.CategoriaDePuntaje;
-import unq.Inmueble;
-import unq.Inquilino;
-import unq.TipoDeInmueble;
-import unq.TipoDeServicio;
-
 class InmuebleTestCase {
 		private Inmueble inmueble;
 		private TipoDeInmueble tipoDeInmuebleHogar;
@@ -68,6 +62,7 @@ class InmuebleTestCase {
 
 	}
 
+	
 	@Test
 	void testUnInmuebleNoTieneUnaListaDeServicios() {
 		

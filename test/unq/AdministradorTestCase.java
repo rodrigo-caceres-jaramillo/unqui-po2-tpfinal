@@ -5,13 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 //import static org.mockito.Mockito.*;
 
-import unq.Administrador;
-import unq.CategoriaDeRankeoDePropietario;
-import unq.SitioWeb;
-import unq.TipoDeInmueble;
-import unq.TipoDeServicio;
-
-
 class AdministradorTestCase {
 	private Administrador admin;
 	private SitioWeb sitio;

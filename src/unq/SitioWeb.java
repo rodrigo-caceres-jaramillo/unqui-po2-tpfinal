@@ -75,7 +75,17 @@ public class SitioWeb {
 	public void agregarTipoDeServicio(TipoDeServicio servicio) {
 		this.tiposDeServicios.add(servicio);
 	}
+	public ArrayList<Publicacion> getInmueblesPublicadosConEspecificaciones(String ciudad, LocalDate fechaDeEntrada,
+			LocalDate fechaDeSalida, Integer cantidadDeHuspedes, Double precioMinimo, Double precioMinimo2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	public void registrarInmueble(Propietario propietario, Inmueble inmueble) {
+		// TODO Auto-generated method stub
+		
+	}
+}
+	/**public void registrarInmueble(Propietario propietario, Inmueble inmueble) {
 		Publicacion nuevaPublicacion = new Publicacion(propietario, inmueble);
 		this.publicaciones.add(nuevaPublicacion);
 	}
@@ -93,3 +103,6 @@ public class SitioWeb {
 		return inmueblesFiltrados;
 	}
 }
+
+
+**/
