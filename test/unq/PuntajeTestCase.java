@@ -7,10 +7,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PuntajeTestCase {
-	
+
 	Puntaje puntaje;
-	Usuario usuarioQueImplementaPuntuacion ; //DOT
+	Usuario usuarioQueImplementaPuntuacion; // DOT
 	CategoriaDePuntaje categoria;
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		puntaje = new Puntaje();
@@ -20,43 +21,36 @@ class PuntajeTestCase {
 
 	@Test
 	void testUnPuntajeTieneUnUsuarioQuePuntua() {
-		puntaje.setUsuario( usuarioQueImplementaPuntuacion );
-		
-		assertEquals( puntaje.getUsuario(), usuarioQueImplementaPuntuacion );
-		
+		puntaje.setUsuario(usuarioQueImplementaPuntuacion);
+
+		assertEquals(puntaje.getUsuario(), usuarioQueImplementaPuntuacion);
+
 	}
 
 	@Test
-	void testUnPuntajeTieneUnaCategoriaDePuntaje(){
+	void testUnPuntajeTieneUnaCategoriaDePuntaje() {
 		puntaje.setCategoria(categoria);
-		
-		assertEquals( puntaje.getCategoria(), categoria );
-		
+
+		assertEquals(puntaje.getCategoria(), categoria);
+
 	}
-	
-	
-	@Test 
+
+	@Test
 	void testUnPuntajeNoTieneUnValor() {
 		assertEquals(puntaje.getValor(), 0);
 	}
-	
+
 	@Test
 	void testUnPuntajeRecibeValorMenorOIgualA5() {
 		puntaje.setValor(5);
-		
-		assertEquals(puntaje.getValor(), 5 );
+
+		assertEquals(puntaje.getValor(), 5);
 	}
-	
+
 	@Test
 	void TestUnPuntajeNoRecibeUnValorMayorA5SuLimiteEs5() {
 		puntaje.setValor(9);
-		assertEquals(puntaje.getValor(), 5 );
+		assertEquals(puntaje.getValor(), 5);
 
 	}
-	
-	
-	
-	
-	
-	
 }

@@ -15,19 +15,29 @@ public class Inmueble {
 	private String direccion;
 	private ArrayList<TipoDeServicio> servicios;
 	private int capacidad;
-	//private ??? foto;
-	private LocalDate checkIn;
-	private LocalDate checkOut;
+	// private ??? foto;
+	// private LocalDate checkIn;
+	// private LocalDate checkOut;
 	private ArrayList<String> formasDePagoAceptadas;
 	private Double precio;
 	private ArrayList<Puntaje> puntaciones;
 	// Constructores
+
 	public Inmueble() {
 		super();
 		this.servicios = new ArrayList<TipoDeServicio>();
 		this.puntaciones = new ArrayList<Puntaje>();
 	}
 
+	public Inmueble(TipoDeInmueble tipo, Integer superficie, String pais, String ciudad, String direccion,
+			Integer capacidad) {
+		setCapacidad(capacidad);
+		setCiudad(ciudad);
+		setDireccion(direccion);
+		setPais(pais);
+		setSuperficie(superficie);
+		setTipoDeInmueble(tipo);
+	}
 
 	public void setTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {
 		this.tipoDeInmueble = tipoDeInmueble;
@@ -87,11 +97,10 @@ public class Inmueble {
 	public ArrayList<Puntaje> getPuntajesDeRankeo() {
 		return (this.puntaciones);
 	}
-	
 
-	//Metodos
+	// Metodos
 	public double getPromPuntajeDeRankeos() {
-		double promedio = 0;
+		double promedio = 0.0;
 		int cantPuntajes = this.getPuntajesDeRankeo().size();
 		for (int i = 0; i < cantPuntajes; i++) {
 			Puntaje puntaje = this.getPuntajesDeRankeo().get(i);
@@ -108,11 +117,9 @@ public class Inmueble {
 		this.getPuntajesDeRankeo().add(puntajeParainmueble);
 	}
 
-
-	public boolean registraPuntajeDe(Inquilino inquilino) {
+	public Boolean registraPuntajeDe(Inquilino inquilino) {
 //Hay que usar un stream 
-	return ( false );}
-
+		return (false);
+	}
 
 }
-

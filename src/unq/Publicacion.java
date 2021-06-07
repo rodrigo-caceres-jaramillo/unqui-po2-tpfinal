@@ -2,6 +2,7 @@ package unq;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Publicacion {
 
@@ -9,32 +10,65 @@ public class Publicacion {
 	private Inmueble inmueble;
 	private LocalDate checkIn;
 	private LocalDate checkOut;
-	private ArrayList<String> formasDePago;
+	private List<FormasDePagoEnum> formasDePago;
 	private Double precio;
 	private ArrayList<Comentario> comentarios;
 
-	public void setUsuario(Usuario propietario) {
-		this.usuario = propietario;
+	public Publicacion() {
+		super();
+		// this.formasDePago = new ArrayList<String>();
+		this.comentarios = new ArrayList<Comentario>();
+		setFormasDePago(new ArrayList<FormasDePagoEnum>());
+
+	}
+
+	
+	public Publicacion(Usuario usuario, Inmueble inmueble) {
+		setUsuario(usuario);
+		setInmueble(inmueble);
+		setFormasDePago(new ArrayList<FormasDePagoEnum>());
+
 	}
 	
+
 	public Publicacion(Usuario usuario, Inmueble inmueble, LocalDate checkIn, LocalDate checkOut, Double precio) {
 		super();
-		
+
 		this.usuario = usuario;
 		this.inmueble = inmueble;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.precio = precio;
-
-		
-		this.formasDePago = new ArrayList<String>();
 		this.comentarios = new ArrayList<Comentario>();
+		setFormasDePago(new ArrayList<FormasDePagoEnum>());
 	}
 
-	public Publicacion() {
-		super();
-		this.formasDePago = new ArrayList<String>();
-		this.comentarios = new ArrayList<Comentario>();
+	public Inmueble getInmueble() {
+		return (this.inmueble);
+	}
+
+	public void setInmueble(Inmueble inmueble) {
+		this.inmueble = inmueble;
+	}
+
+	public List<FormasDePagoEnum> getFormasDePago() {
+		return formasDePago;
+	}
+
+	public void setFormasDePago(List<FormasDePagoEnum> formasDePago) {
+		this.formasDePago = formasDePago;
+	}
+
+	public ArrayList<Comentario> getComentarios() {
+		return (this.comentarios);
+	}
+
+	public void setComentarios(ArrayList<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	public void setUsuario(Usuario propietario) {
+		this.usuario = propietario;
 	}
 
 	public Usuario getUsuario() {
@@ -44,10 +78,6 @@ public class Publicacion {
 
 	public void setInmuebleAPublicar(Inmueble inmuebleDePublicacion) {
 		this.inmueble = inmuebleDePublicacion;
-	}
-
-	public Inmueble getInmueble() {
-		return (this.inmueble);
 	}
 
 	public void setCheckIn(LocalDate checkIn) {
@@ -68,19 +98,6 @@ public class Publicacion {
 		return (this.checkOut);
 	}
 
-	public void agregarFormasDePago(ArrayList<String> formasDePago) {
-		this.formasDePago = formasDePago;
-	}
-
-	public ArrayList<String> getFormasDePago() {
-		return (this.formasDePago);
-	}
-
-	public boolean aceptaFormaDePago(String formaDePago) {
-
-		return (getFormasDePago().contains(formaDePago));
-	}
-
 	public void setPrecio(Double precioDePublicacion) {
 		this.precio = precioDePublicacion;
 	}
@@ -89,12 +106,17 @@ public class Publicacion {
 		return (this.precio);
 	}
 
-	public ArrayList<Comentario> getComentarios() {
-		return (this.comentarios);
+	public Boolean aceptaFormaDePago(String formaDePago) {
+
+		return null;// (getFormasDePago().contains(formaDePago));
 	}
 
-	public boolean tieneComentarios() {
-		return ( !getComentarios().isEmpty()) ;
+	public void agregarFormasDePago(ArrayList<FormasDePagoEnum> formasDePago) {
+		this.formasDePago = formasDePago;
+	}
+
+	public Boolean tieneComentarios() {
+		return (!getComentarios().isEmpty());
 	}
 
 	public void addComentario(Comentario comentarioDePublicacion) {
@@ -103,15 +125,29 @@ public class Publicacion {
 
 	public String informacionDeUsuario() {
 
-		return (getUsuario().getNombre() + " "+  getUsuario().getMail() + " "+ getUsuario().getTelefono()   );
+		return (getUsuario().getNombre() + " " + getUsuario().getMail() + " " + getUsuario().getTelefono());
 	}
 
-	public boolean cumpleConEspecificaciones(String ciudad, LocalDate checkIn, LocalDate checkOut,
+	public Boolean cumpleConEspecificaciones(String ciudad, LocalDate checkIn, LocalDate checkOut,
 			// TODO Auto-generated method stub
 
-			
-			Integer cantidadDeHuspedes, Double precioMinimo,Double  precioMaximo) {
+			Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
 		return false;
+	}
+
+	public void configurarMediosDePago(FormasDePagoEnum enumValue) {
+		for (FormasDePagoEnum e : FormasDePagoEnum.values()) {
+			this.getFormasDePago().add(e);
+		}
+	}
+
+	public void addMediosDePagoAll() {
+		if (getFormasDePago() == null) {
+			setFormasDePago(new ArrayList<FormasDePagoEnum>());
+		}
+		for (FormasDePagoEnum e : FormasDePagoEnum.values()) {
+			this.getFormasDePago().add(e);
+		}
 	}
 
 }

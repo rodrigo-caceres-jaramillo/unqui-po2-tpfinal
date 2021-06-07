@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.function.BooleanSupplier;
 
 public class Inquilino extends Usuario{
+	
 	public Inquilino(String nombre, String mail, int telefono) {
 		super(nombre, mail, telefono);
 	}
@@ -15,7 +16,7 @@ public class Inquilino extends Usuario{
 		return (  getSitioWeb().getInmueblesConBusquedaPor(ciudad, checkIn, checkOut,
 																				cantidadDeHuspedes, precioMinimo, precioMaximo)  );
 		
-		
+
 	}
 
 	public void alquilarInmuebleDeListado(Inmueble inmueble, ArrayList<Inmueble> listadoDeInmuebles) {

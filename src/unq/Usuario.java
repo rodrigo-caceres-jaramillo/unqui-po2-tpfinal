@@ -51,5 +51,6 @@ public abstract class Usuario {
 	//Metodos 	
 	public void registrarse(SitioWeb sitioWeb) {
 		this.setSitioWeb(sitioWeb);
+		sitioWeb.registrarUsuario(this);
 	}
 }

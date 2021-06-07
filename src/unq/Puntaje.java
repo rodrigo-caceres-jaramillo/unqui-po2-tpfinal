@@ -26,7 +26,7 @@ public class Puntaje {
 		this.categoria = categoria;
 	}
 
-	public int getValor() {
+	public double getValor() {
 		return (this.valor);
 	}
 
