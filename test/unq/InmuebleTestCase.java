@@ -11,8 +11,8 @@ class InmuebleTestCase {
 		private TipoDeInmueble tipoDeInmuebleHogar;
 		private TipoDeServicio servicioDeInmuebleLuz;  
 		private TipoDeServicio servicioDeInmuebleAgua;
-		private Puntacion puntaje4Parainmueble; 		  
-		private Puntacion puntaje3Parainmueble;
+		private Puntaje puntaje4Parainmueble; 		  
+		private Puntaje puntaje3Parainmueble;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -20,8 +20,8 @@ class InmuebleTestCase {
 		tipoDeInmuebleHogar= mock(TipoDeInmueble.class); //DOT
 		servicioDeInmuebleAgua = mock(TipoDeServicio.class);
 		servicioDeInmuebleLuz  = mock(TipoDeServicio.class); //DOT
-		puntaje4Parainmueble = mock(Puntacion.class);//DOT
-		puntaje3Parainmueble = mock(Puntacion.class); //DOT
+		puntaje4Parainmueble = mock(Puntaje.class);//DOT
+		puntaje3Parainmueble = mock(Puntaje.class); //DOT
 	}
 
 	@Test

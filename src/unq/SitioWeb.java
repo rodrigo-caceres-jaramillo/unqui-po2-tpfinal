@@ -11,6 +11,8 @@ public class SitioWeb {
 	private ArrayList<TipoDeInmueble> tiposDeInmuebles;
 	private ArrayList<TipoDeServicio> tiposDeServicios;
 	private ArrayList<Publicacion> publicaciones;
+	
+	
 	//Constructor
 	public SitioWeb() {
 		this.setAdministrador(null);
@@ -75,34 +77,37 @@ public class SitioWeb {
 	public void agregarTipoDeServicio(TipoDeServicio servicio) {
 		this.tiposDeServicios.add(servicio);
 	}
-	public ArrayList<Publicacion> getInmueblesPublicadosConEspecificaciones(String ciudad, LocalDate fechaDeEntrada,
-			LocalDate fechaDeSalida, Integer cantidadDeHuspedes, Double precioMinimo, Double precioMinimo2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	public void registrarInmueble(Propietario propietario, Inmueble inmueble) {
-		// TODO Auto-generated method stub
-		
-	}
-}
-	/**public void registrarInmueble(Propietario propietario, Inmueble inmueble) {
 		Publicacion nuevaPublicacion = new Publicacion(propietario, inmueble);
 		this.publicaciones.add(nuevaPublicacion);
 	}
 	
-	public ArrayList<Publicacion> getInmueblesPublicadosConEspecificaciones(String ciudad, LocalDate fechaDeEntrada,LocalDate fechaDeSalida, Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
-		ArrayList<Publicacion> inmueblesFiltrados = new ArrayList<Publicacion>();
-		ArrayList<Publicacion> todosLosInmueblesPublicados = getPublicaciones();
-
-		for (int i = 0; i < todosLosInmueblesPublicados.size(); i++) {
-			Publicacion publicacion = todosLosInmueblesPublicados.get(i);
-			if (publicacion.cumpleConEspecificaciones(ciudad, fechaDeEntrada, fechaDeSalida, cantidadDeHuspedes, precioMinimo, precioMinimo)) {
-				inmueblesFiltrados.add(publicacion);
+	public ArrayList<Inmueble> getInmueblesConBusquedaPor(String ciudad, LocalDate checkIn,LocalDate checkOut, 
+																			Integer capacidad, Double precioMinimo, Double precioMaximo) {
+		
+		ArrayList<Inmueble> inmueblesFiltrados = new ArrayList<Inmueble>();
+	
+		
+		for (int i = 0; i < getPublicaciones().size(); i++) {
+			Publicacion publicacion = getPublicaciones().get(i);
+			
+			if (publicacion.cumpleConEspecificaciones(ciudad, checkIn, checkOut, capacidad,
+														precioMinimo, precioMaximo)  ) {
+				
+				inmueblesFiltrados.add( publicacion.getInmueble() ); 
 			}
 		}
-		return inmueblesFiltrados;
+		return (inmueblesFiltrados);
+	}
+	public void añadirOcupacionDelInmueble(Inmueble inmueble) {
+		// TODO Auto-generated method stub
+	
+	}
+	public boolean elInmuebleEstaOcupado(Inmueble inmueble1) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 
 
-**/
+

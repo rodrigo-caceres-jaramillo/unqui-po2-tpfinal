@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
@@ -16,40 +18,74 @@ class InquilinoTestCase {
 	private Propietario propietario;
 	private Inmueble inmueble1;
 	private Inmueble inmueble2;
+	private CategoriaDePuntaje categoriaDePuntaje;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		sitioWeb = new SitioWeb();
+		sitioWeb = mock(SitioWeb.class);
 		inquilino = new Inquilino("Sergio", "sergio.99@gmail.com", 22759863);
-		propietario = new Propietario("Pepe", "example@example.com", 12531521);
-		inmueble1 = new Inmueble();
-		inmueble2 = new Inmueble();
-		sitioWeb.registrarUsuario(propietario);
-		sitioWeb.registrarUsuario(inquilino);
-		propietario.publicarInmueble(inmueble1);
-		propietario.publicarInmueble(inmueble2);
+		inmueble1 = mock(Inmueble.class);
+		categoriaDePuntaje = mock(CategoriaDePuntaje.class);
+		
+		inquilino.setSitioWeb(sitioWeb);
 	}
 
 	@Test
-	void testUnUsuarioInquilinoAlRealizaBusquedaDeInmueblesEncuentraDentroDeLosOfertadosPorElSitioWeb() {
-		LocalDate fechaDeEntrada = LocalDate.of(2021, 8, 22);
-		LocalDate fechaDeSalida = LocalDate.of(2021, 8, 23);
+	void testUnInquilinoRealizaUnaBusquedaConDatosObligatoriosNoEncuentraNinguno() {
+		LocalDate checkIn = LocalDate.of(2021, 8, 22);
+		LocalDate checkOut = LocalDate.of(2021, 8, 23);
+		
+		ArrayList<Inmueble>  busquedaEsperada = new ArrayList<>();
+ 
+		when( sitioWeb.getInmueblesConBusquedaPor("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0)  ).thenReturn( busquedaEsperada);
 
-		ArrayList<Publicacion> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", fechaDeEntrada, fechaDeSalida, null, null, null);
-		Boolean elInquilinoEncuentraInmueblesEnElSitio = !resultadoDeLaBusqueda.isEmpty();
+		ArrayList<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0);
 
-		assertTrue(elInquilinoEncuentraInmueblesEnElSitio);
+			
+		assertTrue(resultadoDeLaBusqueda.isEmpty());
 	}
 
+	
+	
 	@Test
-	void testUnUsuarioInquilinoAlRealizarBusquedaDeInmueblesNOEncuentraNingunoDentroDeLosOfertados() {
-		LocalDate fechaDeEntrada = LocalDate.of(2021, 8, 22);
-		LocalDate fechaDeSalida = LocalDate.of(2021, 8, 23);
+	void testUnInquilinoRealizaUnaBusquedaConDatosObligatoriosEncuentraUnInmueble() {
+		LocalDate checkIn = LocalDate.of(2021, 8, 22);
+		LocalDate checkOut = LocalDate.of(2021, 8, 23);
+		ArrayList<Inmueble>  busquedaEsperada = new ArrayList<>(Arrays.asList(inmueble1));
+ 
+		when( sitioWeb.getInmueblesConBusquedaPor("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0)  ).thenReturn( busquedaEsperada);
 
-		ArrayList<Publicacion> inmuebles = inquilino.buscarInmuebles("Villa Elisa", fechaDeEntrada, fechaDeSalida, 2, null, null);
-		Boolean elInquilinoEncuentraInmueblesEnElSitio = !inmuebles.isEmpty();
 
-		assertFalse(elInquilinoEncuentraInmueblesEnElSitio);
+		ArrayList<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0);
+		
+		
+		assertFalse( resultadoDeLaBusqueda.isEmpty() );
+		
+	
 	}
-
+	@Test
+	void testUnInquilinoRealizaUnAlquilerDeUnaListaDeInmuebles() {
+		
+		ArrayList<Inmueble>  listadoDeInmuebles = new ArrayList<>(Arrays.asList(inmueble1));
+		inquilino.alquilarInmuebleDeListado(inmueble1, listadoDeInmuebles  );
+		
+		when(sitioWeb.elInmuebleEstaOcupado(inmueble1) ).thenReturn(true);
+		
+		assertTrue(inquilino.elSitioRegistraOcupacionDelInmueble(inmueble1) );
+	}
+	
+	@Test
+	void testUnInquilinoLeDaUnPuntajeAUnInmueble() {
+		inquilino.puntuarInmueble(inmueble1 ,4, categoriaDePuntaje  );	
+		
+		when(inmueble1.registraPuntajeDe(inquilino)).thenReturn(true);
+		
+		assertTrue(inquilino.elInmuebleRegistraPuntajePropio(inmueble1) );
+		
+		
+	}
+	@Test
+	void testUnInquilinoLeDaUnPuntajeAUnPropietario() {}
+	
+	
 }

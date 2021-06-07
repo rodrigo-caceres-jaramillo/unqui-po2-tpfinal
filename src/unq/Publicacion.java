@@ -106,4 +106,12 @@ public class Publicacion {
 		return (getUsuario().getNombre() + " "+  getUsuario().getMail() + " "+ getUsuario().getTelefono()   );
 	}
 
+	public boolean cumpleConEspecificaciones(String ciudad, LocalDate checkIn, LocalDate checkOut,
+			// TODO Auto-generated method stub
+
+			
+			Integer cantidadDeHuspedes, Double precioMinimo,Double  precioMaximo) {
+		return false;
+	}
+
 }

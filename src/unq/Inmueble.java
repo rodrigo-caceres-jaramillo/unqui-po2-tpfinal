@@ -2,6 +2,9 @@ package unq;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class Inmueble {
 	// Atributos
@@ -17,12 +20,12 @@ public class Inmueble {
 	private LocalDate checkOut;
 	private ArrayList<String> formasDePagoAceptadas;
 	private Double precio;
-	private ArrayList<Puntacion> puntaciones;
+	private ArrayList<Puntaje> puntaciones;
 	// Constructores
 	public Inmueble() {
 		super();
 		this.servicios = new ArrayList<TipoDeServicio>();
-		this.puntaciones = new ArrayList<Puntacion>();
+		this.puntaciones = new ArrayList<Puntaje>();
 	}
 
 
@@ -81,7 +84,7 @@ public class Inmueble {
 		return (this.capacidad);
 	}
 
-	public ArrayList<Puntacion> getPuntajesDeRankeo() {
+	public ArrayList<Puntaje> getPuntajesDeRankeo() {
 		return (this.puntaciones);
 	}
 	
@@ -91,7 +94,7 @@ public class Inmueble {
 		double promedio = 0;
 		int cantPuntajes = this.getPuntajesDeRankeo().size();
 		for (int i = 0; i < cantPuntajes; i++) {
-			Puntacion puntaje = this.getPuntajesDeRankeo().get(i);
+			Puntaje puntaje = this.getPuntajesDeRankeo().get(i);
 			promedio = +puntaje.getValor();
 		}
 		return (promedio / 5);
@@ -101,8 +104,15 @@ public class Inmueble {
 		this.getServicios().add(servicioDeInmueble);
 	}
 
-	public void addPuntaje(Puntacion puntajeParainmueble) {
+	public void addPuntaje(Puntaje puntajeParainmueble) {
 		this.getPuntajesDeRankeo().add(puntajeParainmueble);
 	}
+
+
+	public boolean registraPuntajeDe(Inquilino inquilino) {
+//Hay que usar un stream 
+	return ( false );}
+
+
 }
 
