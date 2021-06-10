@@ -28,7 +28,7 @@ class InquilinoTestCase {
 		categoriaDePuntaje = mock(CategoriaDePuntaje.class);
 
 		inquilino.setSitioWeb(sitioWeb);
-	}
+	} 
 
 	@Test
 	void testUnInquilinoRealizaUnaBusquedaConDatosObligatoriosNoEncuentraNinguno() {

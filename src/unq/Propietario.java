@@ -2,21 +2,31 @@ package unq;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Propietario extends Usuario {
 
-	private ArrayList<Publicacion> publicaciones = new ArrayList<Publicacion>();
-
-	public ArrayList<Publicacion> getPublicaciones() {
-		return publicaciones;
-	}
-
-	public void setPublicaciones(ArrayList<Publicacion> publicaciones) {
-		this.publicaciones = publicaciones;
-	}
+	private List<Publicacion> publicaciones = new ArrayList<Publicacion>();
+	private Publicacion publicacion;
 
 	public Propietario(String nombre, String mail, int telefono) {
 		super(nombre, mail, telefono);
+	}
+
+	public List<Publicacion> getPublicaciones() {
+		return publicaciones;
+	}
+
+	public void setPublicaciones(List<Publicacion> publicaciones) {
+		this.publicaciones = publicaciones;
+	}
+
+	public Publicacion getPublicacion() {
+		return publicacion;
+	}
+
+	public void setPublicacion(Publicacion publicacion) {
+		this.publicacion = publicacion;
 	}
 
 	public void publicarInmueble(Inmueble inmueble) {
@@ -26,7 +36,7 @@ public class Propietario extends Usuario {
 	public void añadirPublicacion(Publicacion publicacion) {
 
 		publicaciones.add(publicacion);
-		publicarInmueble(publicacion.getInmueble());
+		// publicarInmueble(publicacion.getInmueble());
 
 	}
 

@@ -39,9 +39,44 @@ class PropietarioTestCase {
 	}
 
 	@Test
+	void testPropietarioEspecificaPublicacionARealizar() {
+		LocalDate checkIn = LocalDate.of(2021, 6, 1);
+		LocalDate checkOut = LocalDate.of(2021, 6, 7);
+		ArrayList<String> fotos = new ArrayList<String>();
+		fotos.add("Foto1");
+		fotos.add("Foto2");
+		fotos.add("Foto3");
+
+		Publicacion publicacion = new Publicacion(usuarioPropietario, inmueble, checkIn, checkOut, 145.05);
+		usuarioPropietario.añadirPublicacion(publicacion);
+
+		Publicacion propietarioPublicacion = usuarioPropietario.getPublicaciones().get(0);
+		propietarioPublicacion.addMediosDePagoAll();
+		
+		//propietarioPublicacion.agregarFotos(fotos);
+
+		assertEquals(propietarioPublicacion.getCheckIn(), LocalDate.of(2021, 6, 1));
+		assertEquals(propietarioPublicacion.getCheckOut(), LocalDate.of(2021, 6, 7));
+		assertEquals(propietarioPublicacion.getInmueble(), inmueble);
+	}
+
+	/*
+	 * Me faltaría ver si l
+	 */
+
+	@Test
+	void testPropietarioRealizaUnaPublicacionAlSitioConEspecificaciones() {
+		usuarioPropietario.registrarse(sitio);
+
+		List<Publicacion> publicacionesDelPropietario = usuarioPropietario.getSitioWeb().getPublicaciones();
+
+		assertTrue(publicacionesDelPropietario.contains(publicacion));
+	}
+
+	@Test
 	void testPropietarioConPublicacionAceptaTodosLosMediosDePago() {
 
-		Publicacion publicacion = generarPublicacionBase();
+		// Publicacion publicacion = generarPublicacionBase();
 		publicacion.addMediosDePagoAll();
 
 		usuarioPropietario.getPublicaciones().add(publicacion);
@@ -51,37 +86,45 @@ class PropietarioTestCase {
 				.size() == FormasDePagoEnum.values().length);
 
 		/*
-		 * El usuario al tener una sola publicacion, le pregunto con get(0) y le pregunto
-		 * si la cantidad de medios de pago que acepta es igual a la del enum (que son 3)
+		 * El usuario al tener una sola publicacion, le pregunto con get(0) y le
+		 * pregunto si la cantidad de medios de pago que acepta es igual a la del enum
+		 * (que son 3)
 		 */
 	}
 
 	@Test
 	void testPropietarioConfiguraPublicacionConSoloEfectivo() {
-		Publicacion publicacion1 = generarPublicacionBase();
-		publicacion1.getFormasDePago().add(FormasDePagoEnum.EFECTIVO);
-
-		usuarioPropietario.getPublicaciones().add(publicacion1);
-
-		assertTrue(usuarioPropietario.getPublicaciones().contains(publicacion1));
-		assertTrue(usuarioPropietario.getPublicaciones().get(0)
-				.getFormasDePago().contains(FormasDePagoEnum.EFECTIVO));
-
-		//Como sé que el usuario solo tiene una sola publicacion le pido el get(0) a su array de
-		//publicaciones y le pregunto si esa publicacion contiene la forma de pago Efectivo.
+		/*
+		 * Publicacion publicacion1 = generarPublicacionBase();
+		 * publicacion1.getFormasDePago().add(FormasDePagoEnum.EFECTIVO);
+		 * 
+		 * usuarioPropietario.getPublicaciones().add(publicacion1);
+		 * 
+		 * assertTrue(usuarioPropietario.getPublicaciones().contains(publicacion1));
+		 * assertTrue(usuarioPropietario.getPublicaciones().get(0).getFormasDePago().
+		 * contains(FormasDePagoEnum.EFECTIVO));
+		 * 
+		 */
+		// Como sé que el usuario solo tiene una sola publicacion le pido el get(0) a su
+		// array de
+		// publicaciones y le pregunto si esa publicacion contiene la forma de pago
+		// Efectivo.
 	}
 
-	private Publicacion generarPublicacionBase() {
-		usuarioPropietario.registrarse(sitio);
-		Inmueble inmueble = new Inmueble(tipo, 45, "Argentina", "BsAs", "unaDireccion", 3);
-		LocalDate checkIn = LocalDate.of(2021, 8, 9);
-		LocalDate checkOut = LocalDate.of(2021, 8, 11);
-		Double precio = 300.0;
-
-		Publicacion publicacion1 = new Publicacion(usuarioPropietario, inmueble, checkIn, checkOut, precio);
-
-		return publicacion1;
-	}
+	/*
+	 * 
+	 * 
+	 * private Publicacion generarPublicacionBase() {
+	 * usuarioPropietario.registrarse(sitio); Inmueble inmueble = new Inmueble(tipo,
+	 * 45, "Argentina", "BsAs", "unaDireccion", 3); LocalDate checkIn =
+	 * LocalDate.of(2021, 8, 9); LocalDate checkOut = LocalDate.of(2021, 8, 11);
+	 * Double precio = 300.0;
+	 * 
+	 * Publicacion publicacion1 = new Publicacion(usuarioPropietario, inmueble,
+	 * checkIn, checkOut, precio);
+	 * 
+	 * return publicacion1; }
+	 */
 
 	/*
 	 * @Test void

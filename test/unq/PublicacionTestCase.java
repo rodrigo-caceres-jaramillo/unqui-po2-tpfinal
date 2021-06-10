@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +24,7 @@ class PublicacionTestCase {
 		comentarioDePublicacion = mock(Comentario.class);
 	}
 
-	@Test
+	@Test 
 
 	void testUnaPublicacionTieneUnUsuario() {
 		publicacion.setUsuario(propietario);
@@ -58,45 +56,56 @@ class PublicacionTestCase {
 	}
 
 	@Test
+	void testUnaPublicacionNoAceptaMediosDePagoViaSitioWeb() {
+
+		assertTrue(publicacion.getFormasDePago().isEmpty());
+	}
+
+	@Test
 	void testUnaPublicacionAceptaSoloEfectivo() {
-		//ArrayList<String> formasDePago = new ArrayList<>(Arrays.asList("Efectivo", "Debito", "Credito"));
 
 		publicacion.configurarMediosDePago(FormasDePagoEnum.EFECTIVO);
-		 publicacion.getFormasDePago().add(FormasDePagoEnum.EFECTIVO);
-		 
-		 //publicacion.recibeMedioDePago(FormasDePagoEnum.EFECTIVO);
-		 
+		publicacion.getFormasDePago().add(FormasDePagoEnum.EFECTIVO);
+
 		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.EFECTIVO));
 	}
 
-	/*
 	@Test
-	void testUnaPublicacionNoAceptaUnaFormaDePago() {
-		String formaDePago = "Efectivo";
-		assertFalse(publicacion.aceptaFormaDePago(formaDePago));
+	void testUnaPublicacionAceptaSoloTarjetaDeDebito() {
+
+		publicacion.configurarMediosDePago(FormasDePagoEnum.TARJETADEDEBITO);
+		publicacion.getFormasDePago().add(FormasDePagoEnum.TARJETADEDEBITO);
+
+		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADEDEBITO));
 	}
-	*/
 
-	/*
 	@Test
-	void testUnaPublicacionAceptaUnaFormaDePago() {
-		ArrayList<String> formasDePago = new ArrayList<>(Arrays.asList("Efectivo", "Debito", "Credito"));
-		// publicacion.agregarFormasDePago(formasDePago);
-		String formaDePago = "Efectivo";
+	void testUnaPublicacionAceptaSoloTarjetaDeCredito() {
 
-		assertTrue(publicacion.aceptaFormaDePago(formaDePago));
+		publicacion.configurarMediosDePago(FormasDePagoEnum.TARJETADECREDITO);
+		publicacion.getFormasDePago().add(FormasDePagoEnum.TARJETADECREDITO);
+
+		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADECREDITO));
+	} 
+
+	@Test
+	void testUnaPublicacionAceptaTodosLosMediosDePago() {
+
+		publicacion.addMediosDePagoAll();
+
+		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADECREDITO));
+		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADEDEBITO));
+		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.EFECTIVO));
 	}
-	*/
 
 	@Test
-	void testUnaPublicacionTieneUnPrecio() {
+	void testUnaPublicacionTieneUnPrecioDeInmueblePorDia() {
 		Double precioDePublicacion = 100.50;
 		publicacion.setPrecio(precioDePublicacion);
 
 		assertEquals(publicacion.getPrecio(), precioDePublicacion);
-
 	}
-
+	
 	@Test
 	void testUnaPublicacionNoTieneComentarios() {
 

@@ -139,7 +139,7 @@ public class Publicacion {
 		for (FormasDePagoEnum e : FormasDePagoEnum.values()) {
 			this.getFormasDePago().add(e);
 		}
-	}
+	} 
 
 	public void addMediosDePagoAll() {
 		if (getFormasDePago() == null) {

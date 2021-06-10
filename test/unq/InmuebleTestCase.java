@@ -13,7 +13,7 @@ class InmuebleTestCase {
 	private TipoDeServicio servicioDeInmuebleLuz;
 	private TipoDeServicio servicioDeInmuebleAgua;
 	private Puntaje puntaje4Parainmueble;
-	private Puntaje puntaje3Parainmueble;
+	private Puntaje puntaje3Parainmueble; 
 	
 	@BeforeEach
 	void setUp() throws Exception {
