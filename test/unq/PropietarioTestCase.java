@@ -1,180 +1,92 @@
 package unq;
 
+
+/* 
+
+//**
+ * publicarInmueble(): listo
+ 
++ puntuarInquilino(Inquilino, int, String): 
++ aceptarReserva(Reserva):
++ informacionPropia():
+A su vez, para un inmueble, el usuario podrá visualizar también la
+información propia del dueño, el puntaje que otros usuarios le han dado a él mismo
+y el puntaje promedio que ha obtenido.
++ bajarPrecioAPublicidadCon(Publicidad, double):
+*/
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import unq.Inmueble;
-import unq.Propietario;
-import unq.SitioWeb;
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mockito.Mock;
 
 class PropietarioTestCase {
 	private SitioWeb sitio;
 	private Propietario usuarioPropietario;
 	private Inmueble inmueble;
-	private TipoDeInmueble tipo;
 	private Publicacion publicacion;
-
 	@BeforeEach
 	public void setUp() throws Exception {
 		usuarioPropietario = new Propietario("ejemplin", "ejemplo@jexample.com", 42356769);
-		tipo = mock(TipoDeInmueble.class);
 		inmueble = mock(Inmueble.class);
 		publicacion = mock(Publicacion.class);
 		sitio = mock(SitioWeb.class);
+
+		usuarioPropietario.registrarse(sitio);
 
 	}
 
 	@Test
 	void testUnPropietarioSeRegistraEnElSitioWeb() {
-		usuarioPropietario.registrarse(sitio);
-
 		assertEquals(usuarioPropietario.getSitioWeb(), sitio);
 	}
-
+	
+	
+	
 	@Test
-	void testPropietarioEspecificaPublicacionARealizar() {
-		LocalDate checkIn = LocalDate.of(2021, 6, 1);
-		LocalDate checkOut = LocalDate.of(2021, 6, 7);
-		ArrayList<String> fotos = new ArrayList<String>();
-		fotos.add("Foto1");
-		fotos.add("Foto2");
-		fotos.add("Foto3");
-
-		Publicacion publicacion = new Publicacion(usuarioPropietario, inmueble, checkIn, checkOut, 145.05);
+	void testPropietarioRealizaUnaPublicacionAlSitio() {
 		usuarioPropietario.añadirPublicacion(publicacion);
-
-		Publicacion propietarioPublicacion = usuarioPropietario.getPublicaciones().get(0);
-		propietarioPublicacion.addMediosDePagoAll();
+				
+		List<Publicacion> publicacionesEsperadas = new ArrayList<Publicacion>(); publicacionesEsperadas.add(publicacion);
 		
-		//propietarioPublicacion.agregarFotos(fotos);
-
-		assertEquals(propietarioPublicacion.getCheckIn(), LocalDate.of(2021, 6, 1));
-		assertEquals(propietarioPublicacion.getCheckOut(), LocalDate.of(2021, 6, 7));
-		assertEquals(propietarioPublicacion.getInmueble(), inmueble);
-	}
-
-	/*
-	 * Me faltaría ver si l
-	 */
-
-	@Test
-	void testPropietarioRealizaUnaPublicacionAlSitioConEspecificaciones() {
-		usuarioPropietario.registrarse(sitio);
-
-		List<Publicacion> publicacionesDelPropietario = usuarioPropietario.getSitioWeb().getPublicaciones();
+		when(sitio.getPublicacionesDe(usuarioPropietario)).thenReturn(publicacionesEsperadas) ;
+		
+		List<Publicacion> publicacionesDelPropietario = 
+				usuarioPropietario.publicacionesEnElSitio();
 
 		assertTrue(publicacionesDelPropietario.contains(publicacion));
 	}
 
 	@Test
-	void testPropietarioConPublicacionAceptaTodosLosMediosDePago() {
+	void testUnPropietarioEstableceUnMedioDePagoAUnaPublicacion() {
+		FormasDePagoEnum efectivo = FormasDePagoEnum.EFECTIVO;
+		usuarioPropietario.medioDePagoPara(publicacion, efectivo );
+		usuarioPropietario.añadirPublicacion(publicacion);
+		
+		when(sitio.registraPubliDeUsuarioConFormaDePago(usuarioPropietario, efectivo)).thenReturn(true);
+		
+		
+		assertTrue(usuarioPropietario.algunaPublicacionConPago(efectivo));
 
-		// Publicacion publicacion = generarPublicacionBase();
-		publicacion.addMediosDePagoAll();
-
-		usuarioPropietario.getPublicaciones().add(publicacion);
-
-		assertTrue(usuarioPropietario.getPublicaciones().contains(publicacion));
-		assertTrue(usuarioPropietario.getPublicaciones().get(0).getFormasDePago()
-				.size() == FormasDePagoEnum.values().length);
-
-		/*
-		 * El usuario al tener una sola publicacion, le pregunto con get(0) y le
-		 * pregunto si la cantidad de medios de pago que acepta es igual a la del enum
-		 * (que son 3)
-		 */
+		
 	}
-
 	@Test
-	void testPropietarioConfiguraPublicacionConSoloEfectivo() {
-		/*
-		 * Publicacion publicacion1 = generarPublicacionBase();
-		 * publicacion1.getFormasDePago().add(FormasDePagoEnum.EFECTIVO);
-		 * 
-		 * usuarioPropietario.getPublicaciones().add(publicacion1);
-		 * 
-		 * assertTrue(usuarioPropietario.getPublicaciones().contains(publicacion1));
-		 * assertTrue(usuarioPropietario.getPublicaciones().get(0).getFormasDePago().
-		 * contains(FormasDePagoEnum.EFECTIVO));
-		 * 
-		 */
-		// Como sé que el usuario solo tiene una sola publicacion le pido el get(0) a su
-		// array de
-		// publicaciones y le pregunto si esa publicacion contiene la forma de pago
-		// Efectivo.
+	void testUnPropietarioBajaPrecioAUnaPublicacionDeInmueble() {
+		when(publicacion.getPrecio()).thenReturn(100.0);
+		usuarioPropietario.bajarPrecioAPublicacionCon(publicacion, 0);
+	
+		assertEquals(publicacion.getPrecio(), 100.0);
 	}
-
-	/*
-	 * 
-	 * 
-	 * private Publicacion generarPublicacionBase() {
-	 * usuarioPropietario.registrarse(sitio); Inmueble inmueble = new Inmueble(tipo,
-	 * 45, "Argentina", "BsAs", "unaDireccion", 3); LocalDate checkIn =
-	 * LocalDate.of(2021, 8, 9); LocalDate checkOut = LocalDate.of(2021, 8, 11);
-	 * Double precio = 300.0;
-	 * 
-	 * Publicacion publicacion1 = new Publicacion(usuarioPropietario, inmueble,
-	 * checkIn, checkOut, precio);
-	 * 
-	 * return publicacion1; }
-	 */
-
-	/*
-	 * @Test void
-	 * testUnPropietarioDeseaPonerEnAlquilerUnInmuebleEnElSitioIdicandoEspecificaciones
-	 * () { Inmueble inmueble2 = new Inmueble();
-	 * usuarioPropietario.conInmuebleAAlquilar(inmueble2); ArrayList<String>
-	 * serviciosInmueble = usuarioPropietario.añadirServiciosDeInmueble(inmueble2,
-	 * "Agua", "Gas", "Electricidad", "WiFi"); ArrayList<String> fotosInmueble =
-	 * usuarioPropietario.añadirFotosDeInmueble(inmueble2, "Foto1", "Foto2",
-	 * "Foto3"); LocalDate checkIn = LocalDate.of(2021, 7, 20); LocalDate checkOut =
-	 * LocalDate.of(2021, 7, 25); ArrayList<String> formasDePago =
-	 * usuarioPropietario.añadirFormasDePago("Tarjeta de credito",
-	 * "Tarjeta de debito", "Efectivo");
-	 * usuarioPropietario.registrarInmuebleConEspecificaciones(inmueble2,
-	 * "Departamento", 45f, "Argentina", "CABA", "example 123", serviciosInmueble,
-	 * fotosInmueble, checkIn, checkOut, formasDePago);
-	 * usuarioPropietario.crearPublicacion(inmueble2);
-	 * 
-	 * assertEquals(null, null);
-	 * 
-	 * }
-	 */
-
-	/**
-	 * @Test void
-	 *       testUnPropietarioEspecificaLasCaracteristicasDeUnInmuebleQueDeseaPublicar()
-	 *       {
-	 * 
-	 *       ArrayList<String> servicios = servicios.añadir("Agua");
-	 *       servicios.añadir("Gas"); servicios.añadir("WiFi");
-	 *       servicios.añadir("Agua"); ArrayList<String> fotos =
-	 *       fotos.añadir("Foto1"); fotos.añadir("Foto2"); fotos.añadir("Foto3");
-	 *       LocalDate checkIn = LocalDate.of(2021, 7, 20); LocalDate checkOut =
-	 *       LocalDate.of(2021, 7, 25);
-	 *       usuarioPropietario.publicarInmuebleConEspecificaciones(inmueble,
-	 *       "Departamento", 45f, "Argentina", "direccion 900", servicios, 2, fotos,
-	 *       checkIn, checkOut);
-	 * 
-	 *       assertEquals(usuarioPropietario.getPublicacion().getTipoInmueble(),
-	 *       "Departamento"); assertEquals(superficie, 45f); assertEquals(pais,
-	 *       "Argentina"); assertEquals(ciudad, "Buenos Aires");
-	 *       assertTrue(servicios.contains("Gas", "Electricidad", "Agua", "WiFi",
-	 *       "Baño privado")); assertEquals(capacidadPersonas, 2);
-	 *       assertTrue(fotos.contains("Foto1", "Foto3", "Foto3"));
-	 * 
-	 *       }
-	 * 
-	 * @Test void testUnPropietarioPuedePublicarUnInmueble() {
-	 *       usuarioPropietario.publicarInmueble(inmueble);
-	 *       assertEquals(sitio.getPublicaciones().size(), 1); }
-	 **/
+	
+	
+	
+	
+	
+	
+	
 
 }

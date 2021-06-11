@@ -2,6 +2,7 @@ package unq;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SitioWeb {
 	// Atributos
@@ -124,7 +125,48 @@ public class SitioWeb {
 	}
 
 	public Boolean elInmuebleEstaOcupado(Inmueble inmueble1) {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public List<Publicacion> getPublicacionesDe(Usuario usuario) {
+		
+		ArrayList<Publicacion> publicaciones = new ArrayList<Publicacion>();
+
+		for (int i = 0; i < getPublicaciones().size(); i++) {
+			Publicacion publicacion = getPublicaciones().get(i);
+
+			if (publicacion.esDelUsuario(usuario) ) {
+
+				publicaciones.add(publicacion);
+			}
+		}
+		return( publicaciones ) ;
+	}
+
+	public void añadirNuevaPublicacion(Publicacion publicacion) {
+			this.getPublicaciones().add(publicacion);
+	}
+
+	public boolean registraPubliDeUsuarioConFormaDePago(Propietario propietario, FormasDePagoEnum formaDePago) {
+		List<Publicacion> publicaciones = this.getPublicacionesDe(propietario);
+
+		return (publicaciones.stream().anyMatch(publi -> publi.aceptaFormaDePago(formaDePago) ) );
+	}
+
+	public void actualizarPrecioDePublicacion(Publicacion publi, double precio) {
+			if(!this.elUsuarioPublicó(publi.getUsuario(), publi ) ){
+					System.out.println("error: no podés bajar precio de una publicación que no es tuya");}
+			else {
+				publi.bajarPrecio(precio);
+				this.publicaciones.remove(publi);
+				this.añadirNuevaPublicacion(publi);
+			}
+	
+	} 
+
+	
+	public boolean elUsuarioPublicó(Usuario usuario, Publicacion publi ){
+		
+		return (this.getPublicacionesDe(usuario).contains(publi)  ) ;
 	}
 }

@@ -1,6 +1,5 @@
 package unq;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +34,47 @@ public class Propietario extends Usuario {
 
 	public void añadirPublicacion(Publicacion publicacion) {
 
-		publicaciones.add(publicacion);
-		// publicarInmueble(publicacion.getInmueble());
+			this.getSitioWeb().añadirNuevaPublicacion(publicacion);
+	}
 
+	public List<Publicacion> publicacionesEnElSitio() {
+
+		return (this.getSitioWeb().getPublicacionesDe(this));
+	}
+
+	public void medioDePagoPara(Publicacion publicacion, FormasDePagoEnum formaDePago) {
+			publicacion.addMedioDePago(formaDePago);	
+			
+	}
+
+	public boolean algunaPublicacionConPago(FormasDePagoEnum formaDePago) {
+					
+		return (getSitioWeb().registraPubliDeUsuarioConFormaDePago(this, formaDePago ) );
+	}
+
+	public void bajarPrecioAPublicacionCon(Publicacion publi, double precio) {
+		this.getSitioWeb().actualizarPrecioDePublicacion(publi, precio);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

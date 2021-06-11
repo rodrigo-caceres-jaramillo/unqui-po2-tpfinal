@@ -16,7 +16,6 @@ public class Publicacion {
 
 	public Publicacion() {
 		super();
-		// this.formasDePago = new ArrayList<String>();
 		this.comentarios = new ArrayList<Comentario>();
 		setFormasDePago(new ArrayList<FormasDePagoEnum>());
 
@@ -106,11 +105,6 @@ public class Publicacion {
 		return (this.precio);
 	}
 
-	public Boolean aceptaFormaDePago(String formaDePago) {
-
-		return null;// (getFormasDePago().contains(formaDePago));
-	}
-
 	public void agregarFormasDePago(ArrayList<FormasDePagoEnum> formasDePago) {
 		this.formasDePago = formasDePago;
 	}
@@ -150,4 +144,25 @@ public class Publicacion {
 		}
 	}
 
+
+	public boolean esDelUsuario(Usuario usuario) {
+		return (this.getUsuario() == usuario);
+	}
+
+
+	public void addMedioDePago(FormasDePagoEnum formaDePago) {
+			this.getFormasDePago().add(formaDePago);
+	}
+
+
+	public boolean aceptaFormaDePago(FormasDePagoEnum formaDePago) {
+		return(this.getFormasDePago().contains(formaDePago));
+	}
+
+
+	public void bajarPrecio(double precioABajar) {
+		if(getPrecio() < precioABajar) { this.setPrecio(0.0);}
+			else { this.setPrecio( getPrecio()- precioABajar ); }
+	}
+	
 }

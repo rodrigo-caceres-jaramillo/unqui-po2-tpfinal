@@ -148,5 +148,27 @@ class PublicacionTestCase {
 		// assertTrue(publicacionDatos.getFormasDePago().isEmpty());
 		assertTrue(publicacionDatos.getComentarios().isEmpty());
 	}
-
+	
+	@Test
+	void testUnaPublicacionActualizaSuPrecio() {
+			
+		Double precioDePublicacion = 100.50;
+		publicacion.setPrecio(precioDePublicacion);
+		publicacion.bajarPrecio(0.50);
+		
+		assertEquals( publicacion.getPrecio(),100.0 );
+	}
+	
+	
+	
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
