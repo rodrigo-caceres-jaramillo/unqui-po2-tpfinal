@@ -68,6 +68,7 @@ public class SitioWeb {
 		return publicaciones;
 	}
 
+	
 	public void setPublicaciones(ArrayList<Publicacion> publicaciones) {
 		this.publicaciones = publicaciones;
 	}
@@ -98,7 +99,13 @@ public class SitioWeb {
 
 	public void registrarInmueble(Propietario propietario, Inmueble inmueble) {
 		Publicacion nuevaPublicacion = new Publicacion(propietario, inmueble);
-		this.publicaciones.add(nuevaPublicacion);
+		this.añadirNuevaPublicacion(nuevaPublicacion);;
+	}
+	
+
+
+	public void añadirNuevaPublicacion(Publicacion publicacion) {
+			this.getPublicaciones().add(publicacion);
 	}
 	 
 
@@ -141,10 +148,6 @@ public class SitioWeb {
 			}
 		}
 		return( publicaciones ) ;
-	}
-
-	public void añadirNuevaPublicacion(Publicacion publicacion) {
-			this.getPublicaciones().add(publicacion);
 	}
 
 	public boolean registraPubliDeUsuarioConFormaDePago(Propietario propietario, FormasDePagoEnum formaDePago) {
