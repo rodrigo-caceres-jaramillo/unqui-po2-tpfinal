@@ -10,7 +10,7 @@ public class Propietario extends Usuario {
 
 	public Propietario(String nombre, String mail, int telefono) {
 		super(nombre, mail, telefono);
-	}
+	} 
 
 	public List<Publicacion> getPublicaciones() {
 		return publicaciones;

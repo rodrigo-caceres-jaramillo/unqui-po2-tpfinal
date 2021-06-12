@@ -1,6 +1,5 @@
 package unq;
 
-
 /* 
 
 //**
@@ -23,12 +22,12 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 class PropietarioTestCase {
 	private SitioWeb sitio;
 	private Propietario usuarioPropietario;
 	private Inmueble inmueble;
 	private Publicacion publicacion;
+
 	@BeforeEach
 	public void setUp() throws Exception {
 		usuarioPropietario = new Propietario("ejemplin", "ejemplo@jexample.com", 42356769);
@@ -44,19 +43,17 @@ class PropietarioTestCase {
 	void testUnPropietarioSeRegistraEnElSitioWeb() {
 		assertEquals(usuarioPropietario.getSitioWeb(), sitio);
 	}
-	
-	
-	
+
 	@Test
 	void testPropietarioRealizaUnaPublicacionAlSitio() {
 		usuarioPropietario.añadirPublicacion(publicacion);
-				
-		List<Publicacion> publicacionesEsperadas = new ArrayList<Publicacion>(); publicacionesEsperadas.add(publicacion);
-		
-		when(sitio.getPublicacionesDe(usuarioPropietario)).thenReturn(publicacionesEsperadas) ;
-		
-		List<Publicacion> publicacionesDelPropietario = 
-				usuarioPropietario.publicacionesEnElSitio();
+
+		List<Publicacion> publicacionesEsperadas = new ArrayList<Publicacion>();
+		publicacionesEsperadas.add(publicacion);
+
+		when(sitio.getPublicacionesDe(usuarioPropietario)).thenReturn(publicacionesEsperadas);
+
+		List<Publicacion> publicacionesDelPropietario = usuarioPropietario.publicacionesEnElSitio();
 
 		assertTrue(publicacionesDelPropietario.contains(publicacion));
 	}
@@ -64,29 +61,21 @@ class PropietarioTestCase {
 	@Test
 	void testUnPropietarioEstableceUnMedioDePagoAUnaPublicacion() {
 		FormasDePagoEnum efectivo = FormasDePagoEnum.EFECTIVO;
-		usuarioPropietario.medioDePagoPara(publicacion, efectivo );
+		usuarioPropietario.medioDePagoPara(publicacion, efectivo);
 		usuarioPropietario.añadirPublicacion(publicacion);
-		
+
 		when(sitio.registraPubliDeUsuarioConFormaDePago(usuarioPropietario, efectivo)).thenReturn(true);
-		
-		
+
 		assertTrue(usuarioPropietario.algunaPublicacionConPago(efectivo));
 
-		
 	}
+
 	@Test
 	void testUnPropietarioBajaPrecioAUnaPublicacionDeInmueble() {
 		when(publicacion.getPrecio()).thenReturn(100.0);
 		usuarioPropietario.bajarPrecioAPublicacionCon(publicacion, 0);
-	
+
 		assertEquals(publicacion.getPrecio(), 100.0);
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }
