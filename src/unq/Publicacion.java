@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Publicacion {
 
-	private Usuario usuario;
+	private Usuario propietario;
 	private Inmueble inmueble;
 	private LocalDate checkIn;
 	private LocalDate checkOut;
@@ -21,19 +21,18 @@ public class Publicacion {
 
 	}
 
-	
-	public Publicacion(Usuario usuario, Inmueble inmueble) {
-		setUsuario(usuario);
+	public Publicacion(Propietario propietario, Inmueble inmueble) {
+		setPropietario(propietario);
 		setInmueble(inmueble);
 		setFormasDePago(new ArrayList<FormasDePagoEnum>());
 
 	}
-	
 
-	public Publicacion(Usuario usuario, Inmueble inmueble, LocalDate checkIn, LocalDate checkOut, Double precio) {
+	public Publicacion(Usuario propietario, Inmueble inmueble, LocalDate checkIn, LocalDate checkOut,
+			Double precio) {
 		super();
 
-		this.usuario = usuario;
+		this.propietario = propietario;
 		this.inmueble = inmueble;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -66,13 +65,12 @@ public class Publicacion {
 		this.comentarios = comentarios;
 	}
 
-	public void setUsuario(Usuario propietario) {
-		this.usuario = propietario;
+	public Usuario getPropietario() {
+		return propietario;
 	}
 
-	public Usuario getUsuario() {
-
-		return (this.usuario);
+	public void setPropietario(Usuario propietario) {
+		this.propietario = propietario;
 	}
 
 	public void setInmuebleAPublicar(Inmueble inmuebleDePublicacion) {
@@ -119,7 +117,7 @@ public class Publicacion {
 
 	public String informacionDeUsuario() {
 
-		return (getUsuario().getNombre() + " " + getUsuario().getMail() + " " + getUsuario().getTelefono());
+		return (getPropietario().getNombre() + " " + getPropietario().getMail() + " " + getPropietario().getTelefono());
 	}
 
 	public Boolean cumpleConEspecificaciones(String ciudad, LocalDate checkIn, LocalDate checkOut,
@@ -133,7 +131,7 @@ public class Publicacion {
 		for (FormasDePagoEnum e : FormasDePagoEnum.values()) {
 			this.getFormasDePago().add(e);
 		}
-	} 
+	}
 
 	public void addMediosDePagoAll() {
 		if (getFormasDePago() == null) {
@@ -144,25 +142,16 @@ public class Publicacion {
 		}
 	}
 
-
-	public boolean esDelUsuario(Usuario usuario) {
-		return (this.getUsuario() == usuario);
-	}
-
+//	public boolean esDelUsuario(Usuario usuario) {
+//		return (this.getUsuario() == usuario);
+//	}
 
 	public void addMedioDePago(FormasDePagoEnum formaDePago) {
-			this.getFormasDePago().add(formaDePago);
+		this.getFormasDePago().add(formaDePago);
 	}
-
 
 	public boolean aceptaFormaDePago(FormasDePagoEnum formaDePago) {
-		return(this.getFormasDePago().contains(formaDePago));
+		return (this.getFormasDePago().contains(formaDePago));
 	}
 
-
-	public void bajarPrecio(double precioABajar) {
-		if(getPrecio() < precioABajar) { this.setPrecio(0.0);}
-			else { this.setPrecio( getPrecio()- precioABajar ); }
-	}
-	
 }

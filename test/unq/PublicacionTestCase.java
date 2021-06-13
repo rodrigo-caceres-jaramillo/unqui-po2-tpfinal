@@ -23,13 +23,13 @@ class PublicacionTestCase {
 		inmuebleDePublicacion = mock(Inmueble.class);
 		comentarioDePublicacion = mock(Comentario.class);
 	}
-
+ 
 	@Test 
 
 	void testUnaPublicacionTieneUnUsuario() {
-		publicacion.setUsuario(propietario);
+		publicacion.setPropietario(propietario);
 
-		assertEquals(publicacion.getUsuario(), propietario);
+		assertEquals(publicacion.getPropietario(), propietario);
 	}
 
 	@Test
@@ -123,7 +123,7 @@ class PublicacionTestCase {
 
 	@Test
 	void testUnaPublicacionOfreceInformacionDeUsuario() {
-		publicacion.setUsuario(propietario);
+		publicacion.setPropietario(propietario);
 
 		when(propietario.getMail()).thenReturn("bianca@gmail.com");
 		when(propietario.getNombre()).thenReturn("bian");
@@ -142,22 +142,22 @@ class PublicacionTestCase {
 
 		assertEquals(publicacionDatos.getCheckIn(), checkIn);
 		assertEquals(publicacionDatos.getCheckOut(), checkOut);
-		assertEquals(publicacionDatos.getUsuario(), propietario);
+		assertEquals(publicacionDatos.getPropietario(), propietario);
 		assertEquals(publicacionDatos.getInmueble(), inmuebleDePublicacion);
 		assertEquals(publicacionDatos.getPrecio(), 145.05);
-		// assertTrue(publicacionDatos.getFormasDePago().isEmpty());
+		assertTrue(publicacionDatos.getFormasDePago().isEmpty());
 		assertTrue(publicacionDatos.getComentarios().isEmpty());
 	}
 	
-	@Test
-	void testUnaPublicacionActualizaSuPrecio() {
-			
-		Double precioDePublicacion = 100.50;
-		publicacion.setPrecio(precioDePublicacion);
-		publicacion.bajarPrecio(0.50);
-		
-		assertEquals( publicacion.getPrecio(),100.0 );
-	}
+//	@Test
+//	void testUnaPublicacionActualizaSuPrecio() {
+//			
+//		Double precioDePublicacion = 100.50;
+//		publicacion.setPrecio(precioDePublicacion);
+//		publicacion.(0.50);
+//		
+//		assertEquals( publicacion.getPrecio(),100.0 );
+//	}
 	
 	
 	

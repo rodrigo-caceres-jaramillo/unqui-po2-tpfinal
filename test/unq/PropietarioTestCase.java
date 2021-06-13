@@ -44,31 +44,31 @@ class PropietarioTestCase {
 		assertEquals(usuarioPropietario.getSitioWeb(), sitio);
 	}
 
-	@Test
-	void testPropietarioRealizaUnaPublicacionAlSitio() {
-		usuarioPropietario.añadirPublicacion(publicacion);
-
-		List<Publicacion> publicacionesEsperadas = new ArrayList<Publicacion>();
-		publicacionesEsperadas.add(publicacion);
-
-		when(sitio.getPublicacionesDe(usuarioPropietario)).thenReturn(publicacionesEsperadas);
-
-		List<Publicacion> publicacionesDelPropietario = usuarioPropietario.publicacionesEnElSitio();
-
-		assertTrue(publicacionesDelPropietario.contains(publicacion));
-	}
-
-	@Test
-	void testUnPropietarioEstableceUnMedioDePagoAUnaPublicacion() {
-		FormasDePagoEnum efectivo = FormasDePagoEnum.EFECTIVO;
-		usuarioPropietario.medioDePagoPara(publicacion, efectivo);
-		usuarioPropietario.añadirPublicacion(publicacion);
-
-		when(sitio.registraPubliDeUsuarioConFormaDePago(usuarioPropietario, efectivo)).thenReturn(true);
-
-		assertTrue(usuarioPropietario.algunaPublicacionConPago(efectivo));
-
-	}
+//	@Test
+//	void testPropietarioRealizaUnaPublicacionAlSitio() {
+//		usuarioPropietario.crearPublicacion(publicacion);
+//
+//		List<Publicacion> publicacionesEsperadas = new ArrayList<Publicacion>();
+//		publicacionesEsperadas.add(publicacion);
+//
+//		when(sitio.getPublicacionesDe(usuarioPropietario)).thenReturn(publicacionesEsperadas);
+//
+//		List<Publicacion> publicacionesDelPropietario = usuarioPropietario.publicacionesEnElSitio();
+//
+//		assertTrue(publicacionesDelPropietario.contains(publicacion));
+//	}
+//
+//	@Test
+//	void testUnPropietarioEstableceUnMedioDePagoAUnaPublicacion() {
+//		FormasDePagoEnum efectivo = FormasDePagoEnum.EFECTIVO;
+//		usuarioPropietario.medioDePagoPara(publicacion, efectivo);
+//		usuarioPropietario.añadirPublicacion(publicacion);
+//
+//		when(sitio.registraPubliDeUsuarioConFormaDePago(usuarioPropietario, efectivo)).thenReturn(true);
+//
+//		assertTrue(usuarioPropietario.algunaPublicacionConPago(efectivo));
+//
+//	}
 
 	@Test
 	void testUnPropietarioBajaPrecioAUnaPublicacionDeInmueble() {

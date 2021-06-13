@@ -13,7 +13,7 @@ public class ParametrosBusqueda {
 
 	public ParametrosBusqueda(String ciudad, LocalDate checkIn, LocalDate checkOut) {
 		super();
-		this.ciudad = ciudad;
+		this.ciudad = ciudad; 
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 	}

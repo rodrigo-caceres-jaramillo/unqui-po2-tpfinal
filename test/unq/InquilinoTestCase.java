@@ -28,7 +28,7 @@ class InquilinoTestCase {
 		categoriaDePuntaje = mock(CategoriaDePuntaje.class);
 
 		inquilino.setSitioWeb(sitioWeb);
-	} 
+	}
 
 	@Test
 	void testUnInquilinoRealizaUnaBusquedaConDatosObligatoriosNoEncuentraNinguno() {
@@ -52,7 +52,9 @@ class InquilinoTestCase {
 		LocalDate checkOut = LocalDate.of(2021, 8, 23);
 		ArrayList<Inmueble> busquedaEsperada = new ArrayList<>(Arrays.asList(inmueble1));
 
-		when(sitioWeb.getInmueblesConBusquedaPor("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0)) //Acá hay que pasarle valores nulos, no 0.
+		when(sitioWeb.getInmueblesConBusquedaPor("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0)) // Acá hay que pasarle
+																									// valores nulos, no
+																									// 0.
 				.thenReturn(busquedaEsperada);
 
 		ArrayList<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", checkIn, checkOut, 0, 0.0,
@@ -71,10 +73,10 @@ class InquilinoTestCase {
 
 		assertTrue(inquilino.elSitioRegistraOcupacionDelInmueble(inmueble1));
 	}
-	
+
 	@Test
 	void test() {
-		
+
 	}
 
 	@Test

@@ -7,20 +7,29 @@ import java.util.List;
 public class SitioWeb {
 	// Atributos
 	private Administrador administrador;
-	private ArrayList<Usuario> usuarios;
+	private AdministradorUsuario adminUsuario;
+	//private ArrayList<Usuario> usuarios;
 	private ArrayList<CategoriaDeRankeo> categoriasDeRankeo;
 	private ArrayList<TipoDeInmueble> tiposDeInmuebles;
 	private ArrayList<TipoDeServicio> tiposDeServicios;
-	private ArrayList<Publicacion> publicaciones;
+	// private ArrayList<Publicacion> publicaciones;
+	private AdministradorPublicacion adminPublicacion;
+
+	public AdministradorPublicacion getAdminPublicacion() {
+		return adminPublicacion;
+	}
+
+	public void setAdminPublicacion(AdministradorPublicacion adminPublicacion) {
+		this.adminPublicacion = adminPublicacion;
+	}
 
 	// Constructor
 	public SitioWeb() {
 		this.setAdministrador(null);
-		this.setUsuarios(new ArrayList<Usuario>());
 		this.setCategoriasDeRankeo(new ArrayList<CategoriaDeRankeo>());
 		this.setTiposDeInmuebles(new ArrayList<TipoDeInmueble>());
 		this.setTiposDeServicios(new ArrayList<TipoDeServicio>());
-		this.setPublicaciones(new ArrayList<Publicacion>());
+
 	}
 
 	// Gets y sets
@@ -32,13 +41,7 @@ public class SitioWeb {
 		this.administrador = administrador;
 	}
 
-	public ArrayList<Usuario> getUsuarios() {
-		return usuarios;
-	}
 
-	public void setUsuarios(ArrayList<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
 
 	public ArrayList<CategoriaDeRankeo> getCategoriasDeRankeo() {
 		return categoriasDeRankeo;
@@ -64,19 +67,16 @@ public class SitioWeb {
 		this.tiposDeServicios = tiposDeServicios;
 	}
 
-	public ArrayList<Publicacion> getPublicaciones() {
-		return publicaciones;
-	}
-
-	
-	public void setPublicaciones(ArrayList<Publicacion> publicaciones) {
-		this.publicaciones = publicaciones;
-	}
-
+	/*
+	 * public ArrayList<Publicacion> getPublicaciones() { return publicaciones; }
+	 * 
+	 * 
+	 * public void setPublicaciones(ArrayList<Publicacion> publicaciones) {
+	 * this.publicaciones = publicaciones; }
+	 */
 	// Metodos
 	public void registrarUsuario(Usuario usuario) {
-		usuario.registrarse(this);
-		this.usuarios.add(usuario);
+		getAdminUsuario().registrar(usuario);
 	}
 
 	public void registrarAdministrador(Administrador administrador) {
@@ -96,18 +96,15 @@ public class SitioWeb {
 		this.tiposDeServicios.add(servicio);
 	}
 
-
 	public void registrarInmueble(Propietario propietario, Inmueble inmueble) {
 		Publicacion nuevaPublicacion = new Publicacion(propietario, inmueble);
-		this.añadirNuevaPublicacion(nuevaPublicacion);;
+		this.publicar(nuevaPublicacion);
+		;
 	}
-	
 
-
-	public void añadirNuevaPublicacion(Publicacion publicacion) {
-			this.getPublicaciones().add(publicacion);
+	public void publicar(Publicacion publicacion) {
+		getAdminPublicacion().agregar(publicacion);
 	}
-	 
 
 	public ArrayList<Inmueble> getInmueblesConBusquedaPor(String ciudad, LocalDate checkIn, LocalDate checkOut,
 			Integer capacidad, Double precioMinimo, Double precioMaximo) {
@@ -135,41 +132,44 @@ public class SitioWeb {
 		return false;
 	}
 
-	public List<Publicacion> getPublicacionesDe(Usuario usuario) {
-		
-		ArrayList<Publicacion> publicaciones = new ArrayList<Publicacion>();
+	public List<Publicacion> getPublicacionesDe(Usuario propietario) {
 
-		for (int i = 0; i < getPublicaciones().size(); i++) {
-			Publicacion publicacion = getPublicaciones().get(i);
-
-			if (publicacion.esDelUsuario(usuario) ) {
-
-				publicaciones.add(publicacion);
-			}
-		}
-		return( publicaciones ) ;
+		return getAdminPublicacion().obtenerPublicacionesDelUsuario(propietario);
 	}
 
 	public boolean registraPubliDeUsuarioConFormaDePago(Propietario propietario, FormasDePagoEnum formaDePago) {
 		List<Publicacion> publicaciones = this.getPublicacionesDe(propietario);
 
-		return (publicaciones.stream().anyMatch(publi -> publi.aceptaFormaDePago(formaDePago) ) );
+		return (publicaciones.stream().anyMatch(publi -> publi.aceptaFormaDePago(formaDePago)));
 	}
 
-	public void actualizarPrecioDePublicacion(Publicacion publi, double precio) {
-			if(!this.elUsuarioPublicó(publi.getUsuario(), publi ) ){
-					System.out.println("error: no podés bajar precio de una publicación que no es tuya");}
-			else {
-				publi.bajarPrecio(precio);
-				this.publicaciones.remove(publi);
-				this.añadirNuevaPublicacion(publi);
-			}
-	
-	} 
+	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
+		getAdminPublicacion().modificarPrecio(publi, precio);
+	}
 
+	public Boolean elUsuarioPublico(Publicacion publi, Usuario usuario) {
+
+		return (getPublicacionesDe(usuario)).contains(publi);
+	}
 	
-	public boolean elUsuarioPublicó(Usuario usuario, Publicacion publi ){
+	public List<Publicacion> getPublicaciones() {
+		return getAdminPublicacion().getPublicaciones();
+	}
+	
+	public void agregarPublicacion(Publicacion publicacion) {
+		getAdminPublicacion().agregar(publicacion);
+	}
+
+	public AdministradorUsuario getAdminUsuario() {
+		return adminUsuario;
+	}
+
+	public void setAdminUsuario(AdministradorUsuario adminUsuario) {
+		this.adminUsuario = adminUsuario;
+	}
+
+	public List<Usuario> getUsuarios() {
 		
-		return (this.getPublicacionesDe(usuario).contains(publi)  ) ;
+		return getAdminUsuario().getUsuarios();
 	}
 }
