@@ -1,4 +1,4 @@
-package unq;
+package entidades;
 
 /* 
 
@@ -17,6 +17,12 @@ y el puntaje promedio que ha obtenido.
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.Inmueble;
+import unq.Propietario;
+import unq.Publicacion;
+import unq.SitioWeb;
+
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;

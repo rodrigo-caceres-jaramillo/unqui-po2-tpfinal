@@ -1,4 +1,4 @@
-package unq;
+package entidades;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,6 +12,19 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.Administrador;
+import unq.AdministradorPublicacion;
+import unq.AdministradorUsuario;
+import unq.CategoriaDePuntaje;
+import unq.FormasDePagoEnum;
+import unq.Inmueble;
+import unq.Inquilino;
+import unq.Propietario;
+import unq.Publicacion;
+import unq.Servicio;
+import unq.SitioWeb;
+import unq.TipoDeInmueble;
 
 class SitioWebTestCase {
 	private SitioWeb sitio;
@@ -68,7 +81,7 @@ class SitioWebTestCase {
 
 	@Test
 	void testUnSitioRegistraUnaCategoriaDeRankeo() {
-		CategoriaDeRankeo categoria = mock(CategoriaDeRankeo.class);
+		CategoriaDePuntaje categoria = mock(CategoriaDePuntaje.class);
 
 		sitio.agregarCategoriaDeRankeo(categoria);
 		assertFalse(sitio.getCategoriasDeRankeo().isEmpty());
@@ -91,7 +104,7 @@ class SitioWebTestCase {
 
 	@Test
 	void testUnSitoWebAgregaUnTipoDeServicioParaInmuebles() {
-		TipoDeServicio tipoServicio = mock(TipoDeServicio.class);
+		Servicio tipoServicio = mock(Servicio.class);
 		sitio.agregarTipoDeServicio(tipoServicio);
 		assertFalse(sitio.getTiposDeServicios().isEmpty());
 

@@ -33,21 +33,22 @@ public class AdministradorPublicacion {
 //		if (!this.elUsuarioPublico(publicacion.getPropietario(), publicacion)) {
 //			System.out.println("error: no podés bajar precio de una publicación que no es tuya");
 //		} else {
+			
 		for (Publicacion publi : getPublicaciones()) {
 			if (publi.equals(publicacion)) {
-				modificarPrecio(publi, precio);
-				break;
+				bajarPrecioDePubli(publi, precio);
+				break; 
 			}
 		}
 
 	}
 
-	public void modificarPrecio(Publicacion publicacion, Double nuevoPrecio) {
+	public void bajarPrecioDePubli(Publicacion publicacion, Double nuevoPrecio) {
 		if (publicacion.getPrecio() < nuevoPrecio) {
-			// this.setPrecio(0.0);
-			// si bajó el precio, hacer algo para notificar al observer
+			    publicacion.setPrecio(0.0);  
 		}
-		publicacion.setPrecio(nuevoPrecio);
+		publicacion.setPrecio(nuevoPrecio); 
+		// si bajó el precio, hacer algo para notificar al observer
 	}
 
 	public List<Publicacion> obtenerPublicacionesDelUsuario(Usuario propietario) {

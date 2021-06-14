@@ -1,6 +1,6 @@
 package unq;
 
-public class CategoriaDeRankeoDePropietario extends CategoriaDeRankeo{
+public class CategoriaDeRankeoDePropietario extends CategoriaDePuntaje{
 	public CategoriaDeRankeoDePropietario(String nombre) {
 		super(nombre);
 	}

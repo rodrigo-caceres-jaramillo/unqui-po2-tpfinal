@@ -1,9 +1,12 @@
-package unq;
+package colaboradores;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.Comentario;
+import unq.Usuario;
 
 import static org.mockito.Mockito.mock;
 

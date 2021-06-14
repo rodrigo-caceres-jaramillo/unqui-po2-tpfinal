@@ -1,4 +1,4 @@
-package unq;
+package entidades;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 import org.mockito.Mock;
+
+import unq.CategoriaDePuntaje;
+import unq.Inmueble;
+import unq.Inquilino;
+import unq.Propietario;
+import unq.SitioWeb;
 
 class InquilinoTestCase {
 

@@ -3,6 +3,7 @@ package unq;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -13,7 +14,7 @@ public class Inmueble {
 	private String pais;
 	private String ciudad;
 	private String direccion;
-	private ArrayList<TipoDeServicio> servicios;
+	private ArrayList<Servicio> servicios;
 	private int capacidad;
 	// private ??? foto;
 	// private LocalDate checkIn;
@@ -26,7 +27,7 @@ public class Inmueble {
 
 	public Inmueble() {
 		super();
-		this.servicios = new ArrayList<TipoDeServicio>();
+		this.servicios = new ArrayList<Servicio>();
 		this.puntaciones = new ArrayList<Puntaje>();
 	}
 
@@ -41,7 +42,8 @@ public class Inmueble {
 	}
 
 	public void setTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {
-		this.tipoDeInmueble = tipoDeInmueble;
+		
+		this.tipoDeInmueble = tipoDeInmueble; 
 	}
 
 	public TipoDeInmueble getTipoDeInmueble() {
@@ -83,7 +85,7 @@ public class Inmueble {
 		return (this.direccion);
 	}
 
-	public ArrayList<TipoDeServicio> getServicios() {
+	public ArrayList<Servicio> getServicios() {
 		return (this.servicios);
 	}
 
@@ -110,7 +112,7 @@ public class Inmueble {
 		return (promedio / 5);
 	}
 
-	public void addNuevoServicio(TipoDeServicio servicioDeInmueble) {
+	public void addNuevoServicio(Servicio servicioDeInmueble) {
 		this.getServicios().add(servicioDeInmueble);
 	}
 
@@ -122,5 +124,16 @@ public class Inmueble {
 //Hay que usar un stream 
 		return (false);
 	}
+
+	public Boolean registraServicio(Servicio servicio) {
+
+		return (this.getServicios().stream().anyMatch(s-> s == servicio) ) ;
+	}
+
+	public boolean esDeTipo(TipoDeInmueble tipoDeInmueble) {
+
+		return (this.getTipoDeInmueble() == tipoDeInmueble);
+	}
+	
 
 }

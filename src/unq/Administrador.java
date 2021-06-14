@@ -18,13 +18,13 @@ public class Administrador {
 	public void registrarse(SitioWeb sitioWeb) {
 		this.setSitioAcargo(sitioWeb);
 	}
-	public void agregarCategoriaDeRankeo(CategoriaDeRankeo rank) {
-		this.sitioAcargo.agregarCategoriaDeRankeo(rank);
+	public void agregarCategoriaDeRankeo(CategoriaDePuntaje categoriaDePuntaje) {
+		this.sitioAcargo.agregarCategoriaDeRankeo(categoriaDePuntaje);
 	}
 	public void agregarTipoDeInmmueble(TipoDeInmueble tipo ) {
 		this.sitioAcargo.agregarTipoDeInmueble(tipo);
 	}
-	public void agregarTipoDeServicio(TipoDeServicio servicio) {
+	public void agregarTipoDeServicio(Servicio servicio) {
 		this.sitioAcargo.agregarTipoDeServicio(servicio);	
 	}
 }

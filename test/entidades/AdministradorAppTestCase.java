@@ -1,4 +1,4 @@
-package unq;
+package entidades;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -9,6 +9,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.AdministradorPublicacion;
+import unq.Inmueble;
+import unq.ParametrosBusqueda;
+import unq.Publicacion;
+import unq.SitioWeb;
+import unq.Usuario;
 
 class AdministradorAppTestCase {
 
