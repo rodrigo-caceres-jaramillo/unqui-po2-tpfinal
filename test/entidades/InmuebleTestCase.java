@@ -92,13 +92,13 @@ class InmuebleTestCase {
 
 	@Test
 	void testUnInmuebleNoRegistraUnNuevoPuntaje() {
-		assertTrue(inmueble.getPuntajesDeRankeo().isEmpty());
+		assertTrue(inmueble.getPuntajes().isEmpty());
 	}
 
 	@Test
 	void testUnInmuebleRegistraUnNuevoPuntaje() {
 		inmueble.addPuntaje(puntaje4Parainmueble);
-		assertTrue(inmueble.getPuntajesDeRankeo().contains(puntaje4Parainmueble));
+		assertTrue(inmueble.getPuntajes().contains(puntaje4Parainmueble));
 
 	}
 
@@ -107,10 +107,10 @@ class InmuebleTestCase {
 		inmueble.addPuntaje(puntaje4Parainmueble);
 		inmueble.addPuntaje(puntaje3Parainmueble);
 
-		when(puntaje4Parainmueble.getValor()).thenReturn((double) 4);
-		when(puntaje3Parainmueble.getValor()).thenReturn((double) 3);
+		when(puntaje4Parainmueble.getValor()).thenReturn( 4);
+		when(puntaje3Parainmueble.getValor()).thenReturn( 3);
 
-		assertEquals(inmueble.getPromPuntajeDeRankeos(), 4, 6);
+		assertEquals(inmueble.getPromedioDePuntajes(), 4, 6);
 	}
 
 }

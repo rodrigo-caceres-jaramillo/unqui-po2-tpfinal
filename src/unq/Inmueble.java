@@ -22,6 +22,7 @@ public class Inmueble {
 	private ArrayList<String> formasDePagoAceptadas;
 	private Double precio;
 	private ArrayList<Puntaje> puntaciones;
+	private Propietario propietario;
 	
 	// Constructores
 
@@ -97,19 +98,25 @@ public class Inmueble {
 		return (this.capacidad);
 	}
 
-	public ArrayList<Puntaje> getPuntajesDeRankeo() {
+	public ArrayList<Puntaje> getPuntajes() {
 		return (this.puntaciones);
 	}
 
+	public void setPropietario(Propietario propietario) {
+		this.propietario = propietario;
+	}
+	public Propietario getPropietario() {
+		return(this.propietario);
+	}
 	// Metodos
-	public double getPromPuntajeDeRankeos() {
+	public double getPromedioDePuntajes() {
 		double promedio = 0.0;
-		int cantPuntajes = this.getPuntajesDeRankeo().size();
+		int cantPuntajes = this.getPuntajes().size();
 		for (int i = 0; i < cantPuntajes; i++) {
-			Puntaje puntaje = this.getPuntajesDeRankeo().get(i);
+			Puntaje puntaje = this.getPuntajes().get(i);
 			promedio = +puntaje.getValor();
 		} 
-		return (promedio / 5);
+		return ( promedio/cantPuntajes );
 	}
 
 	public void addNuevoServicio(Servicio servicioDeInmueble) {
@@ -117,12 +124,12 @@ public class Inmueble {
 	}
 
 	public void addPuntaje(Puntaje puntajeParainmueble) {
-		this.getPuntajesDeRankeo().add(puntajeParainmueble);
+		this.getPuntajes().add(puntajeParainmueble);
 	}
 
-	public Boolean registraPuntajeDe(Inquilino inquilino) {
-//Hay que usar un stream 
-		return (false);
+	public Boolean registraPuntajeDe(Usuario usuario) {
+
+		return (this.getPuntajes().stream().anyMatch( puntaje-> puntaje.getUsuario() == usuario)   );
 	}
 
 	public Boolean registraServicio(Servicio servicio) {
@@ -134,6 +141,7 @@ public class Inmueble {
 
 		return (this.getTipoDeInmueble() == tipoDeInmueble);
 	}
+
 	
 
 }

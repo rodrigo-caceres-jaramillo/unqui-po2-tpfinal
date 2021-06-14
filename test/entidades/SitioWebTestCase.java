@@ -75,7 +75,7 @@ class SitioWebTestCase {
 
 	@Test
 	void testUnSitioNoTieneCategoriasDeRankeo() {
-		assertTrue(sitio.getCategoriasDeRankeo().isEmpty());
+		assertTrue(sitio.getCategoriasDePuntaje().isEmpty());
 
 	}
 
@@ -83,9 +83,9 @@ class SitioWebTestCase {
 	void testUnSitioRegistraUnaCategoriaDeRankeo() {
 		CategoriaDePuntaje categoria = mock(CategoriaDePuntaje.class);
 
-		sitio.agregarCategoriaDeRankeo(categoria);
-		assertFalse(sitio.getCategoriasDeRankeo().isEmpty());
-		assertTrue(sitio.getCategoriasDeRankeo().contains(categoria));
+		sitio.agregarCategoriaDePuntaje(categoria);
+		assertFalse(sitio.getCategoriasDePuntaje().isEmpty());
+		assertTrue(sitio.getCategoriasDePuntaje().contains(categoria));
 
 	}
 

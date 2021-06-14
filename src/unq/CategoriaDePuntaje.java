@@ -1,6 +1,6 @@
 package unq;
 
-public abstract class CategoriaDePuntaje {
+public  class CategoriaDePuntaje {
 
 	private String nombre;
 
@@ -10,6 +10,11 @@ public abstract class CategoriaDePuntaje {
 
 	private void setNombre(String nombre) {
 			this.nombre = nombre;
+	}
+
+	public String getNombre() {
+
+		return (this.nombre);
 	}
 
 	

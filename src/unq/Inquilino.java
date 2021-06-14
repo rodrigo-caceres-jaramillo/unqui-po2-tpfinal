@@ -16,7 +16,6 @@ public class Inquilino extends Usuario{
 		return (  getSitioWeb().getInmueblesConBusquedaPor(ciudad, checkIn, checkOut,
 																				cantidadDeHuspedes, precioMinimo, precioMaximo)  );
 		
-
 	}
 
 	public void alquilarInmuebleDeListado(Inmueble inmueble, ArrayList<Inmueble> listadoDeInmuebles) {
@@ -36,5 +35,13 @@ public class Inquilino extends Usuario{
 	public boolean elInmuebleRegistraPuntajePropio(Inmueble inmueble1) {
 		return (inmueble1.registraPuntajeDe(this));
 	}
+
+	public void puntuarADueñoDeInmueble(Inmueble inmueble, int puntuacion,
+			CategoriaDePuntaje categoriaDePuntajeParaPropietario) {
+		super.puntuarA(inmueble.getPropietario(), puntuacion,
+						categoriaDePuntajeParaPropietario);
+	}
+
+
 }
 

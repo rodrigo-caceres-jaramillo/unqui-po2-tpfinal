@@ -26,7 +26,7 @@ public class Puntaje {
 		this.categoria = categoria;
 	}
 
-	public double getValor() {
+	public int getValor() {
 		return (this.valor);
 	}
 
@@ -47,4 +47,13 @@ public class Puntaje {
 		
 		return (this.categoria);
 	}
+
+	public int valorSiEsDeCategoria(CategoriaDePuntaje categoriaDePuntaje) {
+		int valor=0;
+		if(this.getCategoria().equals(categoriaDePuntaje)) {
+			valor = this.getValor();
+		}
+		return( valor);
+	}
+	
 }

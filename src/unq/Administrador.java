@@ -18,8 +18,8 @@ public class Administrador {
 	public void registrarse(SitioWeb sitioWeb) {
 		this.setSitioAcargo(sitioWeb);
 	}
-	public void agregarCategoriaDeRankeo(CategoriaDePuntaje categoriaDePuntaje) {
-		this.sitioAcargo.agregarCategoriaDeRankeo(categoriaDePuntaje);
+	public void agregarCategoriaDePuntaje(CategoriaDePuntaje categoriaDePuntaje) {
+		this.sitioAcargo.agregarCategoriaDePuntaje(categoriaDePuntaje);
 	}
 	public void agregarTipoDeInmmueble(TipoDeInmueble tipo ) {
 		this.sitioAcargo.agregarTipoDeInmueble(tipo);

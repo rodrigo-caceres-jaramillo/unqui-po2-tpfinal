@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 //import static org.mockito.Mockito.*;
 
 import unq.Administrador;
-import unq.CategoriaDeRankeoDePropietario;
+import unq.CategoriaDePuntaje;
 import unq.Servicio;
 import unq.SitioWeb;
 import unq.TipoDeInmueble;
@@ -15,7 +15,7 @@ import unq.TipoDeInmueble;
 class AdministradorTestCase {
 	private Administrador admin;
 	private SitioWeb sitio;
-	private CategoriaDeRankeoDePropietario rank1;
+	private CategoriaDePuntaje categoriaDePuntaje;
 	private TipoDeInmueble tipo;
 	private Servicio servicio;
 
@@ -28,8 +28,8 @@ class AdministradorTestCase {
 
 	@Test
 	void testUnAdminstradorPuedeAgregarCategoriasDeRankeos() {
-		admin.agregarCategoriaDeRankeo(rank1);
-		assertEquals(1, sitio.getCategoriasDeRankeo().size());
+		admin.agregarCategoriaDePuntaje(categoriaDePuntaje);
+		assertEquals(1, sitio.getCategoriasDePuntaje().size());
 	}
 
 	@Test

@@ -3,6 +3,7 @@ package unq;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 public class SitioWeb {
 	// Atributos
@@ -43,12 +44,12 @@ public class SitioWeb {
 
 
 
-	public ArrayList<CategoriaDePuntaje> getCategoriasDeRankeo() {
+	public ArrayList<CategoriaDePuntaje> getCategoriasDePuntaje() {
 		return categoriasDePuntaje;
 	}
 
-	public void setCategoriasDePuntaje(ArrayList<CategoriaDePuntaje> categoriasDeRankeo) {
-		this.categoriasDePuntaje = categoriasDeRankeo;
+	public void setCategoriasDePuntaje(ArrayList<CategoriaDePuntaje> categoriasDePuntaje) {
+		this.categoriasDePuntaje = categoriasDePuntaje;
 	}
 
 	public ArrayList<TipoDeInmueble> getTiposDeInmuebles() {
@@ -84,7 +85,7 @@ public class SitioWeb {
 		this.setAdministrador(administrador);
 	}
 
-	public void agregarCategoriaDeRankeo(CategoriaDePuntaje categoriaDePuntaje) {
+	public void agregarCategoriaDePuntaje(CategoriaDePuntaje categoriaDePuntaje) {
 		this.categoriasDePuntaje.add(categoriaDePuntaje);
 	}
 
@@ -179,5 +180,15 @@ public class SitioWeb {
 
 	public boolean registraTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {
 		return (this.getTiposDeInmuebles().contains(tipoDeInmueble));
+	}
+
+	public boolean registraCategoriaDePuntaje(CategoriaDePuntaje categoriaDePuntajeParaInmueble) {
+
+		return (this.getCategoriasDePuntaje().contains(categoriaDePuntajeParaInmueble));
+	}
+
+	public Double promedioDePuntajeDe(Usuario usuario, CategoriaDePuntaje categoriaDePuntajeParaInquilino) {
+		
+		return (usuario.getPromedioDePuntajesDeCategoria(categoriaDePuntajeParaInquilino ) );
 	}
 }
