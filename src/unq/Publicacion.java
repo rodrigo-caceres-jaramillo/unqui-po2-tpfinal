@@ -21,15 +21,7 @@ public class Publicacion {
 
 	}
 
-	public Publicacion(Propietario propietario, Inmueble inmueble) {
-		setPropietario(propietario);
-		setInmueble(inmueble);
-		setFormasDePago(new ArrayList<FormasDePagoEnum>());
-
-	}
-
-	public Publicacion(Usuario propietario, Inmueble inmueble, LocalDate checkIn, LocalDate checkOut,
-			Double precio) {
+	public Publicacion(Usuario propietario, Inmueble inmueble, LocalDate checkIn, LocalDate checkOut, Double precio) {
 		super();
 
 		this.propietario = propietario;
@@ -120,10 +112,14 @@ public class Publicacion {
 		return (getPropietario().getNombre() + " " + getPropietario().getMail() + " " + getPropietario().getTelefono());
 	}
 
-	public Boolean cumpleConEspecificaciones(String ciudad, LocalDate checkIn, LocalDate checkOut,
-			// TODO Auto-generated method stub
-
-			Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
+//	public Boolean cumpleConEspecificaciones(String ciudad, LocalDate checkIn, LocalDate checkOut,
+//			// TODO Auto-generated method stub
+//
+//			Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
+//		return false;
+//	}
+//	
+	public Boolean cumpleConEspecificaciones(ParametrosBusqueda paramBusqueda) {
 		return false;
 	}
 

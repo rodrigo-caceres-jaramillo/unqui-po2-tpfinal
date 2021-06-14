@@ -71,5 +71,11 @@ class ParametrosDeBusquedaTestCase {
 		assertEquals(paramBusqueda.getPrecioMaximo(), 150.0);
 
 	}
+	@Test
+	void testLosParametrosNoPuedenRecibirTodosCamposNulos() {
+		paramBusqueda = new ParametrosBusqueda(null, null, null, null, null, null);
+		
+		// Acá iría una exception
+	}
 
 }

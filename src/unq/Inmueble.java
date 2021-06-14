@@ -1,10 +1,6 @@
 package unq;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class Inmueble {
 	// Atributos
@@ -21,7 +17,7 @@ public class Inmueble {
 	private ArrayList<String> formasDePagoAceptadas;
 	private Double precio;
 	private ArrayList<Puntaje> puntaciones;
-	
+
 	// Constructores
 
 	public Inmueble() {
@@ -106,7 +102,7 @@ public class Inmueble {
 		for (int i = 0; i < cantPuntajes; i++) {
 			Puntaje puntaje = this.getPuntajesDeRankeo().get(i);
 			promedio = +puntaje.getValor();
-		} 
+		}
 		return (promedio / 5);
 	}
 

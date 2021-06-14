@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.mockito.ArgumentMatchers;
-
 public class AdministradorPublicacion {
 
 	private List<Publicacion> publicaciones;
@@ -30,9 +28,6 @@ public class AdministradorPublicacion {
 	}
 
 	public void cambiarPrecio(Publicacion publicacion, Double precio) {
-//		if (!this.elUsuarioPublico(publicacion.getPropietario(), publicacion)) {
-//			System.out.println("error: no podés bajar precio de una publicación que no es tuya");
-//		} else {
 		for (Publicacion publi : getPublicaciones()) {
 			if (publi.equals(publicacion)) {
 				modificarPrecio(publi, precio);
@@ -43,25 +38,18 @@ public class AdministradorPublicacion {
 	}
 
 	public void modificarPrecio(Publicacion publicacion, Double nuevoPrecio) {
-		if (publicacion.getPrecio() < nuevoPrecio) {
-			// this.setPrecio(0.0);
-			// si bajó el precio, hacer algo para notificar al observer
-		}
+//		if (publicacion.getPrecio() < nuevoPrecio) {
+//			// this.setPrecio(0.0);
+//			// si bajó el precio, hacer algo para notificar al observer
+//		}
 		publicacion.setPrecio(nuevoPrecio);
 	}
 
 	public List<Publicacion> obtenerPublicacionesDelUsuario(Usuario propietario) {
-
 		List<Publicacion> publicacionesDelUsuario = getPublicaciones().stream()
 				.filter(p -> p.getPropietario().equals(propietario)).collect(Collectors.toList());
 		return publicacionesDelUsuario;
 	}
-
-	/*
-	 * public void publicar(Publicacion publicacion) { if
-	 * (getPublicaciones().isEmpty()) { publicaciones = new
-	 * ArrayList<Publicacion>(); } publicaciones.add(publicacion); }
-	 */
 
 	public List<Publicacion> buscar(ParametrosBusqueda parametrosBusqueda) {
 		List<Publicacion> publicacionesEncontradas = new ArrayList<Publicacion>();
@@ -80,38 +68,43 @@ public class AdministradorPublicacion {
 		Boolean evalObligatorios = ciudadInmueblePublicacion.equals(parametrosBusqueda.getCiudad())
 				&& publicacion.getCheckIn().equals(parametrosBusqueda.getCheckIn())
 				&& publicacion.getCheckOut().equals(parametrosBusqueda.getCheckOut());
-
-		Boolean evalOpcionales = (esPrecioDentroDelRango(parametrosBusqueda, publicacion)
+		Boolean evalOpcionales = evalObligatorios && (esPrecioDentroDelRango(parametrosBusqueda, publicacion)
 				|| seIndicaCantidadHuespedes(parametrosBusqueda, publicacion));
 
-		return evalObligatorios || evalOpcionales;
+		return evalOpcionales;
 
 	}
 
 	private Boolean seIndicaCantidadHuespedes(ParametrosBusqueda parametrosBusqueda, Publicacion publicacion) {
-		return parametrosBusqueda.getCantidadDeHuespedes() != null;
+		return parametrosBusqueda.getCantidadDeHuespedes() != null
+				&& parametrosBusqueda.getCantidadDeHuespedes() == publicacion.getInmueble().getCapacidad();
 	}
 
 	private Boolean esPrecioDentroDelRango(ParametrosBusqueda parametrosBusqueda, Publicacion publicacion) {
 
-		return precioPublicacionNoEsNulo(publicacion) && precioMaximoYMinimoNoSonNulos(parametrosBusqueda)
-				&& (publicacion.getPrecio().compareTo(parametrosBusqueda.getPrecioMinimo())) >= 0
-				&& (publicacion.getPrecio().compareTo(parametrosBusqueda.getPrecioMinimo())) <= 0;
+		return precioPubliYPrecioMaxYMinSonNulos(parametrosBusqueda, publicacion)
+				|| !precioPubliYPrecioMaxYMinSonNulos(parametrosBusqueda, publicacion);
 
 	}
 
-	private boolean precioPublicacionNoEsNulo(Publicacion publicacion) {
-		return publicacion.getPrecio() != null;
+	private Boolean precioPubliYPrecioMaxYMinSonNulos(ParametrosBusqueda paramBusq, Publicacion publicacion) {
+		return precioPubliEsNulo(publicacion) && precioMaxYMinSonNulos(paramBusq)
+				&& estaDentroDelRango(publicacion, paramBusq);
 	}
 
-	private boolean precioMaximoYMinimoNoSonNulos(ParametrosBusqueda parametrosBusqueda) {
-		return parametrosBusqueda.getPrecioMinimo() != null && parametrosBusqueda.getPrecioMaximo() != null;
+	private Boolean estaDentroDelRango(Publicacion publi, ParametrosBusqueda paramBusq) {
+		return (publi.getPrecio().compareTo(paramBusq.getPrecioMinimo())) >= 0
+				&& (publi.getPrecio().compareTo(paramBusq.getPrecioMinimo())) <= 0;
 	}
 
-	public void añadirPublicacion(Publicacion publicacion) {
-		getPublicaciones().add(publicacion);
-
+	private Boolean precioMaxYMinSonNulos(ParametrosBusqueda paramBusq) {
+		return paramBusq.getPrecioMinimo() == null && paramBusq.getPrecioMaximo() == null;
 	}
+
+	private Boolean precioPubliEsNulo(Publicacion publicacion) {
+		return publicacion.getPrecio() == null;
+	}
+
 
 	public Integer cantidadPublicaciones() {
 		return getPublicaciones().size();

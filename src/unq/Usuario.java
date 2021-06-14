@@ -2,7 +2,7 @@ package unq;
 
 public abstract class Usuario {
 	// Atributos
-	private SitioWeb sitioWeb;
+	//private SitioWeb sitioWeb;
 	private String nombre;
 	private String mail;
 	private int telefono;
@@ -10,20 +10,19 @@ public abstract class Usuario {
 	// Constructor
 	public Usuario(String nombre, String mail, int telefono) {
 		super();
-		this.sitioWeb = null;
 		this.nombre = nombre;
 		this.mail = mail;
 		this.telefono = telefono;
 	}
 
 	// Gets y sets
-	public SitioWeb getSitioWeb() {
-		return sitioWeb;
-	}
-
-	public void setSitioWeb(SitioWeb sitioWeb) {
-		this.sitioWeb = sitioWeb;
-	}
+//	public SitioWeb getSitioWeb() {
+//		return sitioWeb;
+//	}
+//
+//	public void setSitioWeb(SitioWeb sitioWeb) {
+//		this.sitioWeb = sitioWeb;
+//	}
 
 	public String getNombre() {
 		return nombre;
@@ -48,10 +47,5 @@ public abstract class Usuario {
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
-	
-	//Metodos 	
-	public void registrarse(SitioWeb sitioWeb) {
-		this.setSitioWeb(sitioWeb);
-		sitioWeb.registrarUsuario(this);
-	}
+	 
 }

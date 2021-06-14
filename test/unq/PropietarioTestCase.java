@@ -13,36 +13,33 @@ información propia del dueño, el puntaje que otros usuarios le han dado a él 
 y el puntaje promedio que ha obtenido.
 + bajarPrecioAPublicidadCon(Publicidad, double):
 */
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 class PropietarioTestCase {
 	private SitioWeb sitio;
 	private Propietario usuarioPropietario;
-	private Inmueble inmueble;
-	private Publicacion publicacion;
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		usuarioPropietario = new Propietario("ejemplin", "ejemplo@jexample.com", 42356769);
-		inmueble = mock(Inmueble.class);
-		publicacion = mock(Publicacion.class);
 		sitio = mock(SitioWeb.class);
-
-		usuarioPropietario.registrarse(sitio);
 
 	}
 
 	@Test
-	void testUnPropietarioSeRegistraEnElSitioWeb() {
-		assertEquals(usuarioPropietario.getSitioWeb(), sitio);
+	void testUnPropietarioConoceSusDatosPersonales() {
+
+		assertEquals(usuarioPropietario.getMail(), "ejemplo@jexample.com");
+		assertEquals(usuarioPropietario.getNombre(), "ejemplin");
+		assertEquals(usuarioPropietario.getTelefono(), 42356769);
+
 	}
+
+	
 
 //	@Test
 //	void testPropietarioRealizaUnaPublicacionAlSitio() {
@@ -70,12 +67,12 @@ class PropietarioTestCase {
 //
 //	}
 
-	@Test
-	void testUnPropietarioBajaPrecioAUnaPublicacionDeInmueble() {
-		when(publicacion.getPrecio()).thenReturn(100.0);
-		usuarioPropietario.bajarPrecioAPublicacionCon(publicacion, 0);
-
-		assertEquals(publicacion.getPrecio(), 100.0);
-	}
+//	@Test
+//	void testUnPropietarioBajaPrecioAUnaPublicacionDeInmueble() {
+//		when(publicacion.getPrecio()).thenReturn(100.0);
+//		usuarioPropietario.bajarPrecioAPublicacionCon(publicacion, 0);
+//
+//		assertEquals(publicacion.getPrecio(), 100.0);
+//	}
 
 }

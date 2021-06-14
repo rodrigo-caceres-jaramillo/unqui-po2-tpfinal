@@ -14,7 +14,7 @@ public class AdministradorUsuario {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
+
 	public void registrar(Usuario usuario) {
 		if (getUsuarios() == null) {
 			setUsuarios(new ArrayList<Usuario>());
@@ -22,7 +22,4 @@ public class AdministradorUsuario {
 		getUsuarios().add(usuario);
 	}
 
-
-	
-	
 }

@@ -41,8 +41,8 @@ class AdministradorAppTestCase {
 	@Test
 	void testUnAdministradorDeAppLePasanPublicacionesParaFiltrar() {
 
-		adminApp.añadirPublicacion(publicacion1);
-		adminApp.añadirPublicacion(publicacion2);
+//		adminApp.añadirPublicacion(publicacion1);
+//		adminApp.añadirPublicacion(publicacion2);
 
 		assertEquals(adminApp.cantidadPublicaciones(), 2);
 	}
@@ -58,8 +58,8 @@ class AdministradorAppTestCase {
 		publicacion1 = new Publicacion(propietario, inmueble, LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 25),
 				120.0);
 
-		adminApp.añadirPublicacion(publicacion1);
-		adminApp.añadirPublicacion(publicacion2);
+//		adminApp.añadirPublicacion(publicacion1);
+//		adminApp.añadirPublicacion(publicacion2);
 
 		paramBusqueda = new ParametrosBusqueda("Buenos Aires", checkIn, checkOut);
 
@@ -79,9 +79,9 @@ class AdministradorAppTestCase {
 
 		Publicacion publicacion1 = new Publicacion(propietario, inmueble, LocalDate.of(2021, 6, 20),
 				LocalDate.of(2021, 6, 25), 120.0);
-
-		adminApp.añadirPublicacion(publicacion1);
-		adminApp.añadirPublicacion(publicacion2);
+//
+//		adminApp.añadirPublicacion(publicacion1);
+//		adminApp.añadirPublicacion(publicacion2);
 
 		paramBusqueda = new ParametrosBusqueda("Buenos Aires", checkIn, checkOut, 4, 100.0, 300.0);
 
