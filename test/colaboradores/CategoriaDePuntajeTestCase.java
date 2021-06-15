@@ -59,14 +59,14 @@ class CategoriaDePuntajeTestCase {
 	@Test
 	void testUnAdministradorSubeUnaCategoriaAlSitio() {
 
-		admin.agregarCategoriaDePuntaje(categoriaDePuntajeParaInmueble);
+		admin.agregarCategoriaDePuntajeAlSitio(categoriaDePuntajeParaInmueble);
 		assertTrue(sitio.registraCategoriaDePuntaje(categoriaDePuntajeParaInmueble));
 
 	}
 
 	@Test
 	void testUnSitioBuscaLosPuntajesDeUnaCategoria() {
-		admin.agregarCategoriaDePuntaje(categoriaDePuntajeParaInmueble);
+		admin.agregarCategoriaDePuntajeAlSitio(categoriaDePuntajeParaInmueble);
 
 		CategoriaDePuntaje categoriaNueva = new CategoriaDePuntaje("Hogar");
 		propietario.puntuarA(inquilino, 5, categoriaDePuntajeParaInquilino);

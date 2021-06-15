@@ -1,5 +1,6 @@
 package unq;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Administrador {
@@ -11,6 +12,7 @@ public class Administrador {
 	// Constructor
 	public Administrador() {
 		this.sitioAcargo = null;
+		this.setServicios( new ArrayList<ServiciosEnum>()  );
 	}
 
 	// Gets y sets
@@ -21,29 +23,42 @@ public class Administrador {
 	public void setSitioAcargo(SitioWeb sitioAcargo) {
 		this.sitioAcargo = sitioAcargo;
 	}
-
-	// Metodos
-	public void registrarse(SitioWeb sitioWeb) {
-		this.setSitioAcargo(sitioWeb);
-	}
-
-	public void agregarCategoriaDePuntaje(CategoriaDePuntaje categoriaDePuntaje) {
-		this.sitioAcargo.agregarCategoriaDePuntaje(categoriaDePuntaje);
-	}
-
-	public void agregarTipoDeInmmueble(TipoDeInmueble tipo) {
-		this.sitioAcargo.agregarTipoDeInmueble(tipo);
-	}
-
 	public List<ServiciosEnum> getServicios() {
-		return servicios;
+		return (this.servicios);
 	}
 
 	public void setServicios(List<ServiciosEnum> servicios) {
 		this.servicios = servicios;
 	}
 
-//	public void agregarTipoDeServicio(Servicio servicio) {
-//		this.sitioAcargo.agregarTipoDeServicio(servicio);
-//	}
+	// test
+	
+	public void agregarCategoriaDePuntajeAlSitio(CategoriaDePuntaje categoriaDePuntaje) {
+		this.getSitioAcargo().addCategoriaDePuntaje(categoriaDePuntaje);
+	}
+
+	public void agregarTipoDeInmmuebleAlSitio(TipoDeInmueble tipo) {
+		this.getSitioAcargo().addTipoDeInmueble(tipo);
+	}
+	public void agregarTipoDeServicioAlSitio(ServiciosEnum servicio) {
+		this.addTiposDeServicios(servicio);
+		}
+
+	
+	public void addTiposDeServicios(ServiciosEnum servicio  ) {
+			this.getServicios().add(servicio);
+	}
+
+	public Boolean registraElTipoDeServicio(ServiciosEnum servicio) {
+		return (this.getServicios().contains(servicio));
+	}
+
+	public Boolean elSitioWebRegistraLaCategoria(CategoriaDePuntaje categoriaDePuntaje) {
+		return (this.getSitioAcargo().registraCategoriaDePuntaje(categoriaDePuntaje));
+	}
+	
+		
+	
+	
+	
 }

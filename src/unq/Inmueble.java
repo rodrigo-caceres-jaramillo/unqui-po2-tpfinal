@@ -14,7 +14,7 @@ public class Inmueble {
 	private String pais;
 	private String ciudad;
 	private String direccion;
-	private List<Servicio> servicios;
+	private List<ServiciosEnum> servicios;
 	private Integer capacidad;
 	private List<Puntaje> puntaciones;
 	private Propietario propietario;
@@ -23,7 +23,7 @@ public class Inmueble {
 
 	public Inmueble() {
 		super();
-		this.servicios = new ArrayList<Servicio>();
+		this.servicios = new ArrayList<ServiciosEnum>();
 		this.puntaciones = new ArrayList<Puntaje>();
 	}
 
@@ -81,7 +81,7 @@ public class Inmueble {
 		return (this.direccion);
 	}
 
-	public List<Servicio> getServicios() {
+	public List<ServiciosEnum> getServicios() {
 		return (this.servicios);
 	}
 
@@ -117,7 +117,7 @@ public class Inmueble {
 		return (promedio / cantPuntajes);
 	}
 
-	public void addNuevoServicio(Servicio servicioDeInmueble) {
+	public void addNuevoServicio(ServiciosEnum servicioDeInmueble) {
 		this.getServicios().add(servicioDeInmueble);
 	}
 
@@ -129,7 +129,7 @@ public class Inmueble {
 		return (this.getPuntajes().stream().anyMatch(puntaje -> puntaje.getUsuario() == usuario));
 	}
 
-	public Boolean registraServicio(Servicio servicio) {
+	public Boolean registraServicio(ServiciosEnum servicio) {
 		return (this.getServicios().stream().anyMatch(s -> s == servicio));
 	}
 

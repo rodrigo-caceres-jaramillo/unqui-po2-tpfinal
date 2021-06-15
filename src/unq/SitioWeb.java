@@ -2,7 +2,6 @@ package unq;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 public class SitioWeb {
 
@@ -11,15 +10,7 @@ public class SitioWeb {
 	private AdministradorPublicacion adminPublicacion;
 	private List<CategoriaDePuntaje> categoriasDePuntaje;
 	private List<TipoDeInmueble> tiposDeInmuebles;
-
-	public AdministradorPublicacion getAdminPublicacion() {
-		return adminPublicacion;
-	}
-
-	public void setAdminPublicacion(AdministradorPublicacion adminPublicacion) {
-		this.adminPublicacion = adminPublicacion;
-	}
-
+	
 	// Constructor
 	public SitioWeb() {
 		this.setAdministrador(null);
@@ -39,19 +30,6 @@ public class SitioWeb {
 		return inmueblesFiltrados;
 	}
 
-	public void registrarUsuario(Usuario usuario) {
-		getAdminUsuario().registrar(usuario);
-	}
-
-	public void registrarAdministrador(Administrador administrador) {
-		administrador.registrarse(this);
-		this.setAdministrador(administrador);
-	}
-
-	public void agregarTipoDeInmueble(TipoDeInmueble tipo) {
-		this.tiposDeInmuebles.add(tipo);
-	}
-
 	public void publicar(Publicacion publicacion) {
 		getAdminPublicacion().agregar(publicacion);
 	}
@@ -61,7 +39,7 @@ public class SitioWeb {
 
 	}
 
-	public Boolean elInmuebleEstaOcupado(Inmueble inmueble1) {
+	public Boolean elInmuebleEstaOcupado(Inmueble inmueble) {
 		return false;
 	}
 
@@ -79,62 +57,82 @@ public class SitioWeb {
 		return (getPublicacionesDe(usuario)).contains(publi);
 	}
 
-	public List<Publicacion> getPublicaciones() {
-		return getAdminPublicacion().getPublicaciones();
-	}
-
-	public void agregarPublicacion(Publicacion publicacion) {
-		getAdminPublicacion().agregar(publicacion);
-	}
-
-	public List<Usuario> getUsuarios() {
-		return getAdminUsuario().getUsuarios();
-	}
-
 	// Gets y sets
+	
+	public AdministradorPublicacion getAdminPublicacion() {
+		return (adminPublicacion);
+	}
+	public void setAdminPublicacion(AdministradorPublicacion adminPublicacion) {
+		this.adminPublicacion = adminPublicacion;
+	}
+
+	public void registrarAdministrador(Administrador administrador) {
+		administrador.setSitioAcargo(this);
+		this.setAdministrador(administrador);
+	}
+	
 	public Administrador getAdministrador() {
 		return administrador;
 	}
-
 	public void setAdministrador(Administrador administrador) {
 		this.administrador = administrador;
-	}
-
-	public void setCategoriasDePuntaje(List<CategoriaDePuntaje> categoriasDePuntaje) {
-		this.categoriasDePuntaje = categoriasDePuntaje;
-	}
-
-	public List<TipoDeInmueble> getTiposDeInmuebles() {
-		return tiposDeInmuebles;
-	}
-
-	public void setTiposDeInmuebles(List<TipoDeInmueble> tiposDeInmuebles) {
-		this.tiposDeInmuebles = tiposDeInmuebles;
-	}
-
-	public void agregarCategoriaDePuntaje(CategoriaDePuntaje categoriaDePuntaje) {
-		this.categoriasDePuntaje.add(categoriaDePuntaje);
-	}
-
-	public void agregarTipoDeServicio(Servicio servicio) {
-		this.tiposDeServicios.add(servicio);
-	}
-
-	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
-		getAdminPublicacion().bajarPrecioDePubli(publi, precio);
 	}
 
 	public AdministradorUsuario getAdminUsuario() {
 		return adminUsuario;
 	}
-
 	public void setAdminUsuario(AdministradorUsuario adminUsuario) {
 		this.adminUsuario = adminUsuario;
 	}
-
-	public Boolean registraServicioDeInmueble(Servicio servicio) {
-		return (this.getTiposDeServicios().contains(servicio));
+	
+	
+	public void setCategoriasDePuntaje(List<CategoriaDePuntaje> categoriasDePuntaje) {
+		this.categoriasDePuntaje = categoriasDePuntaje;
 	}
+	public List<CategoriaDePuntaje> getCategoriasDePuntaje() {
+		return (this.categoriasDePuntaje);
+	}
+	public void addCategoriaDePuntaje(CategoriaDePuntaje categoriaDePuntaje) {
+		this.getCategoriasDePuntaje().add(categoriaDePuntaje);
+	}
+	
+	
+	public List<TipoDeInmueble> getTiposDeInmuebles() {
+		return( tiposDeInmuebles);
+	}
+	public void setTiposDeInmuebles(List<TipoDeInmueble> tiposDeInmuebles) {
+		this.tiposDeInmuebles = tiposDeInmuebles;
+	}
+	public void addTipoDeInmueble(TipoDeInmueble tipo) {
+		this.tiposDeInmuebles.add(tipo);
+	}
+
+	
+	public List<Publicacion> getPublicaciones() {
+		return getAdminPublicacion().getPublicaciones();
+	}
+	public void addPublicacion(Publicacion publicacion) {
+		getAdminPublicacion().agregar(publicacion);
+	}
+	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
+		getAdminPublicacion().bajarPrecioDePubli(publi, precio);
+	}
+
+	
+	public List<Usuario> getUsuarios() {
+		return getAdminUsuario().getUsuarios();
+	}
+	public void addUsuario(Usuario usuario) {
+		getAdminUsuario().registrar(usuario);
+	}
+
+	//testing messages
+	
+
+	public Boolean registraTipoDeServicio(ServiciosEnum servicio) {
+		return (this.getAdministrador().registraElTipoDeServicio(servicio));
+	}
+
 
 	public Boolean registraTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {
 		return (this.getTiposDeInmuebles().contains(tipoDeInmueble));
@@ -144,9 +142,6 @@ public class SitioWeb {
 		return (this.getCategoriasDePuntaje().contains(categoriaDePuntajeParaInmueble));
 	}
 
-	private List<CategoriaDePuntaje> getCategoriasDePuntaje() {
-		return this.categoriasDePuntaje;
-	}
 
 	public Double promedioDePuntajeDe(Usuario usuario, CategoriaDePuntaje categoriaDePuntajeParaInquilino) {
 		return (usuario.getPromedioDePuntajesDeCategoria(categoriaDePuntajeParaInquilino));

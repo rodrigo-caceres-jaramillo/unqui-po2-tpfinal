@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.Inmueble;
-import unq.Puntaje;
-import unq.Servicio;
-import unq.TipoDeInmueble;
+import unq.*;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -16,8 +13,8 @@ import static org.mockito.Mockito.when;
 class InmuebleTestCase {
 	private Inmueble inmueble;
 	private TipoDeInmueble tipoDeInmuebleHogar;
-	private Servicio servicioDeInmuebleLuz;
-	private Servicio servicioDeInmuebleAgua;
+	private ServiciosEnum servicioDeInmuebleLuz;
+	private ServiciosEnum servicioDeInmuebleAgua;
 	private Puntaje puntaje4Parainmueble;
 	private Puntaje puntaje3Parainmueble;
 
@@ -25,8 +22,8 @@ class InmuebleTestCase {
 	void setUp() throws Exception {
 		inmueble = new Inmueble(); // SUT
 		tipoDeInmuebleHogar = mock(TipoDeInmueble.class); // DOT
-		servicioDeInmuebleAgua = mock(Servicio.class);
-		servicioDeInmuebleLuz = mock(Servicio.class); // DOT
+		servicioDeInmuebleAgua = mock(ServiciosEnum.class);
+		servicioDeInmuebleLuz = mock(ServiciosEnum.class); // DOT
 		puntaje4Parainmueble = mock(Puntaje.class);// DOT
 		puntaje3Parainmueble = mock(Puntaje.class); // DOT
 	}

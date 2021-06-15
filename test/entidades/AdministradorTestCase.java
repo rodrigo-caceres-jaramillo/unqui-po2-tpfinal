@@ -1,47 +1,72 @@
 package entidades;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//import static org.mockito.Mockito.*;
 
-import unq.Administrador;
-import unq.CategoriaDePuntaje;
-import unq.Servicio;
-import unq.SitioWeb;
-import unq.TipoDeInmueble;
+import unq.*;
 
 class AdministradorTestCase {
 	private Administrador admin;
 	private SitioWeb sitio;
 	private CategoriaDePuntaje categoriaDePuntaje;
-	private TipoDeInmueble tipo;
-	private Servicio servicio;
+	private TipoDeInmueble tipoDeInmueble;
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		sitio = new SitioWeb();
+		tipoDeInmueble = mock(TipoDeInmueble.class); 
+		categoriaDePuntaje =mock(CategoriaDePuntaje.class); //DOT
+		sitio = mock(SitioWeb.class) ; //DOT
 		admin = new Administrador();
-		sitio.registrarAdministrador(admin);
+		admin.setSitioAcargo(sitio); sitio.registrarAdministrador(admin);
 	}
 
 	@Test
-	void testUnAdminstradorPuedeAgregarCategoriasDeRankeos() {
-		admin.agregarCategoriaDePuntaje(categoriaDePuntaje);
-		
+	void testUnAdministradorTieneUnSitioACargo() {
+		admin.setSitioAcargo(sitio);
+		assertTrue( admin.getSitioAcargo().equals(sitio) );
+	}
+
+
+   @Test
+    void testUnAdministradorNoTieneTiposDeServicios() {
+	  assertFalse(admin.registraElTipoDeServicio(ServiciosEnum.AGUA));
+	   
+	}
+   
+   @Test
+   void testUnAdminPuedeAgregarUnTipoDeServicio() {
+	   admin.addTiposDeServicios(ServiciosEnum.AGUA);
+		 
+	   assertTrue(admin.registraElTipoDeServicio(ServiciosEnum.AGUA));
+
+   }
+
+	
+	@Test
+	void testUnAdminstradorPuedeAgregarCategoriasDePuntaje() {
+		when(sitio.registraCategoriaDePuntaje(categoriaDePuntaje)).thenReturn(true);
+
+		admin.agregarCategoriaDePuntajeAlSitio(categoriaDePuntaje);
+		assertTrue(admin.elSitioWebRegistraLaCategoria(categoriaDePuntaje));
 	}
 
 	@Test
 	void testUnAdministradorPuedeAgregarTiposDeInmuebles() {
-		admin.agregarTipoDeInmmueble(tipo);
-		assertEquals(1, sitio.getTiposDeInmuebles().size());
+		when(sitio.registraTipoDeInmueble(tipoDeInmueble)).thenReturn(true);
+		admin.agregarTipoDeInmmuebleAlSitio(tipoDeInmueble);
+		assertTrue(sitio.registraTipoDeInmueble(tipoDeInmueble));
 	}
+   
 
-//	@Test
-//	void testUnAdministradorPuedeAgregarTiposDeServicios() {
-//		admin.agregarTipoDeServicio(servicio);
-//		assertEquals(1, sitio.getTiposDeServicios().size());
-//	}
-
+   
+   
+   
+   
+   
+   
+   
 }

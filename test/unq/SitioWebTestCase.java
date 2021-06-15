@@ -31,8 +31,8 @@ class SitioWebTestCase {
 
 	@Test
 	void testUnSitioWebPuedeRegistrarUsuarios() {
-		sitio.registrarUsuario(inquilino);
-		sitio.registrarUsuario(propietario);
+		sitio.addUsuario(inquilino);
+		sitio.addUsuario(propietario);
 		assertEquals(2, sitio.getUsuarios().size());
 
 	}
@@ -52,7 +52,7 @@ class SitioWebTestCase {
 	void testUnSitioWebRegistraUnaPublicacion() {
 		Publicacion publi = mock(Publicacion.class);
 
-		sitio.agregarPublicacion(publi);
+		sitio.addPublicacion(publi);
 
 		assertFalse(sitio.getPublicaciones().isEmpty());
 
@@ -83,7 +83,7 @@ class SitioWebTestCase {
 	@Test
 	void testUnSitioWebRegistraUnTipoDeInmuebles() {
 		TipoDeInmueble tipo = mock(TipoDeInmueble.class);
-		sitio.agregarTipoDeInmueble(tipo);
+		sitio.addTipoDeInmueble(tipo);
 		assertFalse(sitio.getTiposDeInmuebles().isEmpty());
 	}
 
@@ -101,7 +101,7 @@ class SitioWebTestCase {
 		Inmueble inmueble = mock(Inmueble.class);
 		when(publicacion.getInmueble()).thenReturn(inmueble);
 		
-		sitio.agregarPublicacion(publicacion);
+		sitio.addPublicacion(publicacion);
 		
 		Publicacion publiSitio = sitio.getPublicaciones().get(0);
 
@@ -130,9 +130,9 @@ class SitioWebTestCase {
 		Publicacion publicacion2 = new Publicacion(propietario, inmueble2, checkIn2, checkOut2, 101.0);
 		Publicacion publicacion3 = new Publicacion(propietario, inmueble3, checkIn, checkOut, 100.0);
 
-		sitio.agregarPublicacion(publicacion1);
-		sitio.agregarPublicacion(publicacion2);
-		sitio.agregarPublicacion(publicacion3);
+		sitio.addPublicacion(publicacion1);
+		sitio.addPublicacion(publicacion2);
+		sitio.addPublicacion(publicacion3);
 
 		List<Inmueble> inmueblesFiltrados = sitio.buscarInmueble(paramBusqueda);
 
@@ -164,9 +164,9 @@ class SitioWebTestCase {
 		Publicacion publicacion2 = new Publicacion(propietario, inmueble2, checkIn, checkOut, 101.0);
 		Publicacion publicacion3 = new Publicacion(propietario, inmueble3, checkIn, checkOut, 100.0);
 
-		sitio.agregarPublicacion(publicacion1);
-		sitio.agregarPublicacion(publicacion2);
-		sitio.agregarPublicacion(publicacion3);
+		sitio.addPublicacion(publicacion1);
+		sitio.addPublicacion(publicacion2);
+		sitio.addPublicacion(publicacion3);
 
 		List<Inmueble> inmueblesFiltrados = sitio.buscarInmueble(paramBusqueda);
 
@@ -194,8 +194,8 @@ class SitioWebTestCase {
 		Publicacion publicacion1 = new Publicacion(propietario, inmueble1, checkIn2, checkOut2, 100.0);
 		Publicacion publicacion2 = new Publicacion(propietario, inmueble2, checkIn2, checkOut2, 101.0);
 
-		sitio.agregarPublicacion(publicacion1);
-		sitio.agregarPublicacion(publicacion2);
+		sitio.addPublicacion(publicacion1);
+		sitio.addPublicacion(publicacion2);
 
 		List<Inmueble> inmueblesFiltrados = sitio.buscarInmueble(paramBusqueda);
 
@@ -208,7 +208,7 @@ class SitioWebTestCase {
 		Publicacion publi = mock(Publicacion.class);
 		when(publi.getPropietario()).thenReturn(propietario);
 		// when(publi.getPropietario().equals(usuario2)).thenReturn(true);
-		sitio.agregarPublicacion(publi);
+		sitio.addPublicacion(publi);
 
 		List<Publicacion> publicacionesDeUsuario = sitio.getPublicacionesDe(propietario);
 
@@ -220,7 +220,7 @@ class SitioWebTestCase {
 		Publicacion publi = mock(Publicacion.class);
 		when(publi.getPropietario()).thenReturn(propietario);
 
-		sitio.agregarPublicacion(publi);
+		sitio.addPublicacion(publi);
 
 		assertFalse(sitio.elUsuarioPublico(publi, inquilino));
 
@@ -231,7 +231,7 @@ class SitioWebTestCase {
 		Publicacion publi = mock(Publicacion.class);
 		when(publi.getPropietario()).thenReturn(propietario);
 
-		sitio.agregarPublicacion(publi);
+		sitio.addPublicacion(publi);
 
 		assertTrue(sitio.elUsuarioPublico(publi, propietario));
 	}
@@ -242,7 +242,7 @@ class SitioWebTestCase {
 		when(publi.aceptaFormaDePago(FormasDePagoEnum.TARJETADECREDITO)).thenReturn(true);
 		// when(publi.esDelUsuario(usuario2)).thenReturn(true);
 		when(publi.getPropietario()).thenReturn(propietario);
-		sitio.agregarPublicacion(publi);
+		sitio.addPublicacion(publi);
 
 		assertTrue(sitio.registraPubliDeUsuarioConFormaDePago(propietario, FormasDePagoEnum.TARJETADECREDITO));
 	}
@@ -265,7 +265,7 @@ class SitioWebTestCase {
 		Publicacion publicacion = new Publicacion();
 		publicacion.setPrecio(100.0);
 			
-		sitio.agregarPublicacion(publicacion);
+		sitio.addPublicacion(publicacion);
 		sitio.actualizarPrecioDePublicacion(publicacion, 120.0);
 		
 		assertEquals(publicacion.getPrecio(), 120.0);
@@ -276,7 +276,7 @@ class SitioWebTestCase {
 		Publicacion publi = mock(Publicacion.class);
 
 		// when(publi.esDelUsuario(usuario2)).thenReturn(false);
-		sitio.agregarPublicacion(publi);
+		sitio.addPublicacion(publi);
 
 		// (sitio.actualizarPrecioDePublicacion(publi, 100),"error: no podés bajar
 		// precio de una publicación que no es tuya");
