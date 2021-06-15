@@ -80,10 +80,10 @@ public class AdministradorPublicacion {
 				&& publicacion.getCheckIn().equals(parametrosBusqueda.getCheckIn())
 				&& publicacion.getCheckOut().equals(parametrosBusqueda.getCheckOut());
 
-		Boolean evalOpcionales = (esPrecioDentroDelRango(parametrosBusqueda, publicacion)
+		Boolean evalOpcionales = evalObligatorios && (esPrecioDentroDelRango(parametrosBusqueda, publicacion)
 				|| seIndicaCantidadHuespedes(parametrosBusqueda, publicacion));
 
-		return evalObligatorios || evalOpcionales;
+		return evalOpcionales;
 
 	}
 
