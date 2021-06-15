@@ -30,8 +30,8 @@ class PublicacionTestCase {
 		inmuebleDePublicacion = mock(Inmueble.class);
 		comentarioDePublicacion = mock(Comentario.class);
 	}
- 
-	@Test 
+
+	@Test
 
 	void testUnaPublicacionTieneUnUsuario() {
 		publicacion.setPropietario(propietario);
@@ -93,7 +93,7 @@ class PublicacionTestCase {
 		publicacion.getFormasDePago().add(FormasDePagoEnum.TARJETADECREDITO);
 
 		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADECREDITO));
-	} 
+	}
 
 	@Test
 	void testUnaPublicacionAceptaTodosLosMediosDePago() {
@@ -112,7 +112,7 @@ class PublicacionTestCase {
 
 		assertEquals(publicacion.getPrecio(), precioDePublicacion);
 	}
-	
+
 	@Test
 	void testUnaPublicacionNoTieneComentarios() {
 
@@ -155,27 +155,15 @@ class PublicacionTestCase {
 		assertTrue(publicacionDatos.getFormasDePago().isEmpty());
 		assertTrue(publicacionDatos.getComentarios().isEmpty());
 	}
-	
-//	@Test
-//	void testUnaPublicacionActualizaSuPrecio() {
-//			
-//		Double precioDePublicacion = 100.50;
-//		publicacion.setPrecio(precioDePublicacion);
-//		publicacion.(0.50);
-//		
-//		assertEquals( publicacion.getPrecio(),100.0 );
-//	}
-	
-	
-	
+
+	@Test
+	void testUnaPublicacionActualizaSuPrecio() {
+			
+		Double precioDePublicacion = 100.50;
+		publicacion.setPrecio(precioDePublicacion);
+		publicacion.setPrecio(0.50);
+		
+		assertEquals(publicacion.getPrecio(),100.0);
+	}
+
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

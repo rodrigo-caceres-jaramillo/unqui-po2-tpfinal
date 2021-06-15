@@ -17,6 +17,7 @@ class PuntajeTestCase {
 	Usuario usuarioQueImplementaPuntuacion; // DOT
 	CategoriaDePuntaje categoria;
 	CategoriaDePuntaje categoria2;
+
 	@BeforeEach
 	void setUp() throws Exception {
 		puntaje = new Puntaje();
@@ -59,30 +60,23 @@ class PuntajeTestCase {
 		assertEquals(puntaje.getValor(), 5);
 
 	}
+
 	@Test
 	void testUnPuntajeRetornaCeroSiNoTieneUnaCategoria() {
-			
+
 		puntaje.setCategoria(categoria);
-		
-		assertEquals(puntaje.valorSiEsDeCategoria(categoria2), 0 );
-		
+
+		assertEquals(puntaje.valorSiEsDeCategoria(categoria2), 0);
+
 	}
-	
+
 	@Test
 	void testUnPuntajeRetornSuValorSiTieneUnaCategoria() {
-			
+
 		puntaje.setCategoria(categoria);
 		puntaje.setValor(5);
-		assertEquals(puntaje.valorSiEsDeCategoria(categoria), 5 );
-		
+		assertEquals(puntaje.valorSiEsDeCategoria(categoria), 5);
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

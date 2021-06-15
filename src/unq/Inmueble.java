@@ -2,6 +2,7 @@ package unq;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -9,19 +10,13 @@ import java.util.stream.Stream;
 public class Inmueble {
 	// Atributos
 	private TipoDeInmueble tipoDeInmueble;
-	private int superficie;
+	private Integer superficie;
 	private String pais;
 	private String ciudad;
 	private String direccion;
-	private ArrayList<Servicio> servicios;
-	private int capacidad;
-	// private ??? foto;
-	// private LocalDate checkIn;
-	// private LocalDate checkOut;
-	private ArrayList<String> formasDePagoAceptadas;
-	private Double precio;
-	private ArrayList<Puntaje> puntaciones;
-
+	private List<Servicio> servicios;
+	private Integer capacidad;
+	private List<Puntaje> puntaciones;
 	private Propietario propietario;
 
 	// Constructores
@@ -51,7 +46,7 @@ public class Inmueble {
 		return (this.tipoDeInmueble);
 	}
 
-	public void setSuperficie(int superficie) {
+	public void setSuperficie(Integer superficie) {
 		this.superficie = superficie;
 	}
 
@@ -67,7 +62,7 @@ public class Inmueble {
 
 	public String getPais() {
 
-		return (this.pais);
+		return this.pais;
 	}
 
 	public void setCiudad(String ciudad) {
@@ -86,7 +81,7 @@ public class Inmueble {
 		return (this.direccion);
 	}
 
-	public ArrayList<Servicio> getServicios() {
+	public List<Servicio> getServicios() {
 		return (this.servicios);
 	}
 
@@ -94,11 +89,11 @@ public class Inmueble {
 		this.capacidad = capacidad;
 	}
 
-	public int getCapacidad() {
+	public Integer getCapacidad() {
 		return (this.capacidad);
 	}
 
-	public ArrayList<Puntaje> getPuntajes() {
+	public List<Puntaje> getPuntajes() {
 		return (this.puntaciones);
 	}
 
@@ -116,11 +111,11 @@ public class Inmueble {
 		Integer cantPuntajes = this.getPuntajes().size();
 		for (int i = 0; i < cantPuntajes; i++) {
 			Puntaje puntaje = this.getPuntajes().get(i);
-			//promedio = +puntaje.getValor();
+			// promedio = +puntaje.getValor();
 		}
-		//return (promedio / 5);
-		return(promedio/cantPuntajes);
-		}
+		// return (promedio / 5);
+		return (promedio / cantPuntajes);
+	}
 
 	public void addNuevoServicio(Servicio servicioDeInmueble) {
 		this.getServicios().add(servicioDeInmueble);
@@ -131,17 +126,14 @@ public class Inmueble {
 	}
 
 	public Boolean registraPuntajeDe(Usuario usuario) {
-
 		return (this.getPuntajes().stream().anyMatch(puntaje -> puntaje.getUsuario() == usuario));
 	}
 
 	public Boolean registraServicio(Servicio servicio) {
-
 		return (this.getServicios().stream().anyMatch(s -> s == servicio));
 	}
 
-	public boolean esDeTipo(TipoDeInmueble tipoDeInmueble) {
-
+	public Boolean esDeTipo(TipoDeInmueble tipoDeInmueble) {
 		return (this.getTipoDeInmueble() == tipoDeInmueble);
 	}
 

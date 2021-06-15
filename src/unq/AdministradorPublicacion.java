@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.mockito.ArgumentMatchers;
-
 public class AdministradorPublicacion {
 
 	private List<Publicacion> publicaciones;
@@ -29,7 +27,7 @@ public class AdministradorPublicacion {
 		this.publicaciones = publicaciones;
 	}
 
-	public void cambiarPrecio(Publicacion publicacion, Double precio) {
+	public void actualizarPrecio(Publicacion publicacion, Double precio) {
 //		if (!this.elUsuarioPublico(publicacion.getPropietario(), publicacion)) {
 //			System.out.println("error: no podés bajar precio de una publicación que no es tuya");
 //		} else {
@@ -73,7 +71,6 @@ public class AdministradorPublicacion {
 			}
 		}
 		return publicacionesEncontradas;
-
 	}
 
 	private Boolean esPublicacionComparador(ParametrosBusqueda parametrosBusqueda, Publicacion publicacion) {

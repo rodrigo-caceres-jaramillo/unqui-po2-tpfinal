@@ -18,17 +18,14 @@ public class Servicio {
 	}
 
 	public String getNombre() {
-		
 		return (this.nombreDeServicio);
 	}
 
-//	public boolean estaRegistradoEnElSitio(SitioWeb sitio) {
-//		
-//		return (sitio.registraServicioDeInmueble(this));
-//	}
+	public Boolean estaRegistradoEnElSitio(SitioWeb sitio) {
+		return (sitio.registraServicioDeInmueble(this));
+	}
 
-	public boolean esUnServicioBrindadoPor(Inmueble inmueble) {
-
+	public Boolean esUnServicioBrindadoPor(Inmueble inmueble) {
 		return (inmueble.registraServicio(this));
 	}
 

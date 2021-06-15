@@ -1,15 +1,17 @@
 package entidades;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
-import org.mockito.Mock;
+
 
 import unq.CategoriaDePuntaje;
 import unq.Inmueble;
@@ -41,12 +43,12 @@ class InquilinoTestCase {
 		LocalDate checkIn = LocalDate.of(2021, 8, 22);
 		LocalDate checkOut = LocalDate.of(2021, 8, 23);
 
-		ArrayList<Inmueble> busquedaEsperada = new ArrayList<>();
+		List<Inmueble> busquedaEsperada = new ArrayList<>();
 
 		when(sitioWeb.getInmueblesConBusquedaPor("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0))
 				.thenReturn(busquedaEsperada);
 
-		ArrayList<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", checkIn, checkOut, 0, 0.0,
+		List<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", checkIn, checkOut, 0, 0.0,
 				0.0);
 
 		assertTrue(resultadoDeLaBusqueda.isEmpty());
@@ -56,14 +58,14 @@ class InquilinoTestCase {
 	void testUnInquilinoRealizaUnaBusquedaConDatosObligatoriosEncuentraUnInmueble() {
 		LocalDate checkIn = LocalDate.of(2021, 8, 22);
 		LocalDate checkOut = LocalDate.of(2021, 8, 23);
-		ArrayList<Inmueble> busquedaEsperada = new ArrayList<>(Arrays.asList(inmueble1));
+		List<Inmueble> busquedaEsperada = new ArrayList<>(Arrays.asList(inmueble1));
 
 		when(sitioWeb.getInmueblesConBusquedaPor("Villa Elisa", checkIn, checkOut, 0, 0.0, 0.0)) // Acá hay que pasarle
 																									// valores nulos, no
 																									// 0.
 				.thenReturn(busquedaEsperada);
 
-		ArrayList<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", checkIn, checkOut, 0, 0.0,
+		List<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles("Villa Elisa", checkIn, checkOut, 0, 0.0,
 				0.0);
 
 		assertFalse(resultadoDeLaBusqueda.isEmpty());
@@ -72,7 +74,7 @@ class InquilinoTestCase {
 	@Test
 	void testUnInquilinoRealizaUnAlquilerDeUnaListaDeInmuebles() {
 
-		ArrayList<Inmueble> listadoDeInmuebles = new ArrayList<>(Arrays.asList(inmueble1));
+		List<Inmueble> listadoDeInmuebles = new ArrayList<>(Arrays.asList(inmueble1));
 		inquilino.alquilarInmuebleDeListado(inmueble1, listadoDeInmuebles);
 
 		when(sitioWeb.elInmuebleEstaOcupado(inmueble1)).thenReturn(true);

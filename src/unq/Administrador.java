@@ -1,8 +1,12 @@
 package unq;
 
+import java.util.List;
+
 public class Administrador {
 	// Atributos
 	private SitioWeb sitioAcargo;
+	private List<ServiciosEnum> servicios;
+
 
 	// Constructor
 	public Administrador() {
@@ -29,6 +33,14 @@ public class Administrador {
 
 	public void agregarTipoDeInmmueble(TipoDeInmueble tipo) {
 		this.sitioAcargo.agregarTipoDeInmueble(tipo);
+	}
+
+	public List<ServiciosEnum> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<ServiciosEnum> servicios) {
+		this.servicios = servicios;
 	}
 
 //	public void agregarTipoDeServicio(Servicio servicio) {

@@ -19,8 +19,8 @@ class InmuebleTestCase {
 	private Servicio servicioDeInmuebleLuz;
 	private Servicio servicioDeInmuebleAgua;
 	private Puntaje puntaje4Parainmueble;
-	private Puntaje puntaje3Parainmueble; 
-	
+	private Puntaje puntaje3Parainmueble;
+
 	@BeforeEach
 	void setUp() throws Exception {
 		inmueble = new Inmueble(); // SUT
@@ -107,8 +107,8 @@ class InmuebleTestCase {
 		inmueble.addPuntaje(puntaje4Parainmueble);
 		inmueble.addPuntaje(puntaje3Parainmueble);
 
-		when(puntaje4Parainmueble.getValor()).thenReturn( 4);
-		when(puntaje3Parainmueble.getValor()).thenReturn( 3);
+		when(puntaje4Parainmueble.getValor()).thenReturn(4);
+		when(puntaje3Parainmueble.getValor()).thenReturn(3);
 
 		assertEquals(inmueble.getPromedioDePuntajes(), 4, 6);
 	}
