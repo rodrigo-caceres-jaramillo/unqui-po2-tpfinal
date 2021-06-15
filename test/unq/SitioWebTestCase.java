@@ -58,21 +58,21 @@ class SitioWebTestCase {
 
 	}
 
-	@Test
-	void testUnSitioNoTieneCategoriasDeRankeo() {
-		assertTrue(sitio.getCategoriasDeRankeo().isEmpty());
+//	@Test
+//	void testUnSitioNoTieneCategoriasDeRankeo() {
+//		assertTrue(sitio.getCategoriasDeRankeo().isEmpty());
+//
+//	}
 
-	}
-
-	@Test
-	void testUnSitioRegistraUnaCategoriaDeRankeo() {
-		CategoriaDeRankeo categoria = mock(CategoriaDeRankeo.class);
-
-		sitio.agregarCategoriaDeRankeo(categoria);
-		assertFalse(sitio.getCategoriasDeRankeo().isEmpty());
-		assertTrue(sitio.getCategoriasDeRankeo().contains(categoria));
-
-	}
+//	@Test
+//	void testUnSitioRegistraUnaCategoriaDeRankeo() {
+//		CategoriaDeRankeo categoria = mock(CategoriaDeRankeo.class);
+//
+//		sitio.agregarCategoriaDeRankeo(categoria);
+//		assertFalse(sitio.getCategoriasDeRankeo().isEmpty());
+//		assertTrue(sitio.getCategoriasDeRankeo().contains(categoria));
+//
+//	}
 
 	@Test
 	void testUnSitioWebNotieneNingunTipoDeInmuebles() {
@@ -87,13 +87,13 @@ class SitioWebTestCase {
 		assertFalse(sitio.getTiposDeInmuebles().isEmpty());
 	}
 
-	@Test
-	void testUnSitoWebAgregaUnTipoDeServicioParaInmuebles() {
-		TipoDeServicio tipoServicio = mock(TipoDeServicio.class);
-		sitio.agregarTipoDeServicio(tipoServicio);
-		assertFalse(sitio.getTiposDeServicios().isEmpty());
-
-	}
+//	@Test
+//	void testUnSitoWebAgregaUnTipoDeServicioParaInmuebles() {
+//		TipoDeServicio tipoServicio = mock(TipoDeServicio.class);
+//		sitio.agregarTipoDeServicio(tipoServicio);
+//		assertFalse(sitio.getTiposDeServicios().isEmpty());
+//
+//	}
 
 	@Test
 	void testUnSitioWebRegistraUnInmuebleGenerandoUnaPublicacion() {

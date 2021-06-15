@@ -1,4 +1,4 @@
-package unq;
+package entidades;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -8,6 +8,13 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.Comentario;
+import unq.FormasDePagoEnum;
+import unq.Inmueble;
+import unq.Propietario;
+import unq.Publicacion;
+import unq.Usuario;
 
 class PublicacionTestCase {
 
