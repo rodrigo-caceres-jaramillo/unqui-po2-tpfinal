@@ -8,13 +8,13 @@ public class Propietario extends Usuario {
 		super(nombre, mail, telefono);
 	}
 
-	public void publicarInmueble(Inmueble inmueble) {
-		this.getSitioWeb().registrarInmueble(this, inmueble);
-	}
+//	public void publicarInmueble(Inmueble inmueble) {
+//		this.getSitioWeb().registrarInmueble(this, inmueble);
+//	}
 
-	public List<Publicacion> publicacionesEnElSitio() {
+	public List<Publicacion> publicacionesEnElSitio(SitioWeb sitio) {
 
-		return (this.getSitioWeb().getPublicacionesDe(this));
+		return sitio.getPublicacionesDe(this);
 	}
 
 	public void medioDePagoPara(Publicacion publicacion, FormasDePagoEnum formaDePago) {
@@ -22,13 +22,12 @@ public class Propietario extends Usuario {
 
 	}
 
-	public boolean algunaPublicacionConPago(FormasDePagoEnum formaDePago) {
-
-		return (getSitioWeb().registraPubliDeUsuarioConFormaDePago(this, formaDePago));
+	public void bajarPrecioAPublicacionEnSitio(Publicacion publi, Double precio, SitioWeb sitio) {
+		sitio.actualizarPrecioDePublicacion(publi, precio);
 	}
 
-	public void bajarPrecioAPublicacionCon(Publicacion publi, Double precio) {
-		this.getSitioWeb().actualizarPrecioDePublicacion(publi, precio);
+	public void agregarPublicacion(Publicacion publicacion, SitioWeb sitio) {
+		sitio.addPublicacion(publicacion);
 	}
 
 }

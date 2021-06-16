@@ -48,8 +48,8 @@ public class Puntaje {
 		return (this.categoria);
 	}
 
-	public int valorSiEsDeCategoria(CategoriaDePuntaje categoriaDePuntaje) {
-		int valor = 0;
+	public Integer valorSiEsDeCategoria(CategoriaDePuntaje categoriaDePuntaje) {
+		Integer valor = 0;
 		if (this.getCategoria().equals(categoriaDePuntaje)) {
 			valor = this.getValor();
 		}

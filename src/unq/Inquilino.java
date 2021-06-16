@@ -9,13 +9,11 @@ public class Inquilino extends Usuario {
 		super(nombre, mail, telefono);
 	}
 
-//	public ArrayList<Inmueble> buscarInmuebles(String ciudad, LocalDate checkIn, LocalDate checkOut,
-//			Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
-//
-//		return (getSitioWeb().getInmueblesConBusquedaPor(ciudad, checkIn, checkOut, cantidadDeHuspedes, precioMinimo,
-//				precioMaximo));
-//
-//	} 
+	public List<Inmueble> buscarInmueblesEn(ParametrosBusqueda parametrosBusqueda, SitioWeb sitio) {
+
+		return sitio.buscarInmueble(parametrosBusqueda);
+
+	} 
 //
 //	public void alquilarInmuebleDeListado(Inmueble inmueble, List<Inmueble> listadoDeInmuebles) {
 //		this.getSitioWeb().añadirOcupacionDelInmueble(inmueble);

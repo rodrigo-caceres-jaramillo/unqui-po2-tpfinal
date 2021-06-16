@@ -112,9 +112,9 @@ class SitioWebTestCase {
 		Publicacion publicacion = mock(Publicacion.class);
 		Inmueble inmueble = mock(Inmueble.class);
 		when(publicacion.getInmueble()).thenReturn(inmueble);
-		
+
 		sitio.addPublicacion(publicacion);
-		
+
 		Publicacion publiSitio = sitio.getPublicaciones().get(0);
 
 		assertFalse(sitio.getPublicaciones().isEmpty());
@@ -270,16 +270,16 @@ class SitioWebTestCase {
 		assertFalse(publi1.getFormasDePago().isEmpty());
 		assertFalse(publi2.getFormasDePago().isEmpty());
 	}
-	
+
 	@Test
 	void testSitioWebActualizarPrecioDePublicacion() {
-		
+
 		Publicacion publicacion = new Publicacion();
 		publicacion.setPrecio(100.0);
-			
+
 		sitio.addPublicacion(publicacion);
 		sitio.actualizarPrecioDePublicacion(publicacion, 120.0);
-		
+
 		assertEquals(publicacion.getPrecio(), 120.0);
 	}
 

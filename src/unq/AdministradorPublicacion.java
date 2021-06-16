@@ -13,9 +13,6 @@ public class AdministradorPublicacion {
 	}
 
 	public void agregar(Publicacion publicacion) {
-		if (getPublicaciones().isEmpty()) {
-			publicaciones = new ArrayList<Publicacion>();
-		}
 		publicaciones.add(publicacion);
 	}
 
@@ -31,12 +28,12 @@ public class AdministradorPublicacion {
 //		if (!this.elUsuarioPublico(publicacion.getPropietario(), publicacion)) {
 //			System.out.println("error: no podés bajar precio de una publicación que no es tuya");
 //		} else {
-			
+
 		for (Publicacion publi : getPublicaciones()) {
 			if (publi.equals(publicacion)) {
-				publicacion.actualizarPrecio(precio); 
+				publicacion.actualizarPrecio(precio);
 				// si bajó el precio, hacer algo para notificar al observer
-				break; 
+				break;
 			}
 		}
 
@@ -48,12 +45,6 @@ public class AdministradorPublicacion {
 				.filter(p -> p.getPropietario().equals(propietario)).collect(Collectors.toList());
 		return publicacionesDelUsuario;
 	}
-
-	/*
-	 * public void publicar(Publicacion publicacion) { if
-	 * (getPublicaciones().isEmpty()) { publicaciones = new
-	 * ArrayList<Publicacion>(); } publicaciones.add(publicacion); }
-	 */
 
 	public List<Publicacion> buscar(ParametrosBusqueda parametrosBusqueda) {
 		List<Publicacion> publicacionesEncontradas = new ArrayList<Publicacion>();
@@ -107,7 +98,6 @@ public class AdministradorPublicacion {
 	private Boolean precioPubliEsNulo(Publicacion publicacion) {
 		return publicacion.getPrecio() == null;
 	}
-
 
 	public Integer cantidadPublicaciones() {
 		return getPublicaciones().size();
