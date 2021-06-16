@@ -1,4 +1,4 @@
-package entidades;
+package colaboradores;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -74,7 +74,7 @@ class PublicacionTestCase {
 		publicacion.configurarMediosDePago(FormasDePagoEnum.EFECTIVO);
 		publicacion.getFormasDePago().add(FormasDePagoEnum.EFECTIVO);
 
-		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.EFECTIVO));
+		assertTrue(publicacion.aceptaFormaDePago(FormasDePagoEnum.EFECTIVO));
 	}
 
 	@Test
@@ -83,7 +83,7 @@ class PublicacionTestCase {
 		publicacion.configurarMediosDePago(FormasDePagoEnum.TARJETADEDEBITO);
 		publicacion.getFormasDePago().add(FormasDePagoEnum.TARJETADEDEBITO);
 
-		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADEDEBITO));
+		assertTrue(publicacion.aceptaFormaDePago(FormasDePagoEnum.TARJETADEDEBITO));
 	}
 
 	@Test
@@ -92,7 +92,7 @@ class PublicacionTestCase {
 		publicacion.configurarMediosDePago(FormasDePagoEnum.TARJETADECREDITO);
 		publicacion.getFormasDePago().add(FormasDePagoEnum.TARJETADECREDITO);
 
-		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADECREDITO));
+		assertTrue(publicacion.aceptaFormaDePago(FormasDePagoEnum.TARJETADECREDITO));
 	}
 
 	@Test
@@ -100,11 +100,19 @@ class PublicacionTestCase {
 
 		publicacion.addMediosDePagoAll();
 
-		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADECREDITO));
-		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.TARJETADEDEBITO));
-		assertTrue(publicacion.getFormasDePago().contains(FormasDePagoEnum.EFECTIVO));
+		assertTrue(publicacion.aceptaFormaDePago(FormasDePagoEnum.TARJETADECREDITO));
+		assertTrue(publicacion.aceptaFormaDePago(FormasDePagoEnum.TARJETADEDEBITO));
+		assertTrue(publicacion.aceptaFormaDePago(FormasDePagoEnum.EFECTIVO));
 	}
 
+
+	@Test
+	void testUnaPublicacionAceptaUnMedioDePago() {
+
+		publicacion.addMedioDePago(FormasDePagoEnum.TARJETADECREDITO);
+
+		assertTrue(publicacion.aceptaFormaDePago(FormasDePagoEnum.TARJETADECREDITO));
+	}
 	@Test
 	void testUnaPublicacionTieneUnPrecioDeInmueblePorDia() {
 		Double precioDePublicacion = 100.50;
@@ -160,10 +168,8 @@ class PublicacionTestCase {
 	void testUnaPublicacionActualizaSuPrecio() {
 			
 		Double precioDePublicacion = 100.50;
-		publicacion.setPrecio(precioDePublicacion);
-		publicacion.setPrecio(0.50);
-		
-		assertEquals(publicacion.getPrecio(),100.0);
+		publicacion.actualizarPrecio(precioDePublicacion);
+		assertEquals(publicacion.getPrecio(),100.50);
 	}
 
 }

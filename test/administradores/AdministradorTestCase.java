@@ -43,15 +43,22 @@ class AdministradorTestCase {
    
    @Test
    void testUnAdminPuedeAgregarUnTipoDeServicio() {
-	   admin.addTiposDeServicios(ServiciosEnum.AGUA);
-		 
+	   admin.addTipoDeServicios(ServiciosEnum.AGUA);
+	   
 	   assertTrue(admin.registraElTipoDeServicio(ServiciosEnum.AGUA));
-
    }
 
-	
 	@Test
-	void testUnAdminstradorPuedeAgregarCategoriasDePuntaje() {
+	void testUnAdminPuedeAgregarUnTipoDeServicioAlSitio() {
+		when(sitio.registraTipoDeServicio(ServiciosEnum.AGUA)).thenReturn(true);
+		
+		admin.agregarTipoDeServicioAlSitio(ServiciosEnum.AGUA);
+			
+		   assertTrue(admin.registraElTipoDeServicio(ServiciosEnum.AGUA));
+		   assertTrue(admin.elSitioWebRegistraElServicio(ServiciosEnum.AGUA) );
+	}
+	@Test
+	void testUnAdminstradorPuedeAgregarCategoriasDePuntajeAlSitio() {
 		when(sitio.registraCategoriaDePuntaje(categoriaDePuntaje)).thenReturn(true);
 
 		admin.agregarCategoriaDePuntajeAlSitio(categoriaDePuntaje);
@@ -59,7 +66,7 @@ class AdministradorTestCase {
 	}
 
 	@Test
-	void testUnAdministradorPuedeAgregarTiposDeInmuebles() {
+	void testUnAdministradorPuedeAgregarTiposDeInmueblesAlSitio() {
 		when(sitio.registraTipoDeInmueble(tipoDeInmueble)).thenReturn(true);
 		admin.agregarTipoDeInmmuebleAlSitio(tipoDeInmueble);
 		assertTrue(sitio.registraTipoDeInmueble(tipoDeInmueble));

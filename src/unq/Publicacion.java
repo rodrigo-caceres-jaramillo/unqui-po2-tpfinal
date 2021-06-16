@@ -16,8 +16,8 @@ public class Publicacion {
 
 	public Publicacion() {
 		super();
-		this.comentarios = new ArrayList<Comentario>();
-		setFormasDePago(new ArrayList<FormasDePagoEnum>());
+		this.setComentarios(new ArrayList<Comentario>());
+		this.setFormasDePago(new ArrayList<FormasDePagoEnum>());
 
 	}
 
@@ -30,15 +30,11 @@ public class Publicacion {
 		this.checkOut = checkOut;
 		this.precio = precio;
 		this.comentarios = new ArrayList<Comentario>();
-		setFormasDePago(new ArrayList<FormasDePagoEnum>());
+		this.setFormasDePago(new ArrayList<FormasDePagoEnum>());
 	}
 
 	public Inmueble getInmueble() {
 		return (this.inmueble);
-	}
-
-	public void setInmueble(Inmueble inmueble) {
-		this.inmueble = inmueble;
 	}
 
 	public List<FormasDePagoEnum> getFormasDePago() {
@@ -95,9 +91,6 @@ public class Publicacion {
 		return (this.precio);
 	}
 
-	public void agregarFormasDePago(ArrayList<FormasDePagoEnum> formasDePago) {
-		this.formasDePago = formasDePago;
-	}
 
 	public Boolean tieneComentarios() {
 		return (!getComentarios().isEmpty());
@@ -112,16 +105,6 @@ public class Publicacion {
 		return (getPropietario().getNombre() + " " + getPropietario().getMail() + " " + getPropietario().getTelefono());
 	}
 
-//	public Boolean cumpleConEspecificaciones(String ciudad, LocalDate checkIn, LocalDate checkOut,
-//			// TODO Auto-generated method stub
-//
-//			Integer cantidadDeHuspedes, Double precioMinimo, Double precioMaximo) {
-//		return false;
-//	}
-//	
-	public Boolean cumpleConEspecificaciones(ParametrosBusqueda paramBusqueda) {
-		return false;
-	}
 
 	public void configurarMediosDePago(FormasDePagoEnum enumValue) {
 		for (FormasDePagoEnum e : FormasDePagoEnum.values()) {
@@ -130,16 +113,13 @@ public class Publicacion {
 	}
 
 	public void addMediosDePagoAll() {
-		if (getFormasDePago() == null) {
-			setFormasDePago(new ArrayList<FormasDePagoEnum>());
-		}
-		for (FormasDePagoEnum e : FormasDePagoEnum.values()) {
-			this.getFormasDePago().add(e);
+		for (FormasDePagoEnum formaDePago : FormasDePagoEnum.values()) {
+			this.addMedioDePago(formaDePago);
 		}
 	}
 
 //	public boolean esDelUsuario(Usuario usuario) {
-//		return (this.getUsuario() == usuario);
+//		return (this.getUsuario().equals(usuario) ) ;
 //	}
 
 	public void addMedioDePago(FormasDePagoEnum formaDePago) {

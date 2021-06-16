@@ -8,14 +8,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.Administrador;
-import unq.CategoriaDePuntaje;
-import unq.Inmueble;
-import unq.Inquilino;
-import unq.Propietario;
-import unq.Puntaje;
-import unq.SitioWeb;
-import unq.Usuario;
+import unq.*;
 
 /**
  * 2. El inquilino rankea al dueño del inmueble. 3. El dueño del inmueble rankea

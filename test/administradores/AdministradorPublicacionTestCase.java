@@ -197,6 +197,7 @@ class AdministradorPublicacionTestCase {
 		adminPublicacion.actualizarPrecio(publicacion, 200.0);
 
 		verify(publicacion, times(1)).actualizarPrecio(200.0);
+		//verifico que al menos una vez le hayan pedido a la publicación que se actualice el precio a 200
 
 }
 	

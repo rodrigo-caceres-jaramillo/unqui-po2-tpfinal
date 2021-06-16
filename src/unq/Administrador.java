@@ -31,7 +31,6 @@ public class Administrador {
 		this.servicios = servicios;
 	}
 
-	// test
 	
 	public void agregarCategoriaDePuntajeAlSitio(CategoriaDePuntaje categoriaDePuntaje) {
 		this.getSitioAcargo().addCategoriaDePuntaje(categoriaDePuntaje);
@@ -41,19 +40,23 @@ public class Administrador {
 		this.getSitioAcargo().addTipoDeInmueble(tipo);
 	}
 	public void agregarTipoDeServicioAlSitio(ServiciosEnum servicio) {
-			this.addTiposDeServicios(servicio);
+			this.addTipoDeServicios(servicio);
 //acordarse que añadir un nuevo tipo de servicio al sitio es igual que añadirse a
 		//admin y que el sitio le pregunte 
 		}
 
 	
-	public void addTiposDeServicios(ServiciosEnum servicio  ) {
+	public void addTipoDeServicios(ServiciosEnum servicio  ) {
 			this.getServicios().add(servicio);
 	}
 
 	public Boolean registraElTipoDeServicio(ServiciosEnum servicio) {
 		return (this.getServicios().contains(servicio));
 	}
+	public Boolean elSitioWebRegistraElServicio(ServiciosEnum servicio) {
+		return (this.getSitioAcargo().registraTipoDeServicio(servicio));
+	}
+	
 
 	public Boolean elSitioWebRegistraLaCategoria(CategoriaDePuntaje categoriaDePuntaje) {
 		return (this.getSitioAcargo().registraCategoriaDePuntaje(categoriaDePuntaje));
