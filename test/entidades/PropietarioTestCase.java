@@ -13,16 +13,22 @@ información propia del dueño, el puntaje que otros usuarios le han dado a él 
 y el puntaje promedio que ha obtenido.
 + bajarPrecioAPublicidadCon(Publicidad, double):
 */
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.*;
+import administradores.*;
+import unq.FormasDePagoEnum;
+import unq.Inmueble;
+import unq.Propietario;
+import unq.Publicacion;
+import unq.SitioWeb;
 
 class PropietarioTestCase {
 	private SitioWeb sitio;
@@ -48,7 +54,7 @@ class PropietarioTestCase {
 
 	@Test
 	void testPropietarioRealizaUnaPublicacionAlSitio() {
-		usuarioPropietario.crearPublicacion(publicacion);
+		usuarioPropietario.añadirPublicacion(publicacion);
 
 		List<Publicacion> publicacionesEsperadas = new ArrayList<Publicacion>();
 		publicacionesEsperadas.add(publicacion);
@@ -77,7 +83,7 @@ class PropietarioTestCase {
 		when(publicacion.getPrecio()).thenReturn(100.0);
 		usuarioPropietario.bajarPrecioAPublicacionCon(publicacion, 0.0);
 
-		assertEquals(publicacion.getPrecio(), 100.0);
+		assertEquals(publicacion.getPrecio(), 0.0);
 	}
 
 }

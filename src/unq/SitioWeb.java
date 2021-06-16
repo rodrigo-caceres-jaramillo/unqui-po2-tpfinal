@@ -1,4 +1,4 @@
-package unq;
+fpackage unq;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,10 +112,10 @@ public class SitioWeb {
 		return getAdminPublicacion().getPublicaciones();
 	}
 	public void addPublicacion(Publicacion publicacion) {
-		getAdminPublicacion().agregar(publicacion);
+		this.getAdminPublicacion().agregar(publicacion);
 	}
 	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
-		getAdminPublicacion().bajarPrecioDePubli(publi, precio);
+		this.getAdminPublicacion().bajarPrecioDePubli(publi, precio);
 	}
 
 	
@@ -143,8 +143,8 @@ public class SitioWeb {
 	}
 
 
-	public Double promedioDePuntajeDe(Usuario usuario, CategoriaDePuntaje categoriaDePuntajeParaInquilino) {
-		return (usuario.getPromedioDePuntajesDeCategoria(categoriaDePuntajeParaInquilino));
+	public Double promedioDePuntajeDelUsuario(Usuario usuario, CategoriaDePuntaje categoriaDePuntaj) {
+		return (usuario.getPromedioDePuntajesDeCategoria(categoriaDePuntaj));
 	}
 
 }

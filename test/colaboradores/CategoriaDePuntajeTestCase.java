@@ -56,6 +56,7 @@ class CategoriaDePuntajeTestCase {
 		assertEquals(categoriaDePuntajeParaPropietario.getNombre(), "despacha a tiempo");
 	}
 
+	
 	@Test
 	void testUnAdministradorSubeUnaCategoriaAlSitio() {
 
@@ -65,17 +66,24 @@ class CategoriaDePuntajeTestCase {
 	}
 
 	@Test
-	void testUnSitioBuscaLosPuntajesDeUnaCategoria() {
-		admin.agregarCategoriaDePuntajeAlSitio(categoriaDePuntajeParaInmueble);
+	void testUnSitioConoceElPromedioDePuntajesDeUnInquilinoConUnaCategoria() {
+		CategoriaDePuntaje categoriaDos = new CategoriaDePuntaje("Limpieza");
+		CategoriaDePuntaje categoriaUno = new CategoriaDePuntaje("hogar");
 
-		CategoriaDePuntaje categoriaNueva = new CategoriaDePuntaje("Hogar");
-		propietario.puntuarA(inquilino, 5, categoriaDePuntajeParaInquilino);
-		propietario.puntuarA(inquilino, 4, categoriaNueva);
+		admin.agregarCategoriaDePuntajeAlSitio(categoriaDos);
+		admin.agregarCategoriaDePuntajeAlSitio(categoriaUno);
 
-		assertEquals(sitio.promedioDePuntajeDe(inquilino, categoriaDePuntajeParaInquilino), 5);
+		propietario.puntuarA(inquilino, 4, categoriaDos);
+		propietario.puntuarA(inquilino, 5, categoriaUno);
 
-		assertEquals(sitio.promedioDePuntajeDe(inquilino, categoriaNueva), 4);
+		assertEquals(inquilino.getPromedioDePuntajesDeCategoria(categoriaDos), 4.0 );		
+			assertEquals(inquilino.getPromedioDePuntajesDeCategoria(categoriaUno), 5.0 );		
 
 	}
 
+	
+	
+	
+	
+	
 }

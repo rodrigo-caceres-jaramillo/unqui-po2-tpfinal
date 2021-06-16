@@ -41,7 +41,9 @@ public class Administrador {
 		this.getSitioAcargo().addTipoDeInmueble(tipo);
 	}
 	public void agregarTipoDeServicioAlSitio(ServiciosEnum servicio) {
-		this.addTiposDeServicios(servicio);
+			this.addTiposDeServicios(servicio);
+//acordarse que añadir un nuevo tipo de servicio al sitio es igual que añadirse a
+		//admin y que el sitio le pregunte 
 		}
 
 	

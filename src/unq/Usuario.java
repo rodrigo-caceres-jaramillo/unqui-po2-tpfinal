@@ -56,8 +56,9 @@ public abstract class Usuario {
 
 
 	public void puntuarA(Usuario usuario, int puntuacion,
-			CategoriaDePuntaje categoriaDePuntajeParaPropietario) {
-			usuario.addPuntaje( new Puntaje(puntuacion,this,categoriaDePuntajeParaPropietario ) );
+			CategoriaDePuntaje categoriaDePuntaje) {
+		Puntaje puntaje =  new Puntaje(puntuacion,this,categoriaDePuntaje );
+		usuario.addPuntaje(puntaje );
 				
 	}
 
@@ -86,7 +87,7 @@ public abstract class Usuario {
 
 	public int cantPuntajesDeCategoria(CategoriaDePuntaje categoriaDePuntaje){
 		 int cant = 0;
-			int cantPuntajes = this.getPuntajes().size();
+		int cantPuntajes = this.getPuntajes().size();
 
 		 for (int i = 0; i < cantPuntajes; i++) {
 				Puntaje puntaje = this.getPuntajes().get(i);

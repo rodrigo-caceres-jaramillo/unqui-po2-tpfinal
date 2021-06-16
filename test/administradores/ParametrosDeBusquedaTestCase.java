@@ -1,4 +1,4 @@
-package unq;
+package administradores;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.ParametrosBusqueda;
 
 class ParametrosDeBusquedaTestCase {
 

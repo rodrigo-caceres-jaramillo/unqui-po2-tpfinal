@@ -150,4 +150,8 @@ public class Publicacion {
 		return (this.getFormasDePago().contains(formaDePago));
 	}
 
+	public void actualizarPrecio(Double precio) {
+			this.setPrecio(precio);
+	}
+
 }

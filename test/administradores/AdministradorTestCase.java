@@ -1,4 +1,4 @@
-package entidades;
+package administradores;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -7,7 +7,11 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.*;
+import unq.Administrador;
+import unq.CategoriaDePuntaje;
+import unq.ServiciosEnum;
+import unq.SitioWeb;
+import unq.TipoDeInmueble;
 
 class AdministradorTestCase {
 	private Administrador admin;

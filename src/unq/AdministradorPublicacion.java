@@ -34,20 +34,12 @@ public class AdministradorPublicacion {
 			
 		for (Publicacion publi : getPublicaciones()) {
 			if (publi.equals(publicacion)) {
-				bajarPrecioDePubli(publi, precio);
+				publicacion.actualizarPrecio(precio); 
+				// si bajó el precio, hacer algo para notificar al observer
 				break; 
 			}
 		}
 
-	}
-
-	public void bajarPrecioDePubli(Publicacion publicacion, Double nuevoPrecio) {
-		if (publicacion.getPrecio() < nuevoPrecio) {
-			    publicacion.setPrecio(0.0);  
-		}
-
-		publicacion.setPrecio(nuevoPrecio); 
-		// si bajó el precio, hacer algo para notificar al observer
 	}
 
 	public List<Publicacion> obtenerPublicacionesDelUsuario(Usuario propietario) {

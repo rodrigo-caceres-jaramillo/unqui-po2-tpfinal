@@ -1,4 +1,4 @@
-package unq;
+package administradores;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,6 +11,18 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.Administrador;
+import unq.AdministradorPublicacion;
+import unq.AdministradorUsuario;
+import unq.FormasDePagoEnum;
+import unq.Inmueble;
+import unq.Inquilino;
+import unq.ParametrosBusqueda;
+import unq.Propietario;
+import unq.Publicacion;
+import unq.SitioWeb;
+import unq.TipoDeInmueble;
 
 class SitioWebTestCase {
 	private SitioWeb sitio;

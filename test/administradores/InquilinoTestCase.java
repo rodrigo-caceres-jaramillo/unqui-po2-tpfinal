@@ -1,4 +1,4 @@
-package unq;
+package administradores;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,6 +7,12 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.CategoriaDePuntaje;
+import unq.Inmueble;
+import unq.Inquilino;
+import unq.Propietario;
+import unq.SitioWeb;
 
 class InquilinoTestCase {
 

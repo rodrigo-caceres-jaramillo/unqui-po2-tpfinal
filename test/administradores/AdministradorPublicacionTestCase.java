@@ -1,7 +1,9 @@
-package unq;
+package administradores;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -9,6 +11,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import unq.AdministradorPublicacion;
+import unq.Inmueble;
+import unq.ParametrosBusqueda;
+import unq.Publicacion;
+import unq.SitioWeb;
+import unq.Usuario;
 
 class AdministradorPublicacionTestCase {
 
@@ -180,22 +189,19 @@ class AdministradorPublicacionTestCase {
 		assertTrue(publicaciones.isEmpty());
 	}
 
-//	@Test
-//	void testAdministradorPublicacionesBajaElPrecioAUnaDeSusPublicaciones() {
-//		Publicacion publicacion = mock(Publicacion.class);
-//		when(publicacion.getPrecio()).thenReturn(100.0);
-//
-//		adminPublicacion.agregar(publicacion);
-//		adminPublicacion.actualizarPrecio(publicacion, 200.0);
-//
-//		Publicacion publiConPrecioActualizado = adminPublicacion.getPublicaciones().get(0);
-//
-//		assertEquals(publiConPrecioActualizado.getPrecio(), 200.0);
-//		/*
-//		 * rompe el assert porque el precio quedó en 100 y no se le setea el 200 al
-//		 * actualizar precio.
-//		 * 
-//		 */
-//	}
+	@Test
+	void testAdministradorPublicacionesBajaElPrecioAUnaDeSusPublicaciones() {
+		Publicacion publicacion = mock(Publicacion.class);
 
+		adminPublicacion.agregar(publicacion);
+		adminPublicacion.actualizarPrecio(publicacion, 200.0);
+
+		verify(publicacion, times(1)).actualizarPrecio(200.0);
+
+}
+	
+	
+	
+	
+	
 }
