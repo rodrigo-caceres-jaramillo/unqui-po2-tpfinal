@@ -36,11 +36,11 @@ class TipoDeInmuebleTestCase {
 		assertTrue(tipoDeInmueble.esUnTipoDelInmueble(inmueble));
 	}
 	@Test
-	void testUnTipoDeInmuebleEstáRegistradoEnUnSitioWeb() {
+	void testUnTipoDeInmuebleEstaRegistradoEnUnSitioWeb() {
 		when( sitio.registraTipoDeInmueble(tipoDeInmueble) ).thenReturn(true);
 		
 		
-		assertTrue(tipoDeInmueble.estáRegistradoEn(sitio));
+		assertTrue(tipoDeInmueble.estaRegistradoEn(sitio));
 		
 		
 	}

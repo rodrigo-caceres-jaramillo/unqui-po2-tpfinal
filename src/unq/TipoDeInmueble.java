@@ -18,7 +18,7 @@ public class TipoDeInmueble {
 		return (inmueble.esDeTipo(this));
 	}
 
-	public boolean estáRegistradoEn(SitioWeb sitio) {
+	public boolean estaRegistradoEn(SitioWeb sitio) {
 		return (sitio.registraTipoDeInmueble(this)) ;
 	}
 	

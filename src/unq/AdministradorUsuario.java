@@ -4,22 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdministradorUsuario {
+	// Atributos
+	ArrayList<Usuario> usuarios;
+	SitioWeb sitioWeb;
+	
+	// Constructor
+	public AdministradorUsuario(SitioWeb sitioWeb) {
+		this.setUsuarios(new ArrayList<Usuario>());
+		this.setSitioWeb(sitioWeb);
+	}
 
-	List<Usuario> usuarios;
+	// Gets y sets
+	public SitioWeb getSitioWeb() {
+		return sitioWeb;
+	}
+
+	public void setSitioWeb(SitioWeb sitioWeb) {
+		this.sitioWeb = sitioWeb;
+	}
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-
+	
+	// Metodos
 	public void registrar(Usuario usuario) {
-		if (getUsuarios() == null) {
-			setUsuarios(new ArrayList<Usuario>());
-		}
 		getUsuarios().add(usuario);
+		usuario.Registrarse(null);
 	}
 
 }

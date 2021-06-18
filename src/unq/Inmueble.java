@@ -17,7 +17,7 @@ public class Inmueble {
 	private List<ServiciosEnum> servicios;
 	private Integer capacidad;
 	private List<Puntaje> puntaciones;
-	private Propietario propietario;
+	private Usuario propietario;
 
 	// Constructores
 
@@ -97,11 +97,11 @@ public class Inmueble {
 		return (this.puntaciones);
 	}
 
-	public void setPropietario(Propietario propietario) {
+	public void setPropietario(Usuario propietario) {
 		this.propietario = propietario;
 	}
 
-	public Propietario getPropietario() {
+	public Usuario getPropietario() {
 		return (this.propietario);
 	}
 
