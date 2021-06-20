@@ -1,5 +1,6 @@
 package entidades;
 
+import static org.junit.Assert.assertFalse;
 /* 
 
 //**
@@ -15,70 +16,67 @@ y el puntaje promedio que ha obtenido.
 */
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.FormasDePagoEnum;
-import unq.Propietario;
-import unq.Publicacion;
-import unq.SitioWeb;
-
+import unq.*;
 class PropietarioTestCase {
 
-	private Propietario usuarioPropietario;
+	private Usuario usuarioPropietario;
+	private SitioWeb sitio;
+	private Publicacion publicacion;
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		usuarioPropietario = new Propietario("ejemplin", "ejemplo@jexample.com", 42356769);
-
-		// usuarioPropietario.registrarse(sitio);
+		usuarioPropietario = new Usuario("ejemplin", "ejemplo@jexample.com", 42356769);
+		sitio = mock(SitioWeb.class);
+		publicacion = mock(Publicacion.class);
+		usuarioPropietario.registrarse(sitio);
 
 	}
 
+	@Test
+	void testUnUsuarioNoEsPropietarioNoTienePublicacionesRealizada() {
+		when(sitio.contienePublicacionesDe(usuarioPropietario)).thenReturn(false);
+
+		assertFalse(usuarioPropietario.esPropietario() );
+	}
+	@Test
+	void testUnUsuarioEsPropietarioSiTieneAlMenosUnaPublicacionRealizada() {
+		
+		List <Publicacion>publisEsperadas = new ArrayList<Publicacion>(); publisEsperadas.add(publicacion);
+
+		when(sitio.contienePublicacionesDe(usuarioPropietario)).thenReturn(true);
+	
+		assertTrue(usuarioPropietario.esPropietario() );
+	}
+	
+	
 	@Test
 	void testPropietarioRealizaUnaPublicacionAlSitio() {
-		SitioWeb sitio = new SitioWeb();
-		Publicacion publicacion = new Publicacion();
-
-		publicacion.setPropietario(usuarioPropietario);
-		sitio.addUsuario(usuarioPropietario);
-
-		usuarioPropietario.agregarPublicacion(publicacion, sitio);
-
-		List<Publicacion> publicacionesDelPropietario = usuarioPropietario.publicacionesEnElSitio(sitio);
-
-		assertTrue(publicacionesDelPropietario.contains(publicacion));
-	}
-
-	@Test
-	void testUnPropietarioEstableceUnMedioDePagoAUnaPublicacion() {
-		SitioWeb sitio = new SitioWeb();
-		Publicacion publicacion = new Publicacion();
-
-		publicacion.setPropietario(usuarioPropietario);
-		sitio.addUsuario(usuarioPropietario);
-
-		FormasDePagoEnum efectivo = FormasDePagoEnum.EFECTIVO;
-		usuarioPropietario.medioDePagoPara(publicacion, efectivo);
-		usuarioPropietario.agregarPublicacion(publicacion, sitio);
-
-		Boolean publisRecibenEfectivo = sitio.registraPubliDeUsuarioConFormaDePago(usuarioPropietario, efectivo);
-
-		assertTrue(publisRecibenEfectivo);
+		List <Publicacion>publisEsperadas = new ArrayList<Publicacion>(); publisEsperadas.add(publicacion);
+		usuarioPropietario.agregarPublicacion(publicacion);
+		when(sitio.getPublicacionesDe(usuarioPropietario)).thenReturn(publisEsperadas);
+		
+		assertTrue(usuarioPropietario.misPublicaciones().contains(publicacion)  );
+				
+	
 	}
 
 	@Test
 	void testUnPropietarioBajaPrecioAUnaPublicacionDeInmueble() {
-		SitioWeb sitio = new SitioWeb();
-		Publicacion publicacion = new Publicacion();
-
 		publicacion.setPrecio(100.0);
 
-		usuarioPropietario.agregarPublicacion(publicacion, sitio);
-		usuarioPropietario.bajarPrecioAPublicacionEnSitio(publicacion, 0.0, sitio);
+		usuarioPropietario.agregarPublicacion(publicacion);
+		usuarioPropietario.bajarPrecioAPublicacion(publicacion, 0.0);
 
 		assertEquals(publicacion.getPrecio(), 0.0);
 	}

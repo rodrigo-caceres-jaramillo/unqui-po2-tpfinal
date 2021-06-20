@@ -34,7 +34,6 @@ public class AdministradorUsuario {
 	// Metodos
 	public void registrar(Usuario usuario) {
 		getUsuarios().add(usuario);
-		usuario.Registrarse(null);
 	}
 
 }

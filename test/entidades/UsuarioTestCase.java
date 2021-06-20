@@ -9,16 +9,16 @@ import org.junit.jupiter.api.Test;
 import unq.*;
 
 class UsuarioTestCase {
-	Usuario usuario;
-	Usuario usuario2;
+	Usuario usuarioPropietario;
+	Usuario usuarioInquilino;
 	Puntaje puntaje;
 	CategoriaDePuntaje categoriaPuntaje1;
 	CategoriaDePuntaje categoriaPuntaje2;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		usuario = new Inquilino("bian", "unEmail", 123);
-		usuario2 = new Propietario("tami", "unEmail", 56);
+		usuarioPropietario = new Usuario("bian", "unEmail", 123);
+		usuarioInquilino = new Usuario("tami", "unEmail", 56);
 		puntaje = mock(Puntaje.class);
 		categoriaPuntaje1 = mock(CategoriaDePuntaje.class);
 		categoriaPuntaje2 = mock(CategoriaDePuntaje.class);
@@ -28,61 +28,76 @@ class UsuarioTestCase {
 	@Test
 	void testUnUsuarioTieneNombreMailYNumeroDeTelefono() {
 
-		assertEquals(usuario.getNombre(), "bian");
-		assertEquals(usuario.getMail(), "unEmail");
-		assertEquals(usuario.getTelefono(), 123);
+		assertEquals(usuarioPropietario.getNombre(), "bian");
+		assertEquals(usuarioPropietario.getMail(), "unEmail");
+		assertEquals(usuarioPropietario.getTelefono(), 123);
 	}
 
 	@Test
 	void testUnUsuarioNoRegistraPuntuaciones() {
-		assertTrue(usuario2.getPuntajes().isEmpty());
-		assertFalse(usuario2.registraPuntajeDe(usuario));
+		assertTrue(usuarioPropietario.getPuntajes().isEmpty());
+		assertFalse(usuarioPropietario.registraPuntajeDe(usuarioPropietario));
 	}
-
-	@Test
-	void testUnUsuarioPuntuaAOtroUsuario() {
-		usuario.puntuarA(usuario2, 5, categoriaPuntaje1);
-
-		assertTrue(usuario2.registraPuntajeDe(usuario));
-	}
-
+	
 	@Test
 	void testUnUsuarioTieneUnPromedioDePunutacionesCeroSinPublicaciones() {
-		assertEquals(usuario.getPromedioDePuntajes(), 0.0);
+		assertEquals(usuarioPropietario.getPromedioDePuntajes(), 0.0);
 
 	}
+//	1. El inquilino rankea al inmueble.
+//	2. El inquilino rankea al dueño del inmueble.
+//	3. El dueño del inmueble rankea al inquilino.
+//	
+	@Test
+	void testUnUsuarioPropietarioPuntuaAUnInquilino() {
+		usuarioPropietario.puntuarA(usuarioInquilino, 5, categoriaPuntaje1);
+
+		assertTrue(usuarioInquilino.registraPuntajeDe(usuarioPropietario));
+	}
+
+
 
 	@Test
 	void testUnUsuarioTieneUnPromedioDePuntuaciones() {
-		usuario.puntuarA(usuario2, 5, categoriaPuntaje1);
-		usuario.puntuarA(usuario2, 4, categoriaPuntaje1);
+		usuarioPropietario.puntuarA(usuarioInquilino, 5, categoriaPuntaje1);
+		usuarioPropietario.puntuarA(usuarioInquilino, 4, categoriaPuntaje1);
 
-		assertEquals(usuario2.getPromedioDePuntajes(), 4.0);
+		assertEquals(usuarioInquilino.getPromedioDePuntajes(), 4.0);
 	}
 
 	@Test
 	void testUnUsuarioTieneUnaCantidadDePuntajesDeAlgunaCategoria() {
-		usuario.puntuarA(usuario2, 5, categoriaPuntaje1);
-		usuario.puntuarA(usuario2, 4, categoriaPuntaje1);
-		usuario.puntuarA(usuario2, 5, categoriaPuntaje2);
+		usuarioPropietario.puntuarA(usuarioInquilino, 5, categoriaPuntaje1);
+		usuarioPropietario.puntuarA(usuarioInquilino, 4, categoriaPuntaje1);
+		usuarioPropietario.puntuarA(usuarioInquilino, 5, categoriaPuntaje2);
 
-		assertEquals(usuario2.cantPuntajesDeCategoria(categoriaPuntaje1), 2);
-		assertEquals(usuario2.cantPuntajesDeCategoria(categoriaPuntaje2), 1);
+		assertEquals(usuarioInquilino.cantPuntajesDeCategoria(categoriaPuntaje1), 2);
+		assertEquals(usuarioInquilino.cantPuntajesDeCategoria(categoriaPuntaje2), 1);
 	}
 
 	@Test
 	void testUnUsuarioTieneCeroPromedioDePuntuacionesDeAlgunaCategoria() {
 
-		assertEquals(usuario2.getPromedioDePuntajesDeCategoria(categoriaPuntaje1), 0.0);
+		assertEquals(usuarioInquilino.getPromedioDePuntajesDeCategoria(categoriaPuntaje1), 0.0);
 
 	}
 
 	@Test
 	void testUnUsuarioTieneUnPromedioDePuntuacionesDeAlgunaCategoria() {
-		usuario.puntuarA(usuario2, 5, categoriaPuntaje1);
-		usuario.puntuarA(usuario2, 4, categoriaPuntaje1);
+		usuarioPropietario.puntuarA(usuarioInquilino, 5, categoriaPuntaje1);
+		usuarioPropietario.puntuarA(usuarioInquilino, 4, categoriaPuntaje1);
 
-		assertEquals(usuario2.getPromedioDePuntajesDeCategoria(categoriaPuntaje1), (5 + 4) / 2);
+		assertEquals(usuarioInquilino.getPromedioDePuntajesDeCategoria(categoriaPuntaje1), (5 + 4) / 2);
 	}
 
+	
+	@Test
+	void testUnInquilinoNoPuedePuntuarAInmuebleNoRealizoCheckOut() {
+		Inmueble inmueble= mock(Inmueble.class);
+		
+		usuarioInquilino.puntuarInmueble(inmueble, 5, categoriaPuntaje1);
+	}
+	
+	
+	
 }

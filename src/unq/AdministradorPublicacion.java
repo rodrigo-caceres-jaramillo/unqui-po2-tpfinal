@@ -39,7 +39,7 @@ public class AdministradorPublicacion {
 
 	}
 
-	public List<Publicacion> obtenerPublicacionesDelUsuario(Usuario propietario) {
+	public List<Publicacion> publicacionesDelUsuario(Usuario propietario) {
 
 		List<Publicacion> publicacionesDelUsuario = getPublicaciones().stream()
 				.filter(p -> p.getPropietario().equals(propietario)).collect(Collectors.toList());
@@ -101,6 +101,10 @@ public class AdministradorPublicacion {
 
 	public Integer cantidadPublicaciones() {
 		return getPublicaciones().size();
+	}
+
+	public Boolean registraPublicacionDeUsuario(Usuario usuario) {
+		return (!this.publicacionesDelUsuario(usuario).isEmpty());
 	}
 
 }

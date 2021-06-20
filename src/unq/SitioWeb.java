@@ -24,7 +24,7 @@ public class SitioWeb {
 	
 	// Gets y sets
 	public List<Publicacion> getPublicacionesDe(Usuario propietario) {
-		return getAdminPublicacion().obtenerPublicacionesDelUsuario(propietario);
+		return getAdminPublicacion().publicacionesDelUsuario(propietario);
 	}
 	
 	public AdministradorPublicacion getAdminPublicacion() {
@@ -85,7 +85,7 @@ public class SitioWeb {
 	
 	public List<Reserva> getReservas() {
 		return this.getAdminReserva().getReservas();
-	}
+	} 	
 	
 	// Metodos
 	public List<Inmueble> buscarInmueble(ParametrosBusqueda parametrosBusqueda) {
@@ -164,12 +164,26 @@ public class SitioWeb {
 		return (usuario.getPromedioDePuntajesDeCategoria(categoriaDePuntaj));
 	}
 
-	public List<Reserva> getReservasFuturasDe(Usuario usuario) {
+	/*public List<Reserva> getReservasFuturasDe(Usuario usuario) {
 		return this.getAdminReserva().obtenerReservasFuturasDelUsuario(usuario);
-	}
+	}*/
 
 	public List<Reserva> getReservasDeLaCiudad(Usuario usuario, String ciudad) {
 		return this.getAdminReserva().obtenerReservasEnLaCiudadDelUsuario(usuario, ciudad);
+	}
+
+	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void cancelarReserva(Reserva reserva) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Boolean contienePublicacionesDe(Usuario usuario) {
+		return (this.getAdminPublicacion().registraPublicacionDeUsuario(usuario) );
 	}
 
 	

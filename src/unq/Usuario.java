@@ -3,6 +3,7 @@ package unq;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 public class Usuario {
 	// Atributos
@@ -68,8 +69,9 @@ public class Usuario {
 	}
 	
 	// Metodos
-	public void Registrarse(SitioWeb sitioWeb) {
+	public void registrarse(SitioWeb sitioWeb) {
 		this.setSitioWeb(sitioWeb);
+		sitioWeb.addUsuario(this);
 	}
 	
 	public List<Inmueble> buscarInmuebles(ParametrosBusqueda parametrosBusqueda) {
@@ -79,16 +81,30 @@ public class Usuario {
 	public void medioDePagoPara(Publicacion publicacion, FormasDePagoEnum formaDePago) {
 		publicacion.addMedioDePago(formaDePago);
 	}
-	// Puntuar ------------------------------------------------------------------	
+	// Puntuar ------------------------------------------------------------------
 	public void puntuarA(Usuario usuario, Integer puntuacion, CategoriaDePuntaje categoriaDePuntaje) {
-		Puntaje puntaje = new Puntaje(puntuacion, this, categoriaDePuntaje);
-		usuario.addPuntaje(puntaje);
-	}
+	Puntaje puntaje = new Puntaje(puntuacion, this, categoriaDePuntaje);
 
-	public Boolean registraPuntajeDe(Usuario usuario) {
-		return (this.getPuntajes().stream().anyMatch(puntaje -> puntaje.getUsuario() == usuario));
+			usuario.addPuntaje(puntaje);
 	}
+//	public void puntuarA(Usuario usuario, Integer puntuacion, CategoriaDePuntaje categoriaDePuntaje) {
+//		Puntaje puntaje = new Puntaje(puntuacion, this, categoriaDePuntaje);
+//		if(this.esPropietario()&& usuario.esInquilino()) {
+//			usuario.addPuntaje(puntaje);
+//		}else{ (this.puntuarAPropietario(propietario, puntaje)}
+//		
+//	}
 
+// public void puntuarAPropietario(Usuario usuario, Puntaje puntaje ){
+//           if( this.realizoCheckOutDe( "tipoUnInmuebleDelPropietario" ) {
+//						usuario.addPuntaje(puntaje) }
+	
+//	
+//	
+//	
+//	
+//	
+	
 	public Double getPromedioDePuntajes() {
 		double total = 0.0;
 		if (!this.getPuntajes().isEmpty()) {
@@ -140,15 +156,13 @@ public class Usuario {
 		inmueble.addPuntaje(new Puntaje(valorDePuntaje, this, categoriaDePuntaje));
 	}
 	
-	public boolean elInmuebleRegistraPuntajePropio(Inmueble inmueble1) {
-		return (inmueble1.registraPuntajeDe(this));
-	}
-
+	
 	public void puntuarADuenoDeInmueble(Inmueble inmueble, int puntuacion,
 			CategoriaDePuntaje categoriaDePuntajeParaPropietario) {
 		this.puntuarA(inmueble.getPropietario(), puntuacion, categoriaDePuntajeParaPropietario);
 	}
 	//Reservar Inmueble --------------------------------------------
+	
 	public void reservarInmueble(Publicacion publicacion, FormasDePagoEnum formaDePago, LocalDate inicioDeAlquiler, LocalDate finDeAlquiler) {
 		Reserva nuevaReserva = new Reserva(publicacion, publicacion.getPropietario(), this, formaDePago, inicioDeAlquiler, finDeAlquiler);
 		this.getSitioWeb().addReserva(nuevaReserva);
@@ -158,10 +172,10 @@ public class Usuario {
 		return this.getSitioWeb().getReservasDe(this);
 	}
 
-	public List<Reserva> misReservasFuturas() {
+/*	public List<Reserva> misReservasFuturas() {
 		return this.getSitioWeb().getReservasFuturasDe(this);
 	}
-	
+	*/
 	public List<Reserva> misReservasDeLaCiudad(String ciudad) {
 		return this.getSitioWeb().getReservasDeLaCiudad(this, ciudad);
 	} 
@@ -182,9 +196,31 @@ public class Usuario {
 		return this.getSitioWeb().getPublicacionesDe(this);
 	}
 	
-	public void bajarPrecioAPublicacionEnSitio(Publicacion publi, Double precio) {
+	public void bajarPrecioAPublicacion(Publicacion publi, Double precio) {
 		this.getSitioWeb().actualizarPrecioDePublicacion(publi, precio);
 	}
+
+	//TestingMessages ------------------------------------------------------
+
+	public Boolean esPropietario() {
+	
+		return (this.getSitioWeb().contienePublicacionesDe(this) );
+	}
+
+	public Boolean esInquilino() {
+		return (!this.esPropietario() );
+	}
+
+	public boolean elInmuebleRegistraPuntajePropio(Inmueble inmueble1) {
+		return (inmueble1.registraPuntajeDe(this));
+	}
+
+
+	public Boolean registraPuntajeDe(Usuario usuario) {
+		return (this.getPuntajes().stream().anyMatch(puntaje -> puntaje.getUsuario() == usuario));
+	}
+
+	
 
 	
 }

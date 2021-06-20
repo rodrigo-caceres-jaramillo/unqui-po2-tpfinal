@@ -42,11 +42,12 @@ public class AdministradorReserva {
 		return reservasDelUsuario;
 	}
 	
-	public List<Reserva> obtenerReservasFuturasDelUsuario(Usuario inquilino) {
+	/*public List<Reserva> obtenerReservasFuturasDelUsuario(Usuario inquilino) {
 		List<Reserva> reservasFuturas = this.obtenerReservasDelUsuario(inquilino).stream()
-				.filter(p -> p.getInicioDeAlquiler().equals(/*fecha de hoy*/)).collect(Collectors.toList());
+				.filter(p -> p.getInicioDeAlquiler().equals(/*fecha de hoy)).collect(Collectors.toList());
 		return reservasFuturas;
 	}
+*/
 	
 	public List<Reserva> obtenerReservasEnLaCiudadDelUsuario(Usuario inquilino, String ciudad) {
 		List<Reserva> reservasDelUsuarioEnLaCiudad = this.obtenerReservasDelUsuario(inquilino).stream()

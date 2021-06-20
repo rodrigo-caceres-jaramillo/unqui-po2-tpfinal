@@ -56,7 +56,7 @@ class AdministradorPublicacionTestCase {
 
 		adminPublicacion.agregar(publicacion);
 
-		List<Publicacion> publicacionesUsuario = adminPublicacion.obtenerPublicacionesDelUsuario(propietario);
+		List<Publicacion> publicacionesUsuario = adminPublicacion.publicacionesDelUsuario(propietario);
 
 		assertEquals(publicacionesUsuario.size(), 1);
 	}

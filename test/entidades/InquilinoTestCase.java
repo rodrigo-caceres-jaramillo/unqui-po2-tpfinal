@@ -1,61 +1,47 @@
 package entidades;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import unq.CategoriaDePuntaje;
-import unq.Inmueble;
-import unq.Inquilino;
-import unq.ParametrosBusqueda;
-import unq.Propietario;
-import unq.SitioWeb;
-
+import java.util.*;
+import unq.*;
 class InquilinoTestCase {
 
-	private SitioWeb sitioWeb;
-	private Inquilino inquilino;
-	private Propietario propietario;
+	private SitioWeb sitio;
+	private Usuario inquilino;
 	private Inmueble inmueble1;
-	private Inmueble inmueble2;
 	private CategoriaDePuntaje categoriaDePuntaje;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		sitioWeb = mock(SitioWeb.class);
-		inquilino = new Inquilino("Sergio", "sergio.99@gmail.com", 22759863);
-		inmueble1 = mock(Inmueble.class);
-		categoriaDePuntaje = mock(CategoriaDePuntaje.class);
-
+		sitio = mock(SitioWeb.class);
+		inquilino = new Usuario("Sergio", "sergio.99@gmail.com", 22759863);
+		inmueble1 = mock(Inmueble.class); 				categoriaDePuntaje = mock(CategoriaDePuntaje.class);
+		inquilino.registrarse(sitio);
 	}
 
 	@Test
-	void testUnInquilinoConoceSusDatos() {
-
-		assertEquals(inquilino.getMail(), "sergio.99@gmail.com");
-		assertEquals(inquilino.getNombre(), "Sergio");
-		assertEquals(inquilino.getTelefono(), 22759863);
-	}
-
+	void unUsuariQueNoRegistraPubicacionesEsInquilino() {
+		when(sitio.contienePublicacionesDe(inquilino)).thenReturn(false);
+		assertTrue(inquilino.esInquilino() );
+		assertFalse(inquilino.esPropietario() );
+		}
+		
+	
+	
 	@Test
 	void testUnInquilinoRealizaUnaBusquedaInmuebleConDatosObligatoriosNoEncuentraNinguno() {
 		LocalDate checkIn = LocalDate.of(2021, 8, 22);
 		LocalDate checkOut = LocalDate.of(2021, 8, 23);
 		ParametrosBusqueda paramBusqueda = new ParametrosBusqueda("Buenos Aires", checkIn, checkOut, null, null, null);
 
-		when(sitioWeb.buscarInmueble(paramBusqueda)).thenReturn(new ArrayList<Inmueble>());
+		when(sitio.buscarInmueble(paramBusqueda)).thenReturn(new ArrayList<Inmueble>());
 
-		List<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmueblesEn(paramBusqueda, sitioWeb);
-
+		List<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles(paramBusqueda);
+		verify(sitio,times(1)).buscarInmueble( paramBusqueda); 
 		assertTrue(resultadoDeLaBusqueda.isEmpty());
 	}
 
@@ -66,28 +52,38 @@ class InquilinoTestCase {
 		ParametrosBusqueda paramBusqueda = new ParametrosBusqueda("Buenos Aires", checkIn, checkOut, null, null, null);
 
 		when(inmueble1.getCiudad()).thenReturn("Buenos Aires");
-		when(inmueble2.getCiudad()).thenReturn("Buenos Aires");
 
-		List<Inmueble> inmueblesEsperados = new ArrayList<Inmueble>();
-		inmueblesEsperados.add(inmueble1);
-		inmueblesEsperados.add(inmueble2);
+		List<Inmueble> inmueblesEsperados = new ArrayList<Inmueble>(); inmueblesEsperados.add(inmueble1);
 
-		when(sitioWeb.buscarInmueble(paramBusqueda)).thenReturn(inmueblesEsperados);
+		when(sitio.buscarInmueble(paramBusqueda)).thenReturn(inmueblesEsperados);
 
-		List<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmueblesEn(paramBusqueda, sitioWeb);
+		List<Inmueble> resultadoDeLaBusqueda = inquilino.buscarInmuebles(paramBusqueda);
 
+		verify(sitio,times(1)).buscarInmueble( paramBusqueda); 
+	
 		assertFalse(resultadoDeLaBusqueda.isEmpty());
 	}
 
 //	@Test
-//	void testUnInquilinoRealizaUnAlquilerDeUnaListaDeInmuebles() {
+//	void testUnInquilinoRealizaUnaReservaDeUnaListaDeInmuebles() {
 //
-//		List<Inmueble> listadoDeInmuebles = new ArrayList<>(Arrays.asList(inmueble1));
-//		// inquilino.alquilarInmuebleDeListado(inmueble1, listadoDeInmuebles);
+//		List<Inmueble> listaInmuebles = new ArrayList<Inmueble>(); listaInmuebles.add(inmueble1);
+//		 inquilino.reservarElInmuebleDeLaLista(inmueble1, listaInmuebles);
 //
-//		when(sitioWeb.elInmuebleEstaOcupado(inmueble1)).thenReturn(true);
-//
-//		// assertTrue(inquilino.elSitioRegistraOcupacionDelInmueble(inmueble1));
+//		 assertTrue(inquilino.elSitioRegistraReservaDelInmueble(inmueble1));
 //	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
