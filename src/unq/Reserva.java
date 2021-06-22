@@ -23,6 +23,10 @@ public class Reserva {
 		this.setFinalDeAlquiler(finalDeAlquiler);
 	}
 	
+	public Reserva() {
+		super();
+	}
+
 	// Gets y sets
 	public Publicacion getPublicacion() {
 		return publicacion;

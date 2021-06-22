@@ -1,7 +1,12 @@
 package entidades;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -102,6 +107,36 @@ class UsuarioTestCase {
 	void testUnUsuarioRealizaUnaBusquedaDePublicacionesDeInmuebles() {
 		
 		
+	}
+
+	@Test
+	void testUnInmuebleNoRegistraUnPuntajeDeUsuario() {
+		Inmueble inmueble = mock(Inmueble.class);
+		when(inmueble.registraPuntajeDe(usuarioInquilino)).thenReturn(false);
+		assertFalse(usuarioPropietario.elInmuebleRegistraPuntajePropio(inmueble) );
+		
+	}
+
+	
+	@Test
+	void testUnUsuarioEsInquilinoNoTienePublicacionesRealizadas() {
+		SitioWeb sitioWeb = mock(SitioWeb.class);
+		usuarioInquilino.registrarse(sitioWeb);
+		when(sitioWeb.contienePublicacionesDe(usuarioInquilino)).thenReturn(false);
+		
+		assertTrue(usuarioInquilino.esInquilino() );
+		assertFalse(usuarioInquilino.esPropietario());
+		
+		
+	}
+	@Test
+	void testUnUsuarioNOEsInquilinoTienePublicacionesRealizadas() {
+		SitioWeb sitioWeb = mock(SitioWeb.class);
+		usuarioInquilino.registrarse(sitioWeb);
+		when(sitioWeb.contienePublicacionesDe(usuarioInquilino)).thenReturn(true);
+		
+		assertFalse(usuarioInquilino.esInquilino() );
+		assertTrue(usuarioInquilino.esPropietario());
 	}
 	
 }

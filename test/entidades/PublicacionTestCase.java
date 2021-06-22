@@ -9,12 +9,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.Comentario;
-import unq.FormasDePagoEnum;
-import unq.Inmueble;
-import unq.Propietario;
-import unq.Publicacion;
-import unq.Usuario;
+import unq.*;
 
 class PublicacionTestCase {
 
@@ -26,7 +21,7 @@ class PublicacionTestCase {
 	@BeforeEach
 	void setUp() throws Exception {
 		publicacion = new Publicacion();
-		propietario = mock(Propietario.class);
+		propietario = mock(Usuario.class);
 		inmuebleDePublicacion = mock(Inmueble.class);
 		comentarioDePublicacion = mock(Comentario.class);
 	}

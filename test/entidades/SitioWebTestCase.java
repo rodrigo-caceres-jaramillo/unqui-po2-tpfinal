@@ -322,6 +322,8 @@ class SitioWebTestCase {
 		
 		
 		sitio.addOcupacionDelInmubleDeLaReserva(reserva);
+		
+		assertFalse( sitio.getOcupaciones().isEmpty() );
 	}
 	
 	

@@ -127,7 +127,7 @@ public class SitioWeb {
 	}
 
 	public Boolean elInmuebleEstaOcupado(Inmueble inmueble) {
-		return false;
+		return (this.getAdminOcupaciones().registraOcupacionDe(inmueble));
 	}
 
 	public Boolean registraPubliDeUsuarioConFormaDePago(Usuario propietario, FormasDePagoEnum formaDePago) {
@@ -222,8 +222,9 @@ public class SitioWeb {
 
 
 	public void addOcupacionDelInmubleDeLaReserva(Reserva reserva) {
-	
 			this.getAdminOcupaciones().addOcupacionConReserva(reserva);
+			this.enviarMailDeConfirmacionAUsuario(reserva.getInquilino());
+
 	}
 
 

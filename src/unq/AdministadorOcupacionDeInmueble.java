@@ -43,4 +43,9 @@ public class AdministadorOcupacionDeInmueble {
 		return (ocupacion);
 	}
 
+	public Boolean registraOcupacionDe(Inmueble inmueble) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

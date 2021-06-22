@@ -52,7 +52,6 @@ class PropietarioTestCase {
 	@Test
 	void testUnUsuarioEsPropietarioSiTieneAlMenosUnaPublicacionRealizada() {
 		
-		List <Publicacion>publisEsperadas = new ArrayList<Publicacion>(); publisEsperadas.add(publicacion);
 
 		when(sitio.contienePublicacionesDe(usuarioPropietario)).thenReturn(true);
 	
@@ -70,6 +69,15 @@ class PropietarioTestCase {
 				
 	
 	}
+	
+	@Test 
+	void testPropietarioEstableceUnMedioDePagoParaUnaPublicacion() {
+		Publicacion publi = new Publicacion();
+
+		usuarioPropietario.medioDePagoPara(publi,FormasDePagoEnum.TARJETADECREDITO);
+		
+		assertTrue(publi.aceptaFormaDePago(FormasDePagoEnum.TARJETADECREDITO));
+	}
 
 	@Test
 	void testUnPropietarioBajaPrecioAUnaPublicacionDeInmueble() {
@@ -80,5 +88,5 @@ class PropietarioTestCase {
 
 		assertEquals(publicacion.getPrecio(), 0.0);
 	}
-
+	
 }
