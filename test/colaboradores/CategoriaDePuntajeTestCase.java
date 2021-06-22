@@ -23,8 +23,8 @@ class CategoriaDePuntajeTestCase {
 	private CategoriaDePuntaje categoriaDePuntajeParaPropietario;
 	private SitioWeb sitio;
 	private Administrador admin;
-	public Propietario propietario;
-	public Inquilino inquilino;
+	public Usuario propietario;
+	public Usuario inquilino;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -36,8 +36,8 @@ class CategoriaDePuntajeTestCase {
 		sitio.setAdministrador(admin);
 		admin.setSitioAcargo(sitio);
 
-		propietario = new Propietario("", "", 0);
-		inquilino = new Inquilino("", "", 0);
+		propietario = new Usuario("", "", 0);
+		inquilino = new   Usuario("", "", 0);
 
 	}
 

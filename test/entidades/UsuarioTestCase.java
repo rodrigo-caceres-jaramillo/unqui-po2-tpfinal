@@ -98,6 +98,10 @@ class UsuarioTestCase {
 		usuarioInquilino.puntuarInmueble(inmueble, 5, categoriaPuntaje1);
 	}
 	
-	
+	@Test
+	void testUnUsuarioRealizaUnaBusquedaDePublicacionesDeInmuebles() {
+		
+		
+	}
 	
 }

@@ -81,7 +81,7 @@ public class Usuario {
 	public void medioDePagoPara(Publicacion publicacion, FormasDePagoEnum formaDePago) {
 		publicacion.addMedioDePago(formaDePago);
 	}
-	// Puntuar ------------------------------------------------------------------
+		//Puntuar ------------------------------------------------------------------
 	public void puntuarA(Usuario usuario, Integer puntuacion, CategoriaDePuntaje categoriaDePuntaje) {
 	Puntaje puntaje = new Puntaje(puntuacion, this, categoriaDePuntaje);
 
@@ -100,7 +100,15 @@ public class Usuario {
 //						usuario.addPuntaje(puntaje) }
 	
 //	
-//	
+//	public void puntuarAInmueble(inmubele, catnPuntos, categoriaDePuntaje){
+//	if(this.realizaCheckOut()){
+			//	puntuar()
+			//else( "no concretaste el periodo de alquiler")
+//	realizaCheckOut(){
+//		sitoWeb.hayOcupacionConCheckoOutDeInquilino(inquilino); 
+	//reserva checkOut == ocupacion checkOut
+	//ocupacion.conretoElPeriodo();  
+//	}
 //	
 //	
 //	
@@ -163,9 +171,9 @@ public class Usuario {
 	}
 	//Reservar Inmueble --------------------------------------------
 	
-	public void reservarInmueble(Publicacion publicacion, FormasDePagoEnum formaDePago, LocalDate inicioDeAlquiler, LocalDate finDeAlquiler) {
-		Reserva nuevaReserva = new Reserva(publicacion, publicacion.getPropietario(), this, formaDePago, inicioDeAlquiler, finDeAlquiler);
-		this.getSitioWeb().addReserva(nuevaReserva);
+	public void reservarInmueble(Publicacion publicacion, FormasDePagoEnum formaDePago, LocalDate checkIn, LocalDate checkOut) {
+		Reserva reserva = new Reserva(publicacion, this, formaDePago, checkIn, checkOut);
+		this.getSitioWeb().addReserva(reserva);
 	}
 	
 	public List<Reserva> misReservas() {

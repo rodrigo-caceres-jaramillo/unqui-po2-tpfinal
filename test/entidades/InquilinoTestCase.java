@@ -64,14 +64,16 @@ class InquilinoTestCase {
 		assertFalse(resultadoDeLaBusqueda.isEmpty());
 	}
 
-//	@Test
-//	void testUnInquilinoRealizaUnaReservaDeUnaListaDeInmuebles() {
-//
-//		List<Inmueble> listaInmuebles = new ArrayList<Inmueble>(); listaInmuebles.add(inmueble1);
-//		 inquilino.reservarElInmuebleDeLaLista(inmueble1, listaInmuebles);
-//
-//		 assertTrue(inquilino.elSitioRegistraReservaDelInmueble(inmueble1));
-//	}
+	@Test
+	void testUnInquilinoRealizaUnaReservaDeUnaListaDeInmuebles() {
+		Publicacion publicacion = mock(Publicacion.class);
+		
+		LocalDate checkIn = LocalDate.of(2021, 8, 22);
+		LocalDate checkOut = LocalDate.of(2021, 8, 23);
+		
+		 inquilino.reservarInmueble( publicacion, FormasDePagoEnum.EFECTIVO,  checkIn, checkOut);
+		
+	}
 	
 	
 	

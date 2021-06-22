@@ -1,7 +1,10 @@
 package unq;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import entidades.ServicioDeMail;
 
 public class SitioWeb {
 	// Atributos
@@ -11,6 +14,8 @@ public class SitioWeb {
 	private AdministradorReserva adminReserva;
 	private List<CategoriaDePuntaje> categoriasDePuntaje;
 	private List<TipoDeInmueble> tiposDeInmuebles;
+	private ServicioDeMail servicioMail;
+	private AdministadorOcupacionDeInmueble adminOcupaciones;
 
 	// Constructor
 	public SitioWeb() {
@@ -20,8 +25,11 @@ public class SitioWeb {
 		this.setAdminPublicacion(new AdministradorPublicacion());
 		this.setAdminUsuario(new AdministradorUsuario(this));
 		this.setAdminReserva(new AdministradorReserva(this));
+		this.setServicioDeMail(new ServicioDeMail());
+		this.setAdminOcupaciones( new AdministadorOcupacionDeInmueble(this));
 	}
 	
+
 	// Gets y sets
 	public List<Publicacion> getPublicacionesDe(Usuario propietario) {
 		return getAdminPublicacion().publicacionesDelUsuario(propietario);
@@ -86,6 +94,23 @@ public class SitioWeb {
 	public List<Reserva> getReservas() {
 		return this.getAdminReserva().getReservas();
 	} 	
+	public void setServicioDeMail(ServicioDeMail servicioDeMail) {
+		this.servicioMail = servicioDeMail;
+		
+	}
+	
+	public ServicioDeMail getServicioDeMail() {
+		
+		return(this.servicioMail);
+	}
+
+	public AdministadorOcupacionDeInmueble getAdminOcupaciones() {
+		return (this.adminOcupaciones);
+	}
+
+	private void setAdminOcupaciones(AdministadorOcupacionDeInmueble adminOcupacionesInmuebles) {
+		this.adminOcupaciones =adminOcupacionesInmuebles;
+	}
 	
 	// Metodos
 	public List<Inmueble> buscarInmueble(ParametrosBusqueda parametrosBusqueda) {
@@ -185,6 +210,26 @@ public class SitioWeb {
 	public Boolean contienePublicacionesDe(Usuario usuario) {
 		return (this.getAdminPublicacion().registraPublicacionDeUsuario(usuario) );
 	}
+
+	public void enviarMailDeConfirmacionAUsuario(Usuario inquilino) {
+			this.getServicioDeMail().enviarMailDeConfirmacionA(inquilino.getMail());
+	}
+
+	public List<OcupacionDeInmueble> getOcupaciones() {
+
+		return (getAdminOcupaciones().getOcupaciones());
+	}
+
+
+	public void addOcupacionDelInmubleDeLaReserva(Reserva reserva) {
+	
+			this.getAdminOcupaciones().addOcupacionConReserva(reserva);
+	}
+
+
+	
+
+	
 
 	
 

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -12,32 +14,20 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unq.Administrador;
-import unq.AdministradorPublicacion;
-import unq.AdministradorUsuario;
-import unq.FormasDePagoEnum;
-import unq.Inmueble;
-import unq.Inquilino;
-import unq.ParametrosBusqueda;
-import unq.Propietario;
-import unq.Publicacion;
-import unq.SitioWeb;
-import unq.TipoDeInmueble;
-
+import unq.*;
 class SitioWebTestCase {
 	private SitioWeb sitio;
-	private Inquilino inquilino;
-	private Propietario propietario;
+	private Usuario inquilino;
+	private Usuario propietario;
 	private Administrador admin;
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		sitio = new SitioWeb();
-		sitio.setAdminPublicacion(new AdministradorPublicacion());
-		sitio.setAdminUsuario(new AdministradorUsuario());
-		inquilino = mock(Inquilino.class);
-		propietario = mock(Propietario.class);
+		inquilino = mock(Usuario.class);
+		propietario = mock(Usuario.class);
 		admin = mock(Administrador.class);
+		
 
 	}
 
@@ -70,21 +60,21 @@ class SitioWebTestCase {
 
 	}
 
-//	@Test
-//	void testUnSitioNoTieneCategoriasDeRankeo() {
-//		assertTrue(sitio.getCategoriasDeRankeo().isEmpty());
-//
-//	}
+	@Test
+	void testUnSitioNoTieneCategoriasDePuntaje() {
+		assertTrue(sitio.getCategoriasDePuntaje().isEmpty());
 
-//	@Test
-//	void testUnSitioRegistraUnaCategoriaDeRankeo() {
-//		CategoriaDeRankeo categoria = mock(CategoriaDeRankeo.class);
-//
-//		sitio.agregarCategoriaDeRankeo(categoria);
-//		assertFalse(sitio.getCategoriasDeRankeo().isEmpty());
-//		assertTrue(sitio.getCategoriasDeRankeo().contains(categoria));
-//
-//	}
+	}
+
+	@Test
+	void testUnSitioRegistraUnaCategoriasDePuntaje() {
+		CategoriaDePuntaje categoria = mock(CategoriaDePuntaje.class);
+
+		sitio.addCategoriaDePuntaje(categoria);
+		assertFalse(sitio.getCategoriasDePuntaje().isEmpty());
+		assertTrue(sitio.getCategoriasDePuntaje().contains(categoria));
+
+	}
 
 	@Test
 	void testUnSitioWebNotieneNingunTipoDeInmuebles() {
@@ -99,13 +89,6 @@ class SitioWebTestCase {
 		assertFalse(sitio.getTiposDeInmuebles().isEmpty());
 	}
 
-//	@Test
-//	void testUnSitoWebAgregaUnTipoDeServicioParaInmuebles() {
-//		TipoDeServicio tipoServicio = mock(TipoDeServicio.class);
-//		sitio.agregarTipoDeServicio(tipoServicio);
-//		assertFalse(sitio.getTiposDeServicios().isEmpty());
-//
-//	}
 
 	@Test
 	void testUnSitioWebRegistraUnInmuebleGenerandoUnaPublicacion() {
@@ -252,7 +235,6 @@ class SitioWebTestCase {
 	void testUnSitioWebConoceSiUnaPublicacionRegistraAlgunMetodoDePago() {
 		Publicacion publi = mock(Publicacion.class);
 		when(publi.aceptaFormaDePago(FormasDePagoEnum.TARJETADECREDITO)).thenReturn(true);
-		// when(publi.esDelUsuario(usuario2)).thenReturn(true);
 		when(publi.getPropietario()).thenReturn(propietario);
 		sitio.addPublicacion(publi);
 
@@ -284,15 +266,68 @@ class SitioWebTestCase {
 	}
 
 	@Test
-	void testUnSitioWebNoPuedeActualizarUnPrecioDePublicacion() {
-		Publicacion publi = mock(Publicacion.class);
-
-		// when(publi.esDelUsuario(usuario2)).thenReturn(false);
-		sitio.addPublicacion(publi);
-
-		// (sitio.actualizarPrecioDePublicacion(publi, 100),"error: no podés bajar
-		// precio de una publicación que no es tuya");
-
+	void unSitioWebNoPoseeReservas() {
+		assertTrue(sitio.getReservas().isEmpty() );
 	}
+	
+	@Test
+	void unSitioWebRegistraUnaReserva() {
 
+			Reserva reserva = mock(Reserva.class);
+		sitio.addReserva(reserva);
+		assertFalse(sitio.getReservas().isEmpty() );
+	}
+	
+	
+	@Test
+	void unSitioEstableceUnServicioDeMail() {
+		ServicioDeMail servicioDeMail = new ServicioDeMail();
+		
+		sitio.setServicioDeMail(servicioDeMail);
+		
+		assertTrue( sitio.getServicioDeMail().equals(servicioDeMail) );
+		
+	}
+	
+	@Test
+	void unSitioWebRealizaUnDisparoDeMailDeConfirmacionDeReserva() {
+		ServicioDeMail servicioDeMail = mock(ServicioDeMail.class);
+		
+		sitio.setServicioDeMail(servicioDeMail);
+		when(inquilino.getMail()).thenReturn("bianca@gmail.com");
+		sitio.enviarMailDeConfirmacionAUsuario(inquilino );
+		
+		verify(sitio.getServicioDeMail(), times(1) ).enviarMailDeConfirmacionA("bianca@gmail.com");
+	}
+	
+	
+	@Test
+	void unSitioWebNoPoseeOcupacionesDeInmuebles() {
+		assertTrue(sitio.getOcupaciones().isEmpty());
+		
+	}
+	
+	@Test
+	
+	void unSitioWebAsentaLaOcupacionDeUnInmuebleReservado() {
+		LocalDate checkIn = LocalDate.of(2021, 5, 10);
+		LocalDate checkOut = LocalDate.of(2021, 5, 16);
+
+		
+		Reserva reserva = mock(Reserva.class);
+		when(reserva.getPropietario()).thenReturn(propietario);
+		when(reserva.getInquilino()).thenReturn(inquilino);
+		when(reserva.getInicioDeAlquiler()).thenReturn(checkIn);
+		when(reserva.getFinalDeAlquiler()).thenReturn(checkOut);
+		
+		
+		sitio.addOcupacionDelInmubleDeLaReserva(reserva);
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -12,11 +12,11 @@ public class Reserva {
 	private LocalDate finalDeAlquiler;
 	
 	// Constructor
-	public Reserva(Publicacion publicacion, Usuario propietario, Usuario inquilino, FormasDePagoEnum formaDePago,
+	public Reserva(Publicacion publicacion, Usuario inquilino, FormasDePagoEnum formaDePago,
 			LocalDate inicioDeAlquiler, LocalDate finalDeAlquiler) {
 		super();
 		this.setPublicacion(publicacion);
-		this.setPropietario(propietario);
+		this.setPropietario(publicacion.getPropietario());
 		this.setInquilino(inquilino);
 		this.setFormaDePago(formaDePago);
 		this.setInicioDeAlquiler(inicioDeAlquiler);
@@ -70,6 +70,10 @@ public class Reserva {
 
 	public void setFinalDeAlquiler(LocalDate finalDeAlquiler) {
 		this.finalDeAlquiler = finalDeAlquiler;
+	}
+	
+	public Inmueble getInmueble() {
+		return (this.getPublicacion().getInmueble());
 	}
 	
 }
