@@ -1,5 +1,6 @@
 package unq;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,7 +8,7 @@ import java.util.stream.Collectors;
 public class AdministradorReserva {
 	// Atributos
 	private SitioWeb sitioWeb;
-	private ArrayList<Reserva> reservas;
+	private List<Reserva> reservas;
 	
 	// Constructor
 	public AdministradorReserva(SitioWeb sitioWeb) {
@@ -24,10 +25,10 @@ public class AdministradorReserva {
 	public void setSitioWeb(SitioWeb sitioWeb) {
 		this.sitioWeb = sitioWeb;
 	}
-	public ArrayList<Reserva> getReservas() {
+	public List<Reserva> getReservas() {
 		return reservas;
 	}
-	public void setReservas(ArrayList<Reserva> reservas) {
+	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
 
@@ -42,17 +43,22 @@ public class AdministradorReserva {
 		return reservasDelUsuario;
 	}
 	
-	/*public List<Reserva> obtenerReservasFuturasDelUsuario(Usuario inquilino) {
+	public List<Reserva> obtenerReservasFuturasDelUsuario(Usuario inquilino) {
 		List<Reserva> reservasFuturas = this.obtenerReservasDelUsuario(inquilino).stream()
-				.filter(p -> p.getInicioDeAlquiler().equals(/*fecha de hoy)).collect(Collectors.toList());
+				.filter(p -> p.getInicioDeAlquiler().equals(LocalDate.now())).collect(Collectors.toList());
 		return reservasFuturas;
 	}
-*/
+
 	
 	public List<Reserva> obtenerReservasEnLaCiudadDelUsuario(Usuario inquilino, String ciudad) {
 		List<Reserva> reservasDelUsuarioEnLaCiudad = this.obtenerReservasDelUsuario(inquilino).stream()
 				.filter(p -> p.getPublicacion().getInmueble().getCiudad()
 						.equals(ciudad)).collect(Collectors.toList());
 		return reservasDelUsuarioEnLaCiudad;
+	}
+
+	public Integer cantidadDeReservas() {
+		
+		return getReservas().size();
 	}
 }

@@ -1,6 +1,6 @@
 package entidades;
 
-public class ServicioDeMail {
+public class ServicioDeMailTestCase {
 
 	public void enviarMailDeConfirmacionA(String mail) {
 		// TODO Auto-generated method stub

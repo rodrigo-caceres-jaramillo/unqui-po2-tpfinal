@@ -66,7 +66,7 @@ class AdministradorPublicacionTestCase {
 		Publicacion publicacion = mock(Publicacion.class);
 		Publicacion publicacion2 = mock(Publicacion.class);
 		ParametrosBusqueda paramBusq = new ParametrosBusqueda("Buenos Aires", LocalDate.of(2021, 6, 12),
-				LocalDate.of(2021, 6, 16));
+				LocalDate.of(2021, 6, 16), null, null, null);
 		Inmueble inmueble = mock(Inmueble.class);
 		Inmueble inmueble2 = mock(Inmueble.class);
 
@@ -88,6 +88,11 @@ class AdministradorPublicacionTestCase {
 
 		assertEquals(publicaciones.size(), 1);
 		assertTrue(publicaciones.contains(publicacion));
+	}
+
+	@Test
+	void testAdministradorPublicaciones() {
+
 	}
 
 	@Test
@@ -197,12 +202,9 @@ class AdministradorPublicacionTestCase {
 		adminPublicacion.actualizarPrecio(publicacion, 200.0);
 
 		verify(publicacion, times(1)).actualizarPrecio(200.0);
-		//verifico que al menos una vez le hayan pedido a la publicación que se actualice el precio a 200
+		// verifico que al menos una vez le hayan pedido a la publicación que se
+		// actualice el precio a 200
 
-}
-	
-	
-	
-	
-	
+	}
+
 }

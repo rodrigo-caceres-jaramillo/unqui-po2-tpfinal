@@ -54,7 +54,7 @@ public class AdministradorPublicacion {
 			}
 		}
 		return publicacionesEncontradas;
-	}
+	} 
 
 	private Boolean esPublicacionComparador(ParametrosBusqueda parametrosBusqueda, Publicacion publicacion) {
 		String ciudadInmueblePublicacion = publicacion.getInmueble().getCiudad();
@@ -64,14 +64,10 @@ public class AdministradorPublicacion {
 				&& publicacion.getCheckOut().equals(parametrosBusqueda.getCheckOut());
 
 		Boolean evalOpcionales = evalObligatorios && (esPrecioDentroDelRango(parametrosBusqueda, publicacion)
-				|| seIndicaCantidadHuespedes(parametrosBusqueda, publicacion));
+				|| parametrosBusqueda.seIndicaCantidadDeHuespedes());
 
 		return evalOpcionales;
 
-	}
-
-	private Boolean seIndicaCantidadHuespedes(ParametrosBusqueda parametrosBusqueda, Publicacion publicacion) {
-		return parametrosBusqueda.getCantidadDeHuespedes() != null;
 	}
 
 	private Boolean esPrecioDentroDelRango(ParametrosBusqueda parametrosBusqueda, Publicacion publicacion) {

@@ -13,20 +13,31 @@ public class ParametrosBusqueda {
 
 	public ParametrosBusqueda(String ciudad, LocalDate checkIn, LocalDate checkOut) {
 		super();
-		this.ciudad = ciudad; 
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
+		verificarDatosObligatorios(ciudad, checkIn, checkOut);
+
+	}
+
+	private void verificarDatosObligatorios(String ciudad, LocalDate checkIn, LocalDate checkOut) {
+		if (!(ciudad == null) && !(checkIn == null) && !(checkOut == null)) {
+			setCiudad(ciudad);
+			setCheckIn(checkIn);
+			setCheckOut(checkOut);
+		}
+
 	}
 
 	public ParametrosBusqueda(String ciudad, LocalDate checkIn, LocalDate checkOut, Integer cantidadDeHuespedes,
 			Double precioMinimo, Double precioMaximo) {
 		super();
-		this.ciudad = ciudad;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.cantidadDeHuespedes = cantidadDeHuespedes;
-		this.precioMinimo = precioMinimo;
-		this.precioMaximo = precioMaximo;
+		verificarDatosObligatorios(ciudad, checkIn, checkOut);
+
+		setCantidadDeHuespedes(cantidadDeHuespedes);
+		setPrecioMinimo(precioMinimo);
+		setPrecioMaximo(precioMaximo);
+	}
+	
+	public Boolean seIndicaCantidadDeHuespedes() {
+		return getCantidadDeHuespedes() != null;
 	}
 
 	public String getCiudad() {

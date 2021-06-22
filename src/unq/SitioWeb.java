@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidades.ServicioDeMail;
+import entidades.ServicioDeMailTestCase;
 
 public class SitioWeb {
 	// Atributos
@@ -14,7 +14,7 @@ public class SitioWeb {
 	private AdministradorReserva adminReserva;
 	private List<CategoriaDePuntaje> categoriasDePuntaje;
 	private List<TipoDeInmueble> tiposDeInmuebles;
-	private ServicioDeMail servicioMail;
+	private ServicioDeMailTestCase servicioMail;
 	private AdministadorOcupacionDeInmueble adminOcupaciones;
 
 	// Constructor
@@ -25,7 +25,7 @@ public class SitioWeb {
 		this.setAdminPublicacion(new AdministradorPublicacion());
 		this.setAdminUsuario(new AdministradorUsuario(this));
 		this.setAdminReserva(new AdministradorReserva(this));
-		this.setServicioDeMail(new ServicioDeMail());
+		this.setServicioDeMail(new ServicioDeMailTestCase());
 		this.setAdminOcupaciones( new AdministadorOcupacionDeInmueble(this));
 	}
 	
@@ -94,12 +94,12 @@ public class SitioWeb {
 	public List<Reserva> getReservas() {
 		return this.getAdminReserva().getReservas();
 	} 	
-	public void setServicioDeMail(ServicioDeMail servicioDeMail) {
+	public void setServicioDeMail(ServicioDeMailTestCase servicioDeMail) {
 		this.servicioMail = servicioDeMail;
 		
 	}
 	
-	public ServicioDeMail getServicioDeMail() {
+	public ServicioDeMailTestCase getServicioDeMail() {
 		
 		return(this.servicioMail);
 	}
@@ -122,9 +122,9 @@ public class SitioWeb {
 		return inmueblesFiltrados;
 	}
 
-	public void publicar(Publicacion publicacion) {
-		getAdminPublicacion().agregar(publicacion);
-	}
+//	public void publicar(Publicacion publicacion) {
+//		getAdminPublicacion().agregar(publicacion);
+//	}
 
 	public Boolean elInmuebleEstaOcupado(Inmueble inmueble) {
 		return (this.getAdminOcupaciones().registraOcupacionDe(inmueble));

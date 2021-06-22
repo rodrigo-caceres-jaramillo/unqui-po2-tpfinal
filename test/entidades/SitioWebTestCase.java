@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unq.*;
+
 class SitioWebTestCase {
 	private SitioWeb sitio;
 	private Usuario inquilino;
@@ -27,7 +28,6 @@ class SitioWebTestCase {
 		inquilino = mock(Usuario.class);
 		propietario = mock(Usuario.class);
 		admin = mock(Administrador.class);
-		
 
 	}
 
@@ -88,7 +88,6 @@ class SitioWebTestCase {
 		sitio.addTipoDeInmueble(tipo);
 		assertFalse(sitio.getTiposDeInmuebles().isEmpty());
 	}
-
 
 	@Test
 	void testUnSitioWebRegistraUnInmuebleGenerandoUnaPublicacion() {
@@ -202,7 +201,7 @@ class SitioWebTestCase {
 	void testUnSitioWebGeneraUnaBusquedaDePublicacionesDeUsuario() {
 		Publicacion publi = mock(Publicacion.class);
 		when(publi.getPropietario()).thenReturn(propietario);
-		// when(publi.getPropietario().equals(usuario2)).thenReturn(true);
+
 		sitio.addPublicacion(publi);
 
 		List<Publicacion> publicacionesDeUsuario = sitio.getPublicacionesDe(propietario);
@@ -267,69 +266,112 @@ class SitioWebTestCase {
 
 	@Test
 	void unSitioWebNoPoseeReservas() {
-		assertTrue(sitio.getReservas().isEmpty() );
+		assertTrue(sitio.getReservas().isEmpty());
 	}
-	
+
 	@Test
 	void unSitioWebRegistraUnaReserva() {
-
-			Reserva reserva = mock(Reserva.class);
+		Reserva reserva = mock(Reserva.class);
 		sitio.addReserva(reserva);
-		assertFalse(sitio.getReservas().isEmpty() );
+		assertFalse(sitio.getReservas().isEmpty());
 	}
-	
-	
+
+	@Test
+	void testEnUnSitioSeObtienenLasReservasDeUnUsuarioInquilino() {
+		Reserva reserva = mock(Reserva.class);
+		when(reserva.getInquilino()).thenReturn(inquilino);
+
+		sitio.addReserva(reserva);
+
+		List<Reserva> reservasDelInq = sitio.getReservasDe(inquilino);
+
+		assertEquals(reservasDelInq.size(), 1);
+
+	}
+
+	@Test
+	void testEnUnSitioSeObtienenLasReservasIndicandoCiudadDeUnUsuarioInquilino() {
+		Publicacion publi = mock(Publicacion.class);
+		Inmueble inmueble = mock(Inmueble.class);
+		Reserva reserva = mock(Reserva.class);
+
+		when(inmueble.getCiudad()).thenReturn("Buenos Aires");
+		when(publi.getInmueble()).thenReturn(inmueble);
+		when(reserva.getInquilino()).thenReturn(inquilino);
+		when(reserva.getPublicacion()).thenReturn(publi);
+
+		sitio.addReserva(reserva);
+
+		List<Reserva> reservasDelInq = sitio.getReservasDeLaCiudad(inquilino, "Buenos Aires");
+
+		assertEquals(reservasDelInq.size(), 1);
+	}
+
 	@Test
 	void unSitioEstableceUnServicioDeMail() {
-		ServicioDeMail servicioDeMail = new ServicioDeMail();
-		
+		ServicioDeMailTestCase servicioDeMail = new ServicioDeMailTestCase();
+
 		sitio.setServicioDeMail(servicioDeMail);
-		
-		assertTrue( sitio.getServicioDeMail().equals(servicioDeMail) );
-		
+
+		assertTrue(sitio.getServicioDeMail().equals(servicioDeMail));
+
 	}
-	
+
 	@Test
 	void unSitioWebRealizaUnDisparoDeMailDeConfirmacionDeReserva() {
-		ServicioDeMail servicioDeMail = mock(ServicioDeMail.class);
-		
+		ServicioDeMailTestCase servicioDeMail = mock(ServicioDeMailTestCase.class);
+
 		sitio.setServicioDeMail(servicioDeMail);
 		when(inquilino.getMail()).thenReturn("bianca@gmail.com");
-		sitio.enviarMailDeConfirmacionAUsuario(inquilino );
-		
-		verify(sitio.getServicioDeMail(), times(1) ).enviarMailDeConfirmacionA("bianca@gmail.com");
+		sitio.enviarMailDeConfirmacionAUsuario(inquilino);
+
+		verify(sitio.getServicioDeMail(), times(1)).enviarMailDeConfirmacionA("bianca@gmail.com");
 	}
-	
-	
+
 	@Test
 	void unSitioWebNoPoseeOcupacionesDeInmuebles() {
 		assertTrue(sitio.getOcupaciones().isEmpty());
-		
+
 	}
-	
+
 	@Test
-	
+
 	void unSitioWebAsentaLaOcupacionDeUnInmuebleReservado() {
 		LocalDate checkIn = LocalDate.of(2021, 5, 10);
 		LocalDate checkOut = LocalDate.of(2021, 5, 16);
 
-		
 		Reserva reserva = mock(Reserva.class);
 		when(reserva.getPropietario()).thenReturn(propietario);
 		when(reserva.getInquilino()).thenReturn(inquilino);
 		when(reserva.getInicioDeAlquiler()).thenReturn(checkIn);
 		when(reserva.getFinalDeAlquiler()).thenReturn(checkOut);
-		
-		
+
 		sitio.addOcupacionDelInmubleDeLaReserva(reserva);
-		
-		assertFalse( sitio.getOcupaciones().isEmpty() );
+
+		assertFalse(sitio.getOcupaciones().isEmpty());
+	}
+
+	@Test
+	void testSitioWebNOConoceSiTienePublicacionesDeUnUsuario() {
+		Publicacion publi = mock(Publicacion.class);
+		Usuario otroPropietario = mock(Usuario.class);
+		when(publi.getPropietario()).thenReturn(otroPropietario);
+
+		sitio.addPublicacion(publi);
+
+		assertFalse(sitio.contienePublicacionesDe(propietario));
+
 	}
 	
-	
-	
-	
-	
-	
-	
+	@Test
+	void testSitioWebConoceSiTienePublicacionesDeUnUsuario() {
+		Publicacion publi = mock(Publicacion.class);
+
+		when(publi.getPropietario()).thenReturn(propietario);
+
+		sitio.addPublicacion(publi);
+
+		assertTrue(sitio.contienePublicacionesDe(propietario));
+	}
+
 }

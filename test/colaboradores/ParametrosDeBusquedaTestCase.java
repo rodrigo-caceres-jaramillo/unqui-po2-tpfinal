@@ -1,6 +1,8 @@
 package colaboradores;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
@@ -49,6 +51,8 @@ class ParametrosDeBusquedaTestCase {
 		paramBusqueda = new ParametrosBusqueda("Buenos Aires", checkIn, checkOut, 3, null, null);
 
 		assertEquals(paramBusqueda.getCantidadDeHuespedes(), 3);
+		assertTrue(paramBusqueda.seIndicaCantidadDeHuespedes());
+
 	}
 
 	@Test
@@ -59,6 +63,7 @@ class ParametrosDeBusquedaTestCase {
 
 		assertEquals(paramBusqueda.getPrecioMinimo(), 100.0);
 		assertEquals(paramBusqueda.getPrecioMaximo(), 150.0);
+		assertFalse(paramBusqueda.seIndicaCantidadDeHuespedes());
 
 	}
 
