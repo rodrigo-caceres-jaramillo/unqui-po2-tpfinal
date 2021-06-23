@@ -3,7 +3,6 @@ package unq;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 public class Usuario {
 	// Atributos

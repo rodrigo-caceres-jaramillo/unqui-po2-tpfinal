@@ -1,12 +1,7 @@
 package unq;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.BooleanSupplier;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
 public class Inmueble {
 	// Atributos
 	private TipoDeInmueble tipoDeInmueble;
@@ -107,14 +102,14 @@ public class Inmueble {
 
 	// Metodos
 	public Double getPromedioDePuntajes() {
-		Double promedio = 0.0;
+		Integer promedio = 0;
 		Integer cantPuntajes = this.getPuntajes().size();
 		for (int i = 0; i < cantPuntajes; i++) {
 			Puntaje puntaje = this.getPuntajes().get(i);
-			// promedio = +puntaje.getValor();
+			 promedio = +puntaje.getValor();
 		}
-		// return (promedio / 5);
-		return (promedio / cantPuntajes);
+		
+		return (double) (promedio / cantPuntajes);
 	}
 
 	public void addNuevoServicio(ServiciosEnum servicioDeInmueble) {

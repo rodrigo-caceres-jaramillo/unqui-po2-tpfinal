@@ -1,6 +1,5 @@
 package unq;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,8 +197,7 @@ public class SitioWeb {
 	}
 
 	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return null;
+		return (this.getAdminReserva().getCiudadadesConReservasDe( usuario) );
 	}
 
 	public void cancelarReserva(Reserva reserva) {

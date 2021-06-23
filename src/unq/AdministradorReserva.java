@@ -61,4 +61,9 @@ public class AdministradorReserva {
 		
 		return getReservas().size();
 	}
+
+	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
+				
+		return null;
+	}
 }
