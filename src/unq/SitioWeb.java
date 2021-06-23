@@ -2,10 +2,12 @@ package unq;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import entidades.ServicioDeMailTestCase;
 
-public class SitioWeb {
+@SuppressWarnings("deprecation")
+public class SitioWeb extends Observable {
 	// Atributos
 	private Administrador administrador;
 	private AdministradorUsuario adminUsuario;
@@ -25,19 +27,18 @@ public class SitioWeb {
 		this.setAdminUsuario(new AdministradorUsuario(this));
 		this.setAdminReserva(new AdministradorReserva(this));
 		this.setServicioDeMail(new ServicioDeMailTestCase());
-		this.setAdminOcupaciones( new AdministadorOcupacionDeInmueble(this));
+		this.setAdminOcupaciones(new AdministadorOcupacionDeInmueble(this));
 	}
-	
 
 	// Gets y sets
 	public List<Publicacion> getPublicacionesDe(Usuario propietario) {
 		return getAdminPublicacion().publicacionesDelUsuario(propietario);
 	}
-	
+
 	public AdministradorPublicacion getAdminPublicacion() {
 		return (adminPublicacion);
 	}
-	
+
 	public void setAdministrador(Administrador administrador) {
 		this.administrador = administrador;
 	}
@@ -45,11 +46,11 @@ public class SitioWeb {
 	public AdministradorUsuario getAdminUsuario() {
 		return adminUsuario;
 	}
-	
+
 	public void setAdminPublicacion(AdministradorPublicacion adminPublicacion) {
 		this.adminPublicacion = adminPublicacion;
 	}
-	
+
 	public Administrador getAdministrador() {
 		return administrador;
 	}
@@ -65,7 +66,7 @@ public class SitioWeb {
 	public List<CategoriaDePuntaje> getCategoriasDePuntaje() {
 		return (this.categoriasDePuntaje);
 	}
-	
+
 	public List<TipoDeInmueble> getTiposDeInmuebles() {
 		return (tiposDeInmuebles);
 	}
@@ -73,7 +74,7 @@ public class SitioWeb {
 	public void setTiposDeInmuebles(List<TipoDeInmueble> tiposDeInmuebles) {
 		this.tiposDeInmuebles = tiposDeInmuebles;
 	}
-	
+
 	public AdministradorReserva getAdminReserva() {
 		return adminReserva;
 	}
@@ -81,26 +82,27 @@ public class SitioWeb {
 	public void setAdminReserva(AdministradorReserva adminReserva) {
 		this.adminReserva = adminReserva;
 	}
-	
+
 	public List<Publicacion> getPublicaciones() {
 		return getAdminPublicacion().getPublicaciones();
 	}
-	
+
 	public List<Usuario> getUsuarios() {
 		return getAdminUsuario().getUsuarios();
 	}
-	
+
 	public List<Reserva> getReservas() {
 		return this.getAdminReserva().getReservas();
-	} 	
+	}
+
 	public void setServicioDeMail(ServicioDeMailTestCase servicioDeMail) {
 		this.servicioMail = servicioDeMail;
-		
+
 	}
-	
+
 	public ServicioDeMailTestCase getServicioDeMail() {
-		
-		return(this.servicioMail);
+
+		return (this.servicioMail);
 	}
 
 	public AdministadorOcupacionDeInmueble getAdminOcupaciones() {
@@ -108,9 +110,9 @@ public class SitioWeb {
 	}
 
 	private void setAdminOcupaciones(AdministadorOcupacionDeInmueble adminOcupacionesInmuebles) {
-		this.adminOcupaciones =adminOcupacionesInmuebles;
+		this.adminOcupaciones = adminOcupacionesInmuebles;
 	}
-	
+
 	// Metodos
 	public List<Inmueble> buscarInmueble(ParametrosBusqueda parametrosBusqueda) {
 		List<Publicacion> publicacionesFiltradas = getAdminPublicacion().buscar(parametrosBusqueda);
@@ -158,6 +160,7 @@ public class SitioWeb {
 
 	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
 		this.getAdminPublicacion().actualizarPrecio(publi, precio);
+		this.notifyObservers();
 	}
 
 	public void addUsuario(Usuario usuario) {
@@ -171,6 +174,7 @@ public class SitioWeb {
 	public List<Reserva> getReservasDe(Usuario usuario) {
 		return this.getAdminReserva().obtenerReservasDelUsuario(usuario);
 	}
+
 	// testing messages
 	public Boolean registraTipoDeServicio(ServiciosEnum servicio) {
 		return (this.getAdministrador().registraElTipoDeServicio(servicio));
@@ -188,29 +192,30 @@ public class SitioWeb {
 		return (usuario.getPromedioDePuntajesDeCategoria(categoriaDePuntaj));
 	}
 
-	/*public List<Reserva> getReservasFuturasDe(Usuario usuario) {
-		return this.getAdminReserva().obtenerReservasFuturasDelUsuario(usuario);
-	}*/
+	/*
+	 * public List<Reserva> getReservasFuturasDe(Usuario usuario) { return
+	 * this.getAdminReserva().obtenerReservasFuturasDelUsuario(usuario); }
+	 */
 
 	public List<Reserva> getReservasDeLaCiudad(Usuario usuario, String ciudad) {
 		return this.getAdminReserva().obtenerReservasEnLaCiudadDelUsuario(usuario, ciudad);
 	}
 
 	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
-		return (this.getAdminReserva().getCiudadadesConReservasDe( usuario) );
+		return (this.getAdminReserva().getCiudadadesConReservasDe(usuario));
 	}
 
 	public void cancelarReserva(Reserva reserva) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Boolean contienePublicacionesDe(Usuario usuario) {
-		return (this.getAdminPublicacion().registraPublicacionDeUsuario(usuario) );
+		return (this.getAdminPublicacion().registraPublicacionDeUsuario(usuario));
 	}
 
 	public void enviarMailDeConfirmacionAUsuario(Usuario inquilino) {
-			this.getServicioDeMail().enviarMailDeConfirmacionA(inquilino.getMail());
+		this.getServicioDeMail().enviarMailDeConfirmacionA(inquilino.getMail());
 	}
 
 	public List<OcupacionDeInmueble> getOcupaciones() {
@@ -218,19 +223,10 @@ public class SitioWeb {
 		return (getAdminOcupaciones().getOcupaciones());
 	}
 
-
 	public void addOcupacionDelInmubleDeLaReserva(Reserva reserva) {
-			this.getAdminOcupaciones().addOcupacionConReserva(reserva);
-			this.enviarMailDeConfirmacionAUsuario(reserva.getInquilino());
+		this.getAdminOcupaciones().addOcupacionConReserva(reserva);
+		this.enviarMailDeConfirmacionAUsuario(reserva.getInquilino());
 
 	}
 
-
-	
-
-	
-
-	
-
-	
 }
