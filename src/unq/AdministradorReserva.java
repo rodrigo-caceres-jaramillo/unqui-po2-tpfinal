@@ -48,7 +48,7 @@ public class AdministradorReserva {
 				.filter(p -> p.getInicioDeAlquiler().equals(LocalDate.now())).collect(Collectors.toList());
 		return reservasFuturas;
 	}
-
+ 
 	
 	public List<Reserva> obtenerReservasEnLaCiudadDelUsuario(Usuario inquilino, String ciudad) {
 		List<Reserva> reservasDelUsuarioEnLaCiudad = this.obtenerReservasDelUsuario(inquilino).stream()
@@ -65,5 +65,10 @@ public class AdministradorReserva {
 	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
 				
 		return null;
+	}
+
+	public void eliminar(Reserva reserva) {
+		getReservas().remove(reserva);
+		
 	}
 }

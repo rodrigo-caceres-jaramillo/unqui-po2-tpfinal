@@ -206,7 +206,7 @@ public class SitioWeb extends Observable {
 	}
 
 	public void cancelarReserva(Reserva reserva) {
-		// TODO Auto-generated method stub
+		getAdminReserva().eliminar(reserva);
 
 	}
 

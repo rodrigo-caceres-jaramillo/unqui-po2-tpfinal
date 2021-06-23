@@ -13,11 +13,13 @@ public class Publicacion {
 	private List<FormasDePagoEnum> formasDePago;
 	private Double precio;
 	private ArrayList<Comentario> comentarios;
+	private PoliticaDeCancelacion cancelacion;
 
 	public Publicacion() {
 		super();
 		this.setComentarios(new ArrayList<Comentario>());
 		this.setFormasDePago(new ArrayList<FormasDePagoEnum>());
+		setCancelacion(null);
 
 	}
 
@@ -132,6 +134,19 @@ public class Publicacion {
 
 	public void actualizarPrecio(Double precio) {
 			this.setPrecio(precio);
+	}
+
+	public Boolean tienePoliticaCancelacion(PoliticaDeCancelacion cancelacion) {
+		
+		return getCancelacion().equals(cancelacion);
+	}
+
+	public PoliticaDeCancelacion getCancelacion() {
+		return cancelacion;
+	}
+
+	public void setCancelacion(PoliticaDeCancelacion cancelacion) {
+		this.cancelacion = cancelacion;
 	}
 
 }

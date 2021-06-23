@@ -140,7 +140,7 @@ class AdministradorReservaTestCase {
 		assertEquals(reservasFuturas.size(), 1);
 		
 		
-		
+		  
 	}
 
 }

@@ -362,7 +362,7 @@ class SitioWebTestCase {
 		assertFalse(sitio.contienePublicacionesDe(propietario));
 
 	}
-	
+
 	@Test
 	void testSitioWebConoceSiTienePublicacionesDeUnUsuario() {
 		Publicacion publi = mock(Publicacion.class);
@@ -374,6 +374,33 @@ class SitioWebTestCase {
 		assertTrue(sitio.contienePublicacionesDe(propietario));
 	}
 
-	
-	
+	@Test
+	void testSitioWebConPublicacionIndicaPoliticaDeCancelacionGratuita() {
+		Publicacion publi = mock(Publicacion.class);
+		PoliticaDeCancelacion cancelacionGratuita = mock(CancelacionGratuita.class);
+
+		when(publi.getCancelacion()).thenReturn(cancelacionGratuita);
+		when(publi.getPropietario()).thenReturn(propietario);
+
+		sitio.addPublicacion(publi);
+
+		Publicacion publiDelSitio = sitio.getPublicacionesDe(propietario).get(0);
+
+		assertEquals(publiDelSitio.getCancelacion(), cancelacionGratuita);
+	}
+
+//	@Test
+//	void testSitioWebConUsuarioPuedeRealizarCancelacionGratuita() {
+//		Publicacion publi = mock(Publicacion.class);
+//		PoliticaDeCancelacion cancelacionGratuita = mock(CancelacionGratuita.class);
+//		Reserva reserva = mock(Reserva.class);
+//
+//		sitio.addUsuario(inquilino);
+//
+//		when(reserva.getInquilino()).thenReturn(inquilino);
+//		when(reserva.getPublicacion()).thenReturn(publi);
+//		
+//
+//	}
+
 }

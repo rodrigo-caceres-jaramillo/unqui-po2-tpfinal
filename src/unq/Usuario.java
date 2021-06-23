@@ -11,7 +11,7 @@ public class Usuario {
 	private Integer telefono;
 	private List<Puntaje> puntajes;
 	private SitioWeb sitioWeb;
-	
+
 	// Constructor
 	public Usuario(String nombre, String mail, Integer telefono) {
 		super();
@@ -21,7 +21,7 @@ public class Usuario {
 		this.setPuntajes(new ArrayList<Puntaje>());
 		this.setSitioWeb(null);
 	}
-	
+
 	// Gets y sets
 	public String getNombre() {
 		return nombre;
@@ -66,25 +66,26 @@ public class Usuario {
 	public void setSitioWeb(SitioWeb sitioWeb) {
 		this.sitioWeb = sitioWeb;
 	}
-	
+
 	// Metodos
 	public void registrarse(SitioWeb sitioWeb) {
 		this.setSitioWeb(sitioWeb);
 		sitioWeb.addUsuario(this);
 	}
-	
+
 	public List<Inmueble> buscarInmuebles(ParametrosBusqueda parametrosBusqueda) {
 		return getSitioWeb().buscarInmueble(parametrosBusqueda);
-	} 
+	}
 
 	public void medioDePagoPara(Publicacion publicacion, FormasDePagoEnum formaDePago) {
 		publicacion.addMedioDePago(formaDePago);
 	}
-		//Puntuar ------------------------------------------------------------------
-	public void puntuarA(Usuario usuario, Integer puntuacion, CategoriaDePuntaje categoriaDePuntaje) {
-	Puntaje puntaje = new Puntaje(puntuacion, this, categoriaDePuntaje);
 
-			usuario.addPuntaje(puntaje);
+	// Puntuar ------------------------------------------------------------------
+	public void puntuarA(Usuario usuario, Integer puntuacion, CategoriaDePuntaje categoriaDePuntaje) {
+		Puntaje puntaje = new Puntaje(puntuacion, this, categoriaDePuntaje);
+
+		usuario.addPuntaje(puntaje);
 	}
 //	public void puntuarA(Usuario usuario, Integer puntuacion, CategoriaDePuntaje categoriaDePuntaje) {
 //		Puntaje puntaje = new Puntaje(puntuacion, this, categoriaDePuntaje);
@@ -97,21 +98,21 @@ public class Usuario {
 // public void puntuarAPropietario(Usuario usuario, Puntaje puntaje ){
 //           if( this.realizoCheckOutDe( "tipoUnInmuebleDelPropietario" ) {
 //						usuario.addPuntaje(puntaje) }
-	
+
 //	
 //	public void puntuarAInmueble(inmubele, catnPuntos, categoriaDePuntaje){
 //	if(this.realizaCheckOut()){
-			//	puntuar()
-			//else( "no concretaste el periodo de alquiler")
+	// puntuar()
+	// else( "no concretaste el periodo de alquiler")
 //	realizaCheckOut(){
 //		sitoWeb.hayOcupacionConCheckoOutDeInquilino(inquilino); 
-	//reserva checkOut == ocupacion checkOut
-	//ocupacion.conretoElPeriodo();  
+	// reserva checkOut == ocupacion checkOut
+	// ocupacion.conretoElPeriodo();
 //	}
 //	
 //	
 //	
-	
+
 	public Double getPromedioDePuntajes() {
 		double total = 0.0;
 		if (!this.getPuntajes().isEmpty()) {
@@ -158,77 +159,79 @@ public class Usuario {
 		}
 		return (total);
 	}
-	
+
 	public void puntuarInmueble(Inmueble inmueble, Integer valorDePuntaje, CategoriaDePuntaje categoriaDePuntaje) {
 		inmueble.addPuntaje(new Puntaje(valorDePuntaje, this, categoriaDePuntaje));
 	}
-	
-	
+
 	public void puntuarADuenoDeInmueble(Inmueble inmueble, int puntuacion,
 			CategoriaDePuntaje categoriaDePuntajeParaPropietario) {
 		this.puntuarA(inmueble.getPropietario(), puntuacion, categoriaDePuntajeParaPropietario);
 	}
-	//Reservar Inmueble --------------------------------------------
-	
-	public void reservarInmueble(Publicacion publicacion, FormasDePagoEnum formaDePago, LocalDate checkIn, LocalDate checkOut) {
+	// Reservar Inmueble --------------------------------------------
+
+	public void reservarInmueble(Publicacion publicacion, FormasDePagoEnum formaDePago, LocalDate checkIn,
+			LocalDate checkOut) {
 		Reserva reserva = new Reserva(publicacion, this, formaDePago, checkIn, checkOut);
 		this.getSitioWeb().addReserva(reserva);
 	}
-	
+
 	public List<Reserva> misReservas() {
 		return this.getSitioWeb().getReservasDe(this);
 	}
 
-/*	public List<Reserva> misReservasFuturas() {
-		return this.getSitioWeb().getReservasFuturasDe(this);
-	}
-	*/
+	/*
+	 * public List<Reserva> misReservasFuturas() { return
+	 * this.getSitioWeb().getReservasFuturasDe(this); }
+	 */
 	public List<Reserva> misReservasDeLaCiudad(String ciudad) {
 		return this.getSitioWeb().getReservasDeLaCiudad(this, ciudad);
-	} 
-	
+	}
+
 	public List<String> ciudadadesConReservas() {
 		return this.getSitioWeb().getCiudadadesConReservasDe(this);
 	}
-		
-	public void cancelarReserva (Reserva reserva) {
-		this.getSitioWeb().cancelarReserva (reserva);
+
+	public void cancelarReserva(Reserva reserva) {
+		this.getSitioWeb().cancelarReserva(reserva);
 	}
-	//Publicar Inmueble  --------------------------------------------
+
+	// Publicar Inmueble --------------------------------------------
 	public void agregarPublicacion(Publicacion publicacion) {
 		this.getSitioWeb().addPublicacion(publicacion);
 	}
-	
+
 	public List<Publicacion> misPublicaciones() {
 		return this.getSitioWeb().getPublicacionesDe(this);
 	}
-	
+
 	public void bajarPrecioAPublicacion(Publicacion publi, Double precio) {
 		this.getSitioWeb().actualizarPrecioDePublicacion(publi, precio);
 	}
 
-	//TestingMessages ------------------------------------------------------
+	// TestingMessages ------------------------------------------------------
 
 	public Boolean esPropietario() {
-	
-		return (this.getSitioWeb().contienePublicacionesDe(this) );
+
+		return (this.getSitioWeb().contienePublicacionesDe(this));
 	}
 
 	public Boolean esInquilino() {
-		return (!this.esPropietario() );
+		return (!this.esPropietario());
 	}
 
 	public boolean elInmuebleRegistraPuntajePropio(Inmueble inmueble1) {
 		return (inmueble1.registraPuntajeDe(this));
 	}
 
-
 	public Boolean registraPuntajeDe(Usuario usuario) {
 		return (this.getPuntajes().stream().anyMatch(puntaje -> puntaje.getUsuario() == usuario));
 	}
 
-	
+	public Boolean puedeCancelar(PoliticaDeCancelacion cancelacion, Reserva reserva) {
+		
+		return cancelacion.usuarioPuedeCancelarReserva(this, reserva);
+	}
 
-	
+
 }
-
