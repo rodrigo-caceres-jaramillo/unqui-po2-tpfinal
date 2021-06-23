@@ -67,6 +67,7 @@ class SitioDeOfertasObservableTestCase {
 
 	@Test
 	void testUnSitioDeOfertasLanzaUnAvisoDeOfertaDePublicacion() {
+
 		sitioDeofertas.addInmuebleDeInteres(inmueble);
 		when(publi.getInmueble()).thenReturn(inmueble);
 
