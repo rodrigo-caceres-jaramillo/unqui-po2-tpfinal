@@ -233,5 +233,20 @@ public class Usuario {
 		return cancelacion.usuarioPuedeCancelarReserva(this, reserva);
 	}
 
+	public void verificarCancelacionReservaGratuita(Reserva reserva, CancelacionGratuita cancelacion) {
+		if (!cancelacion.usuarioPuedeCancelarReserva(this, reserva)) {
+			Double montoACobrar = cancelacion.calcularMonto(reserva);
+			getSitioWeb().setMontoACobrar(montoACobrar);	
+			cancelarReserva(reserva);
+		}
+	}
+
+	public void verificarCancelacionReservaSimple(Reserva reserva, CancelacionSimple cancelacion) {
+		Double montoACobrar = cancelacion.calcularMonto(reserva);
+		getSitioWeb().setMontoACobrar(montoACobrar);
+		cancelarReserva(reserva);
+		
+	}
+
 
 }

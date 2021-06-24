@@ -17,6 +17,7 @@ public class SitioWeb extends Observable {
 	private List<TipoDeInmueble> tiposDeInmuebles;
 	private ServicioDeMailTestCase servicioMail;
 	private AdministadorOcupacionDeInmueble adminOcupaciones;
+	private Double monto;
 
 	// Constructor
 	public SitioWeb() {
@@ -226,6 +227,20 @@ public class SitioWeb extends Observable {
 	public void addOcupacionDelInmubleDeLaReserva(Reserva reserva) {
 		this.getAdminOcupaciones().addOcupacionConReserva(reserva);
 		this.enviarMailDeConfirmacionAUsuario(reserva.getInquilino());
+
+	}
+
+//	public void getMontoACobrar(Double montoACobrar) {
+//		setMontoACobrar(montoACobrar);
+//
+//	}
+	
+	public Double getMonto() {
+		return monto;
+	}
+
+	public void setMontoACobrar(Double montoACobrar) {
+		this.monto = montoACobrar;
 
 	}
 

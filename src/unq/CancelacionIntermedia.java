@@ -12,4 +12,10 @@ public class CancelacionIntermedia extends PoliticaDeCancelacion{
 		return null;
 	}
 
+	@Override
+	protected Double calcularMonto(Reserva reserva) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

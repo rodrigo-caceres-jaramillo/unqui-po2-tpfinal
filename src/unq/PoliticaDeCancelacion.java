@@ -27,4 +27,6 @@ public abstract class PoliticaDeCancelacion {
 
 	public abstract Boolean usuarioPuedeCancelarReserva(Usuario usuario, Reserva reserva);
 
+	protected abstract Double calcularMonto(Reserva reserva);
+
 }

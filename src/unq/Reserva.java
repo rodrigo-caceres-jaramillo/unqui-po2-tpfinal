@@ -79,5 +79,11 @@ public class Reserva {
 	public Inmueble getInmueble() {
 		return (this.getPublicacion().getInmueble());
 	}
+
+	public Integer diasDeReserva() {
+		LocalDate diasReservados = getInicioDeAlquiler().plusDays(2);
+		
+		return diasReservados.getDayOfMonth();
+	}
 	
 }

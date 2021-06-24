@@ -14,4 +14,10 @@ public class CancelacionGratuita extends PoliticaDeCancelacion{
 		return LocalDate.now().isBefore(checkInReserva.plusDays(-10)); 
 	}
 
+	public Double calcularMonto(Reserva reserva) {
+		Double precioPubli = reserva.getPublicacion().getPrecio();
+		
+		return precioPubli * reserva.diasDeReserva();
+	}
+
 }
