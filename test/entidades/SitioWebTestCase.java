@@ -240,28 +240,17 @@ class SitioWebTestCase {
 		assertTrue(sitio.registraPubliDeUsuarioConFormaDePago(propietario, FormasDePagoEnum.TARJETADECREDITO));
 	}
 
-	@Test
-	void testSitioWebPublicacionesAceptanTodosLosMediosDePago() {
-		Publicacion publi1 = new Publicacion();
-		Publicacion publi2 = new Publicacion();
-
-		publi1.addMediosDePagoAll();
-		publi2.addMediosDePagoAll();
-
-		assertFalse(publi1.getFormasDePago().isEmpty());
-		assertFalse(publi2.getFormasDePago().isEmpty());
-	}
 
 	@Test
 	void testSitioWebActualizarPrecioDePublicacion() {
 
-		Publicacion publicacion = new Publicacion();
+		Publicacion publicacion = mock(Publicacion.class);
 		publicacion.setPrecio(100.0);
 
 		sitio.addPublicacion(publicacion);
 		sitio.actualizarPrecioDePublicacion(publicacion, 120.0);
 
-		assertEquals(publicacion.getPrecio(), 120.0);
+		verify(publicacion, times(1)).actualizarPrecio(120.0);
 	}
 
 	@Test
@@ -402,5 +391,22 @@ class SitioWebTestCase {
 //		
 //
 //	}
+	
+	@Test 
+	void testSitioWebEnviaUnaActualizacionDePublicacionASitioDeOfertas() {
+		Publicacion publi = mock(Publicacion.class); 
+		SitioDeOfertasObserver sitioDeOfertas = mock(SitioDeOfertasObserver.class);
+		when(sitioDeOfertas.esUnaPublicacionInteresante(publi)).thenReturn(true);
+
+		sitio.addPublicacion(publi); 
+		sitio.addObserver(sitioDeOfertas);
+	
+		sitio.actualizarPrecioDePublicacion(publi, 120.0);
+		verify(publi, times(1)).actualizarPrecio(120.0);
+		verify( sitioDeOfertas, times(1)).update(sitio,publi);
+		//verifico que al mock le llegó al menos una vez el mensaje update del obesrvable sitioWeb
+	
+	
+	}
 
 }

@@ -76,10 +76,11 @@ class SitioDeOfertasObservableTestCase {
 		sitioDeofertas.setImplementadorDePublicaciones(publisher);
 		String contenidoDeAviso = "hay una baja de precio en el inmueble de la publi";
 
-		sitioDeofertas.lanzarAvisoDeOfertaDeInmuebleEn(publi);
+		sitioDeofertas.lanzarAvisosDeOfertaDeInmuebleEn(publi);
 
 		verify(publisher, times(1)).publish(contenidoDeAviso);
 
 	}
+	
 
 }

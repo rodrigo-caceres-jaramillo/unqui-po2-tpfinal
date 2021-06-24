@@ -8,6 +8,10 @@ import entidades.ServicioDeMailTestCase;
 
 @SuppressWarnings("deprecation")
 public class SitioWeb extends Observable {
+	/*
+	 * sitioWeb = sujeto concreto observable por SitioDeOfertas 
+	 */
+	
 	// Atributos
 	private Administrador administrador;
 	private AdministradorUsuario adminUsuario;
@@ -161,7 +165,13 @@ public class SitioWeb extends Observable {
 
 	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
 		this.getAdminPublicacion().actualizarPrecio(publi, precio);
-		this.notifyObservers();
+		this.setChanged(); //aviso que cambié
+		
+		this.notifyObservers(this.getPublicacionActualizada(publi));
+	}
+
+	private Publicacion getPublicacionActualizada(Publicacion publi) {
+		return (this.getAdminPublicacion().getPublicacion(publi)) ;
 	}
 
 	public void addUsuario(Usuario usuario) {

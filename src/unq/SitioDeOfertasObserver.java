@@ -7,7 +7,9 @@ import java.util.Observer;
 
 @SuppressWarnings("deprecation")
 public class SitioDeOfertasObserver implements Observer {
-
+	/*
+	 * observador concreto a traves de la interfaz observer 
+	 */
 	private List<Inmueble> inmueblesDeInteres;
 	private IHomePagePublisher implementadorDePublicaciones;
 	private SitioWeb sitio;
@@ -45,7 +47,7 @@ public class SitioDeOfertasObserver implements Observer {
 		return (this.implementadorDePublicaciones);
 	}
 
-	public void lanzarAvisoDeOfertaDeInmuebleEn(Publicacion publi) {
+	public void lanzarAvisosDeOfertaDeInmuebleEn(Publicacion publi) {
 		if (this.esUnaPublicacionInteresante(publi)) {
 			this.realizarOfertaConImplementador(publi);
 		}
@@ -59,9 +61,12 @@ public class SitioDeOfertasObserver implements Observer {
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-
+	public void update(Observable o , Object arg) {
+			Publicacion publi = (Publicacion) arg;	
+			this.lanzarAvisosDeOfertaDeInmuebleEn(publi);
 	}
 
+	
+	
+	
 }
