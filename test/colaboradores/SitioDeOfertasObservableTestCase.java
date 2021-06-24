@@ -20,7 +20,7 @@ class SitioDeOfertasObservableTestCase {
 	@BeforeEach
 	void setUp() throws Exception {
 
-		sitioDeofertas = new SitioDeOfertasObserver(sitio);
+		sitioDeofertas = new SitioDeOfertasObserver();
 		sitio = mock(SitioWeb.class);
 		inmueble = mock(Inmueble.class);
 		publi = mock(Publicacion.class);
@@ -80,6 +80,17 @@ class SitioDeOfertasObservableTestCase {
 
 		verify(publisher, times(1)).publish(contenidoDeAviso);
 
+	}
+	
+	@Test
+	void testUnSitioDeOfertasConoceUnSitioWebObserver() {
+		SitioWeb sitio = new SitioWeb();
+		SitioDeOfertasObserver sitioObservable = new SitioDeOfertasObserver();
+		
+		sitioObservable.setSitioWeb(sitio);
+		
+		assertTrue(sitioObservable.getSitio().equals(sitio));
+		assertEquals(sitio.countObservers() , 1 );
 	}
 	
 

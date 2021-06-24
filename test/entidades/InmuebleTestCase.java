@@ -10,6 +10,7 @@ import unq.Inmueble;
 import unq.Puntaje;
 import unq.ServiciosEnum;
 import unq.TipoDeInmueble;
+import unq.Usuario;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -92,6 +93,17 @@ class InmuebleTestCase {
 	}
 
 	@Test
+	void testUnInmuebleTieneTodosSusDatos() {
+		Inmueble inmueble = new Inmueble(tipoDeInmuebleHogar, 8, "Argentina","bs.as","Fake123", 4); 
+		
+		assertEquals(inmueble.getCapacidad(), 4);
+		assertEquals(inmueble.getCiudad(), "bs.as");
+		assertEquals(inmueble.getDireccion(), "Fake123");
+		assertEquals(inmueble.getPais(), "Argentina");
+		assertEquals(inmueble.getSuperficie(), 8);
+		assertEquals(inmueble.getTipoDeInmueble(), tipoDeInmuebleHogar);
+	}
+	@Test
 	void testUnInmuebleNoRegistraUnNuevoPuntaje() {
 		assertTrue(inmueble.getPuntajes().isEmpty());
 	}
@@ -114,4 +126,53 @@ class InmuebleTestCase {
 		assertEquals(inmueble.getPromedioDePuntajes(), 4, 6);
 	}
 
+	@Test 
+	void testUnInmuebleNoPoseeUnPuntajeDeUnUsuario() {
+		Usuario usuarioQuePuntea = mock(Usuario.class);
+		assertFalse(inmueble.registraPuntajeDe(usuarioQuePuntea));
+	}
+	
+	@Test
+	void testUnInmueblePoseeUnPuntajeDeUnUsuario() {
+		Usuario usuarioQuePuntea = mock(Usuario.class);
+
+		inmueble.addPuntaje(puntaje4Parainmueble);
+		when(puntaje4Parainmueble.getUsuario()).thenReturn(usuarioQuePuntea);
+
+		assertTrue(inmueble.registraPuntajeDe(usuarioQuePuntea));
+	} 
+	@Test
+	void testUnInmuebleNoRegistraServicio() {
+		assertFalse(inmueble.registraServicio(servicioDeInmuebleAgua));
+	}
+	
+	@Test
+	void testUnInmuebleRegistraServicio() {
+		inmueble.addNuevoServicio(servicioDeInmuebleAgua);
+		assertTrue(inmueble.registraServicio(servicioDeInmuebleAgua));
+	}
+	
+	@Test
+	void testUnInmuebleNoTieneTipoDeInmueble() {
+		assertFalse(inmueble.esDeTipo(tipoDeInmuebleHogar));
+	}
+	
+	@Test
+	void testUnInmuebleTieneTipoDeInmueble() {
+		inmueble.setTipoDeInmueble(tipoDeInmuebleHogar);
+		assertTrue(inmueble.esDeTipo(tipoDeInmuebleHogar));
+	}
+	@Test
+	void testUnInmuebleConoceSuPropietario() {
+		Usuario usuarioPropietario = mock(Usuario.class);
+
+		inmueble.setPropietario(usuarioPropietario);
+		
+		assertTrue(inmueble.getPropietario().equals(usuarioPropietario) );
+	}
+	
+
+	
+	
+	
 }

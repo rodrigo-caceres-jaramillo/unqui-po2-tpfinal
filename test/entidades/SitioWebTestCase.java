@@ -396,15 +396,16 @@ class SitioWebTestCase {
 	void testSitioWebEnviaUnaActualizacionDePublicacionASitioDeOfertas() {
 		Publicacion publi = mock(Publicacion.class); 
 		SitioDeOfertasObserver sitioDeOfertas = mock(SitioDeOfertasObserver.class);
+		sitioDeOfertas.setSitioWeb(sitio);
 		when(sitioDeOfertas.esUnaPublicacionInteresante(publi)).thenReturn(true);
-
+		
 		sitio.addPublicacion(publi); 
 		sitio.addObserver(sitioDeOfertas);
 	
 		sitio.actualizarPrecioDePublicacion(publi, 120.0);
 		verify(publi, times(1)).actualizarPrecio(120.0);
 		verify( sitioDeOfertas, times(1)).update(sitio,publi);
-		//verifico que al mock le llegó al menos una vez el mensaje update del obesrvable sitioWeb
+		//verifico que al mock le llegó al menos una vez el mensaje update del observable SitioWeb
 	
 	
 	}

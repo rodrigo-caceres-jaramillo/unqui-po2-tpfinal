@@ -24,12 +24,12 @@ public class Inmueble {
 
 	public Inmueble(TipoDeInmueble tipo, Integer superficie, String pais, String ciudad, String direccion,
 			Integer capacidad) {
-		setCapacidad(capacidad);
-		setCiudad(ciudad);
-		setDireccion(direccion);
-		setPais(pais);
-		setSuperficie(superficie);
-		setTipoDeInmueble(tipo);
+		this.setCapacidad(capacidad);
+		this.setCiudad(ciudad);
+		this.setDireccion(direccion);
+		this.setPais(pais);
+		this.setSuperficie(superficie);
+		this.setTipoDeInmueble(tipo);
 	}
 
 	public void setTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {

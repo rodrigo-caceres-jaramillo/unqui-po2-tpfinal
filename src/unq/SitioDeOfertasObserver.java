@@ -14,12 +14,25 @@ public class SitioDeOfertasObserver implements Observer {
 	private IHomePagePublisher implementadorDePublicaciones;
 	private SitioWeb sitio;
 
+	public SitioDeOfertasObserver() {
+		super();
+		this.setInmueblesDeInteres(new ArrayList<Inmueble>());
+
+	}
+	
 	
 	public SitioDeOfertasObserver(SitioWeb sitio) {
 		super();
 		this.setInmueblesDeInteres(new ArrayList<Inmueble>());
-		this.sitio.addObserver(this);
+		this.setSitioWeb(sitio);
 	}
+
+	public void setSitioWeb(SitioWeb sitio) {
+		this.sitio =sitio;
+		this.sitio.addObserver(this);
+
+	}
+
 
 	public void setInmueblesDeInteres(ArrayList<Inmueble> inmueblesDeInteres) {
 		this.inmueblesDeInteres = inmueblesDeInteres;
@@ -64,6 +77,11 @@ public class SitioDeOfertasObserver implements Observer {
 	public void update(Observable o , Object arg) {
 			Publicacion publi = (Publicacion) arg;	
 			this.lanzarAvisosDeOfertaDeInmuebleEn(publi);
+	}
+
+
+	public SitioWeb getSitio() {
+		return (this.sitio);
 	}
 
 	

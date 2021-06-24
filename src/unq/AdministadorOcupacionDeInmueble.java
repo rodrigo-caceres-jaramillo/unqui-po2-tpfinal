@@ -44,8 +44,6 @@ public class AdministadorOcupacionDeInmueble {
 	}
 
 	public Boolean registraOcupacionDe(Inmueble inmueble) {
-		// TODO Auto-generated method stub
-		return null;
+		return(this.getOcupaciones().stream().anyMatch(o -> o.getInmueble().equals(inmueble) ) );
 	}
-
 }

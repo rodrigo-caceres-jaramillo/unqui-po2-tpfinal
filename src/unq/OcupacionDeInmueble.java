@@ -32,5 +32,7 @@ public class OcupacionDeInmueble {
 	private void setInmmuebleOcupado(Inmueble inmueble) {
 		this.inmueble = inmueble;
 	}
-
+	public Inmueble getInmueble() {
+		return(this.inmueble) ;
+	}
 }
