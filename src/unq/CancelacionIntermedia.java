@@ -1,21 +1,34 @@
 package unq;
 
-public class CancelacionIntermedia extends PoliticaDeCancelacion{
+import java.time.LocalDate;
+
+public class CancelacionIntermedia extends PoliticaDeCancelacion {
 
 	public CancelacionIntermedia() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
 	public Boolean usuarioPuedeCancelarReserva(Usuario usuario, Reserva reserva) {
-		// TODO Auto-generated method stub
-		return null;
+		LocalDate checkInReserva = reserva.getPublicacion().getCheckIn();
+
+		return LocalDate.now().isBefore(checkInReserva.plusDays(-20));
 	}
 
 	@Override
-	protected Double calcularMonto(Reserva reserva) {
-		// TODO Auto-generated method stub
-		return null;
+	public Double calcularMonto(Reserva reserva) {
+		Double precio = reserva.getPublicacion().getPrecio();
+		LocalDate checkInReserva = reserva.getPublicacion().getCheckIn();
+
+		if (LocalDate.now().isBefore(checkInReserva.plusDays(-19))
+				&& LocalDate.now().isBefore(checkInReserva.plusDays(-10))) {
+
+			return precio / (precio * 50 / 100);
+
+		} else {
+			return precio;
+		}
+
 	}
 
 }

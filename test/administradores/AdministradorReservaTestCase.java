@@ -86,7 +86,7 @@ class AdministradorReservaTestCase {
 		assertEquals(reservasDelUsuario.size(), 2);
 
 	}
-	
+
 	@Test
 	void testAdministradorReservaNoObtieneReservasDeLaCiudadIngresada() {
 		Publicacion publicacion = mock(Publicacion.class);
@@ -126,21 +126,19 @@ class AdministradorReservaTestCase {
 
 		assertEquals(reservasDelUsuario.size(), 1);
 	}
-	
+
 	@Test
 	void testAdministradorReservaObtieneReservasFuturasDeUnUsuario() {
-		
-		when(reserva.getInicioDeAlquiler()).thenReturn(LocalDate.of(2021, 6, 22));
+
+		when(reserva.getInicioDeAlquiler()).thenReturn(LocalDate.of(2021, 6, 24));
 		when(reserva.getInquilino()).thenReturn(usuario);
-		
+
 		adminReserva.agregar(reserva);
-		
+
 		List<Reserva> reservasFuturas = adminReserva.obtenerReservasFuturasDelUsuario(usuario);
-		
+
 		assertEquals(reservasFuturas.size(), 1);
-		
-		
-		  
+
 	}
 
 }

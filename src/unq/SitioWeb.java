@@ -9,9 +9,9 @@ import entidades.ServicioDeMailTestCase;
 @SuppressWarnings("deprecation")
 public class SitioWeb extends Observable {
 	/*
-	 * sitioWeb = sujeto concreto observable por SitioDeOfertas 
+	 * sitioWeb = sujeto concreto observable por SitioDeOfertas
 	 */
-	
+
 	// Atributos
 	private Administrador administrador;
 	private AdministradorUsuario adminUsuario;
@@ -165,13 +165,13 @@ public class SitioWeb extends Observable {
 
 	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
 		this.getAdminPublicacion().actualizarPrecio(publi, precio);
-		this.setChanged(); //aviso que cambié
-		
+		this.setChanged(); // aviso que cambié
+
 		this.notifyObservers(this.getPublicacionActualizada(publi));
 	}
 
 	private Publicacion getPublicacionActualizada(Publicacion publi) {
-		return (this.getAdminPublicacion().getPublicacion(publi)) ;
+		return (this.getAdminPublicacion().getPublicacion(publi));
 	}
 
 	public void addUsuario(Usuario usuario) {
@@ -203,18 +203,13 @@ public class SitioWeb extends Observable {
 		return (usuario.getPromedioDePuntajesDeCategoria(categoriaDePuntaj));
 	}
 
-	/*
-	 * public List<Reserva> getReservasFuturasDe(Usuario usuario) { return
-	 * this.getAdminReserva().obtenerReservasFuturasDelUsuario(usuario); }
-	 */
-
 	public List<Reserva> getReservasDeLaCiudad(Usuario usuario, String ciudad) {
 		return this.getAdminReserva().obtenerReservasEnLaCiudadDelUsuario(usuario, ciudad);
 	}
 
-	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
-		return (this.getAdminReserva().getCiudadadesConReservasDe(usuario));
-	}
+//	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
+//		return (this.getAdminReserva().getCiudadadesConReservasDe(usuario));
+//	}
 
 	public void cancelarReserva(Reserva reserva) {
 		getAdminReserva().eliminar(reserva);
@@ -240,11 +235,6 @@ public class SitioWeb extends Observable {
 
 	}
 
-//	public void getMontoACobrar(Double montoACobrar) {
-//		setMontoACobrar(montoACobrar);
-//
-//	}
-	
 	public Double getMonto() {
 		return monto;
 	}

@@ -17,7 +17,7 @@ public class CancelacionGratuita extends PoliticaDeCancelacion{
 	public Double calcularMonto(Reserva reserva) {
 		Double precioPubli = reserva.getPublicacion().getPrecio();
 		
-		return precioPubli * reserva.diasDeReserva();
+		return precioPubli * reserva.getDiasDeReserva();
 	}
-
+ 
 }

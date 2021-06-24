@@ -15,17 +15,13 @@ public class CancelacionSimple extends PoliticaDeCancelacion {
 	}
 
 	@Override
-	protected Double calcularMonto(Reserva reserva) {
+	public Double calcularMonto(Reserva reserva) {
 		Double precio = reserva.getPublicacion().getPrecio();
 		LocalDate checkIn = reserva.getInicioDeAlquiler();
 		LocalDate checkOut = reserva.getFinalDeAlquiler();
-		Double monto = 0.0;
-
-		for (LocalDate date = checkIn; date.isBefore(checkOut); date.plusDays(1)) {
-			monto = monto + date.getDayOfMonth() * precio;
-		}
-
-		return monto;
+		Integer cantidadDeDias = checkOut.getDayOfMonth() - checkIn.getDayOfMonth(); 
+		
+		return cantidadDeDias * precio;
 	}
 
 }

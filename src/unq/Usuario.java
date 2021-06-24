@@ -188,9 +188,9 @@ public class Usuario {
 		return this.getSitioWeb().getReservasDeLaCiudad(this, ciudad);
 	}
 
-	public List<String> ciudadadesConReservas() {
-		return this.getSitioWeb().getCiudadadesConReservasDe(this);
-	}
+//	public List<String> ciudadadesConReservas() {
+//		return this.getSitioWeb().getCiudadadesConReservasDe(this);
+//	}
 
 	public void cancelarReserva(Reserva reserva) {
 		this.getSitioWeb().cancelarReserva(reserva);
@@ -234,7 +234,7 @@ public class Usuario {
 	}
 
 	public void verificarCancelacionReservaGratuita(Reserva reserva, CancelacionGratuita cancelacion) {
-		if (!cancelacion.usuarioPuedeCancelarReserva(this, reserva)) {
+		if (cancelacion.usuarioPuedeCancelarReserva(this, reserva)) {
 			Double montoACobrar = cancelacion.calcularMonto(reserva);
 			getSitioWeb().setMontoACobrar(montoACobrar);	
 			cancelarReserva(reserva);
