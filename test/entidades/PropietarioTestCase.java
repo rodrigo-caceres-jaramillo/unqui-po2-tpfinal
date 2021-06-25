@@ -39,7 +39,7 @@ class PropietarioTestCase {
 		usuarioPropietario = new Usuario("ejemplin", "ejemplo@jexample.com", 42356769);
 		sitio = mock(SitioWeb.class);
 		publicacion = mock(Publicacion.class);
-		usuarioPropietario.registrarse(sitio);
+		usuarioPropietario.registrarseEn(sitio);
 
 	}
 

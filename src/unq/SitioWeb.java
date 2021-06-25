@@ -20,7 +20,7 @@ public class SitioWeb extends Observable {
 	private List<CategoriaDePuntaje> categoriasDePuntaje;
 	private List<TipoDeInmueble> tiposDeInmuebles;
 	private ServicioDeMailTestCase servicioMail;
-	private AdministadorOcupacionDeInmueble adminOcupaciones;
+	private AdministradorOcupacionDeInmueble adminOcupaciones;
 	private Double monto;
 
 	// Constructor
@@ -28,11 +28,11 @@ public class SitioWeb extends Observable {
 		this.setAdministrador(null);
 		this.setCategoriasDePuntaje(new ArrayList<CategoriaDePuntaje>());
 		this.setTiposDeInmuebles(new ArrayList<TipoDeInmueble>());
-		this.setAdminPublicacion(new AdministradorPublicacion());
-		this.setAdminUsuario(new AdministradorUsuario(this));
-		this.setAdminReserva(new AdministradorReserva(this));
+		this.agregarAdministrador(new AdministradorPublicacion());
+		this.agregarAdministrador(new AdministradorUsuario());
+		this.agregarAdministrador(new AdministradorReserva());
+		this.agregarAdministrador(new AdministradorOcupacionDeInmueble());
 		this.setServicioDeMail(new ServicioDeMailTestCase());
-		this.setAdminOcupaciones(new AdministadorOcupacionDeInmueble(this));
 	}
 
 	// Gets y sets
@@ -106,15 +106,14 @@ public class SitioWeb extends Observable {
 	}
 
 	public ServicioDeMailTestCase getServicioDeMail() {
-
 		return (this.servicioMail);
 	}
 
-	public AdministadorOcupacionDeInmueble getAdminOcupaciones() {
+	public AdministradorOcupacionDeInmueble getAdminOcupaciones() {
 		return (this.adminOcupaciones);
 	}
 
-	private void setAdminOcupaciones(AdministadorOcupacionDeInmueble adminOcupacionesInmuebles) {
+	public void setAdminOcupaciones(AdministradorOcupacionDeInmueble adminOcupacionesInmuebles) {
 		this.adminOcupaciones = adminOcupacionesInmuebles;
 	}
 
@@ -166,7 +165,6 @@ public class SitioWeb extends Observable {
 	public void actualizarPrecioDePublicacion(Publicacion publi, Double precio) {
 		this.getAdminPublicacion().actualizarPrecio(publi, precio);
 		this.setChanged(); // aviso que cambié
-
 		this.notifyObservers(this.getPublicacionActualizada(publi));
 	}
 
@@ -184,6 +182,10 @@ public class SitioWeb extends Observable {
 
 	public List<Reserva> getReservasDe(Usuario usuario) {
 		return this.getAdminReserva().obtenerReservasDelUsuario(usuario);
+	}
+	
+	public List<Reserva> getReservasFuturasDe(Usuario usuario) {
+		return this.getAdminReserva().obtenerReservasFuturasDelUsuario(usuario);
 	}
 
 	// testing messages
@@ -207,13 +209,12 @@ public class SitioWeb extends Observable {
 		return this.getAdminReserva().obtenerReservasEnLaCiudadDelUsuario(usuario, ciudad);
 	}
 
-//	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
-//		return (this.getAdminReserva().getCiudadadesConReservasDe(usuario));
-//	}
+	public List<String> getCiudadadesConReservasDe(Usuario usuario) {
+		return (this.getAdminReserva().getCiudadadesConReservasDe(usuario));
+	}
 
 	public void cancelarReserva(Reserva reserva) {
 		getAdminReserva().eliminar(reserva);
-
 	}
 
 	public Boolean contienePublicacionesDe(Usuario usuario) {
@@ -232,7 +233,6 @@ public class SitioWeb extends Observable {
 	public void addOcupacionDelInmubleDeLaReserva(Reserva reserva) {
 		this.getAdminOcupaciones().addOcupacionConReserva(reserva);
 		this.enviarMailDeConfirmacionAUsuario(reserva.getInquilino());
-
 	}
 
 	public Double getMonto() {
@@ -241,7 +241,13 @@ public class SitioWeb extends Observable {
 
 	public void setMontoACobrar(Double montoACobrar) {
 		this.monto = montoACobrar;
-
 	}
 
+	public void agregarRegistrable(Registrable registrable) {
+		registrable.registrarseEn(this);
+	}
+	
+	private void agregarAdministrador(Administradores admin) {
+		admin.administrar(this);
+	}
 }

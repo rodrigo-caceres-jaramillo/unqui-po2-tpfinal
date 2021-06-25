@@ -15,7 +15,6 @@ public class Inmueble {
 	private Usuario propietario;
 
 	// Constructores
-
 	public Inmueble() {
 		super();
 		this.servicios = new ArrayList<ServiciosEnum>();
@@ -33,7 +32,6 @@ public class Inmueble {
 	}
 
 	public void setTipoDeInmueble(TipoDeInmueble tipoDeInmueble) {
-
 		this.tipoDeInmueble = tipoDeInmueble;
 	}
 
@@ -108,7 +106,6 @@ public class Inmueble {
 			Puntaje puntaje = this.getPuntajes().get(i);
 			 promedio = +puntaje.getValor();
 		}
-		
 		return (double) (promedio / cantPuntajes);
 	}
 

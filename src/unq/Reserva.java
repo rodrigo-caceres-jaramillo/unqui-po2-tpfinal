@@ -2,7 +2,7 @@ package unq;
 
 import java.time.LocalDate;
 
-public class Reserva {
+public class Reserva implements Registrable{
 	// Atributos
 	private Publicacion publicacion;
 	private Usuario propietario;
@@ -86,8 +86,12 @@ public class Reserva {
 	}
 
 	public void diasDeReserva(Integer dia) {
-
 		this.dia = dia;
+	}
+
+	@Override
+	public void registrarseEn(SitioWeb sitioWeb) {
+		sitioWeb.addReserva(this);
 	}
 
 }

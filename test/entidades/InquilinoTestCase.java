@@ -20,7 +20,7 @@ class InquilinoTestCase {
 		sitio = mock(SitioWeb.class);
 		inquilino = new Usuario("Sergio", "sergio.99@gmail.com", 22759863);
 		inmueble1 = mock(Inmueble.class); 				categoriaDePuntaje = mock(CategoriaDePuntaje.class);
-		inquilino.registrarse(sitio);
+		inquilino.registrarseEn(sitio);
 	}
 
 	@Test

@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 import unq.*;
 
 class AdministradorOcupacionInmuebleTestCase {
-	AdministadorOcupacionDeInmueble adminOcupaciones;
+	AdministradorOcupacionDeInmueble adminOcupaciones;
 	Inmueble inmueble;
 	OcupacionDeInmueble ocupacionDeInmueble;
 	SitioWeb sitio;
 	@BeforeEach
 	void setUp() throws Exception {
-		adminOcupaciones = new AdministadorOcupacionDeInmueble(sitio);
+		adminOcupaciones = new AdministradorOcupacionDeInmueble();
 		ocupacionDeInmueble = mock(OcupacionDeInmueble.class);
 		inmueble = mock(Inmueble.class);
 	}

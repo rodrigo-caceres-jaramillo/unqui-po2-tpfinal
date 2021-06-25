@@ -122,7 +122,7 @@ class UsuarioTestCase {
 	@Test
 	void testUnUsuarioEsInquilinoNoTienePublicacionesRealizadas() {
 		SitioWeb sitioWeb = mock(SitioWeb.class);
-		usuarioInquilino.registrarse(sitioWeb);
+		usuarioInquilino.registrarseEn(sitioWeb);
 		when(sitioWeb.contienePublicacionesDe(usuarioInquilino)).thenReturn(false);
 
 		assertTrue(usuarioInquilino.esInquilino());
@@ -133,7 +133,7 @@ class UsuarioTestCase {
 	@Test
 	void testUnUsuarioNOEsInquilinoTienePublicacionesRealizadas() {
 		SitioWeb sitioWeb = mock(SitioWeb.class);
-		usuarioInquilino.registrarse(sitioWeb);
+		usuarioInquilino.registrarseEn(sitioWeb);
 		when(sitioWeb.contienePublicacionesDe(usuarioInquilino)).thenReturn(true);
 
 		assertFalse(usuarioInquilino.esInquilino());

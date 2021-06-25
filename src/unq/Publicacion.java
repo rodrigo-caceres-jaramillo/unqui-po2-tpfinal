@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Publicacion {
+public class Publicacion implements Registrable{
 
 	private Usuario propietario;
 	private Inmueble inmueble;
@@ -147,6 +147,11 @@ public class Publicacion {
 
 	public void setCancelacion(PoliticaDeCancelacion cancelacion) {
 		this.cancelacion = cancelacion;
+	}
+
+	@Override
+	public void registrarseEn(SitioWeb sitioWeb) {
+		sitioWeb.addPublicacion(this);
 	}
 
 }

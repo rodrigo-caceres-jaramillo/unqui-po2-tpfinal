@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Registrable{
 	// Atributos
 	private String nombre;
 	private String mail;
@@ -68,7 +68,7 @@ public class Usuario {
 	}
 
 	// Metodos
-	public void registrarse(SitioWeb sitioWeb) {
+	public void registrarseEn(SitioWeb sitioWeb) {
 		this.setSitioWeb(sitioWeb);
 		sitioWeb.addUsuario(this);
 	}
@@ -168,8 +168,8 @@ public class Usuario {
 			CategoriaDePuntaje categoriaDePuntajeParaPropietario) {
 		this.puntuarA(inmueble.getPropietario(), puntuacion, categoriaDePuntajeParaPropietario);
 	}
+	
 	// Reservar Inmueble --------------------------------------------
-
 	public void reservarInmueble(Publicacion publicacion, FormasDePagoEnum formaDePago, LocalDate checkIn,
 			LocalDate checkOut) {
 		Reserva reserva = new Reserva(publicacion, this, formaDePago, checkIn, checkOut);
@@ -179,18 +179,17 @@ public class Usuario {
 	public List<Reserva> misReservas() {
 		return this.getSitioWeb().getReservasDe(this);
 	}
-
-	/*
-	 * public List<Reserva> misReservasFuturas() { return
-	 * this.getSitioWeb().getReservasFuturasDe(this); }
-	 */
+	
+	public List<Reserva> misReservasFuturas() { 
+		return this.getSitioWeb().getReservasFuturasDe(this); }
+	 
 	public List<Reserva> misReservasDeLaCiudad(String ciudad) {
 		return this.getSitioWeb().getReservasDeLaCiudad(this, ciudad);
 	}
 
-//	public List<String> ciudadadesConReservas() {
-//		return this.getSitioWeb().getCiudadadesConReservasDe(this);
-//	}
+	public List<String> ciudadadesConReservas() {
+		return this.getSitioWeb().getCiudadadesConReservasDe(this);
+	}
 
 	public void cancelarReserva(Reserva reserva) {
 		this.getSitioWeb().cancelarReserva(reserva);

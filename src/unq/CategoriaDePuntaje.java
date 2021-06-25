@@ -1,6 +1,6 @@
 package unq;
 
-public  class CategoriaDePuntaje {
+public  class CategoriaDePuntaje implements Registrable{
 
 	private String nombre;
 
@@ -17,6 +17,8 @@ public  class CategoriaDePuntaje {
 		return (this.nombre);
 	}
 
-	
-
+	@Override
+	public void registrarseEn(SitioWeb sitioWeb) {
+		sitioWeb.addCategoriaDePuntaje(this);
+	}
 }

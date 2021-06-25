@@ -3,15 +3,15 @@ package unq;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministradorUsuario {
+public class AdministradorUsuario implements Administradores, Registrable{
 	// Atributos
 	ArrayList<Usuario> usuarios;
 	SitioWeb sitioWeb;
 	
 	// Constructor
-	public AdministradorUsuario(SitioWeb sitioWeb) {
+	public AdministradorUsuario() {
 		this.setUsuarios(new ArrayList<Usuario>());
-		this.setSitioWeb(sitioWeb);
+		this.setSitioWeb(null);
 	}
 
 	// Gets y sets
@@ -36,4 +36,13 @@ public class AdministradorUsuario {
 		getUsuarios().add(usuario);
 	}
 
+	@Override
+	public void administrar(SitioWeb sitioWeb) {
+		sitioWeb.setAdminUsuario(this);
+	}
+
+	@Override
+	public void registrarseEn(SitioWeb sitioWeb) {
+		this.setSitioWeb(sitioWeb);
+	}
 }

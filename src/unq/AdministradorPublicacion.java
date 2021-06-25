@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AdministradorPublicacion {
+public class AdministradorPublicacion implements Administradores{
 
 	private List<Publicacion> publicaciones;
 
@@ -25,18 +25,15 @@ public class AdministradorPublicacion {
 	}
 
 	public void actualizarPrecio(Publicacion publicacion, Double precio) {
-
 		for (Publicacion publi : getPublicaciones()) {
 			if (publi.equals(publicacion)) {
 				publicacion.actualizarPrecio(precio);
 				break;
 			}
 		}
-
 	}
 
 	public List<Publicacion> publicacionesDelUsuario(Usuario propietario) {
-
 		List<Publicacion> publicacionesDelUsuario = getPublicaciones().stream()
 				.filter(p -> p.getPropietario().equals(propietario)).collect(Collectors.toList());
 		return publicacionesDelUsuario;
@@ -70,7 +67,6 @@ public class AdministradorPublicacion {
 
 		return precioPubliYPrecioMaxYMinSonNulos(parametrosBusqueda, publicacion)
 				|| !precioPubliYPrecioMaxYMinSonNulos(parametrosBusqueda, publicacion);
-
 	}
 
 	private Boolean precioPubliYPrecioMaxYMinSonNulos(ParametrosBusqueda paramBusq, Publicacion publicacion) {
@@ -103,6 +99,11 @@ public class AdministradorPublicacion {
 		
 	return(	 this.getPublicaciones().stream()
 			     .filter(item -> item.equals(publi)).findFirst().get() ) ;
+	}
+
+	@Override
+	public void administrar(SitioWeb sitioWeb) {
+		sitioWeb.setAdminPublicacion(this);
 	}
 
 }

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AdministradorReserva {
+public class AdministradorReserva implements Administradores, Registrable{
 	// Atributos
 	private SitioWeb sitioWeb;
 	private List<Reserva> reservas;
 
 	// Constructor
-	public AdministradorReserva(SitioWeb sitioWeb) {
+	public AdministradorReserva() {
 		super();
-		this.setSitioWeb(sitioWeb);
+		this.setSitioWeb(null);
 		this.setReservas(new ArrayList<Reserva>());
 	}
 
@@ -57,13 +57,29 @@ public class AdministradorReserva {
 		return reservasDelUsuarioEnLaCiudad;
 	}
 
+	public List<String> getCiudadadesConReservasDe(Usuario inquilino) {
+		List<String> ciudadesConReservas = new ArrayList<String>();
+			for(Reserva reserva : this.obtenerReservasDelUsuario(inquilino))
+				ciudadesConReservas.add(reserva.getPublicacion().getInmueble().getCiudad());
+		List<String> ciudadadesSinRepetidos = ciudadesConReservas.stream().distinct().collect(Collectors.toList());
+		return ciudadadesSinRepetidos;
+	}
+	
 	public Integer cantidadDeReservas() {
-
 		return getReservas().size();
 	}
 
 	public void eliminar(Reserva reserva) {
 		getReservas().remove(reserva);
+	}
 
+	@Override
+	public void administrar(SitioWeb sitioWeb) {
+		sitioWeb.setAdminReserva(this);
+	}
+	
+	@Override
+	public void registrarseEn(SitioWeb sitioWeb) {
+		this.setSitioWeb(sitioWeb);
 	}
 }

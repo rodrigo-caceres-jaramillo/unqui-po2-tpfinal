@@ -30,7 +30,8 @@ class AdministradorReservaTestCase {
 		sitio = mock(SitioWeb.class);
 		reserva = mock(Reserva.class);
 		usuario = mock(Usuario.class);
-		adminReserva = new AdministradorReserva(sitio);
+		adminReserva = new AdministradorReserva();
+		adminReserva.registrarseEn(sitio);
 	}
 
 	@Test
@@ -130,7 +131,7 @@ class AdministradorReservaTestCase {
 	@Test
 	void testAdministradorReservaObtieneReservasFuturasDeUnUsuario() {
 
-		when(reserva.getInicioDeAlquiler()).thenReturn(LocalDate.of(2021, 6, 24));
+		when(reserva.getInicioDeAlquiler()).thenReturn(LocalDate.now());
 		when(reserva.getInquilino()).thenReturn(usuario);
 
 		adminReserva.agregar(reserva);

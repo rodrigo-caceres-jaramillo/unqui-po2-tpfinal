@@ -22,8 +22,8 @@ class AdministradorUsuarioTestCase {
 	void setUp() throws Exception {
 		usuario = mock(Usuario.class);
 		sitio = mock(SitioWeb.class);
-		adminUsuario = new AdministradorUsuario(sitio);
-
+		adminUsuario = new AdministradorUsuario();
+		adminUsuario.registrarseEn(sitio);
 	}
 
 	@Test

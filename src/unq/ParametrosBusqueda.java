@@ -14,7 +14,6 @@ public class ParametrosBusqueda {
 	public ParametrosBusqueda(String ciudad, LocalDate checkIn, LocalDate checkOut) {
 		super();
 		verificarDatosObligatorios(ciudad, checkIn, checkOut);
-
 	}
 
 	private void verificarDatosObligatorios(String ciudad, LocalDate checkIn, LocalDate checkOut) {
@@ -23,7 +22,6 @@ public class ParametrosBusqueda {
 			setCheckIn(checkIn);
 			setCheckOut(checkOut);
 		}
-
 	}
 
 	public ParametrosBusqueda(String ciudad, LocalDate checkIn, LocalDate checkOut, Integer cantidadDeHuespedes,

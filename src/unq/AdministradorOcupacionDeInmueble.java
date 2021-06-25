@@ -3,20 +3,19 @@ package unq;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministadorOcupacionDeInmueble {
-
+public class AdministradorOcupacionDeInmueble implements Administradores, Registrable{
+	// Atributos
 	private List<OcupacionDeInmueble> ocupacionesDeInmuebles;
-	private SitioWeb sitio;
+	private SitioWeb sitioweb;
 
-
-	public AdministadorOcupacionDeInmueble(SitioWeb sitio) {
-		this.setSitioAdministrar(sitio);
+	// Constructor
+	public AdministradorOcupacionDeInmueble() {
+		this.setSitioWeb(null);
 		this.setOcupaciones(new ArrayList<OcupacionDeInmueble>() ); 
 	}
-
-	private void setSitioAdministrar(SitioWeb sitio) {
-		this.sitio =sitio;
-		
+	// Gets y sets
+	private void setSitioWeb(SitioWeb sitio) {
+		this.sitioweb =sitio;
 	}
 
 	private void setOcupaciones(ArrayList<OcupacionDeInmueble> ocupaciones) {
@@ -45,5 +44,15 @@ public class AdministadorOcupacionDeInmueble {
 
 	public Boolean registraOcupacionDe(Inmueble inmueble) {
 		return(this.getOcupaciones().stream().anyMatch(o -> o.getInmueble().equals(inmueble) ) );
+	}
+
+	@Override
+	public void administrar(SitioWeb sitioWeb) {
+		sitioWeb.setAdminOcupaciones(this);
+	}
+	
+	@Override
+	public void registrarseEn(SitioWeb sitioWeb) {
+		this.setSitioWeb(sitioWeb);
 	}
 }
